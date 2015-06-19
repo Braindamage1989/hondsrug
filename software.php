@@ -3,10 +3,10 @@
 
     require_once 'includes/connectdb.php';
     
-    $query_all = "SELECT id, omschrijving, datum, starttijd, hw_id, sw_id, toegekend_aan, melder FROM incidenten";
+    $query_all = "SELECT * FROM software";
     $result_all = mysqli_query($db, $query_all);
     
-    $query_one = "SELECT id, omschrijving, datum, starttijd, hw_id, sw_id, toegekend_aan, melder FROM incidenten LIMIT 1";
+    $query_one = "SELECT * FROM software LIMIT 1";
     $result_one = mysqli_query($db, $query_one);
     $titles = mysqli_fetch_assoc($result_one);
     
@@ -15,8 +15,13 @@
     if(isset($_POST['inline'])):
         $_SESSION['ids'] = $_POST['id'];
         print_r($_SESSION['ids']);
-        header('Location: incidenten_inline.php');
+        header('Location: software_inline.php');
         exit;
+        
+    if(isset($_POST['toevoegen'])):
+        header('Location: software_toevoegen.php');
+        exit;
+    endif;
     endif;
 ?>
 <body>
@@ -36,7 +41,7 @@
                 <tr>
             <?php
                     foreach($row as $k => $v):
-                        if($k == 'id'):
+                        if($k == 'sw_id'):
                             echo "<td><input type=\"checkbox\" name=\"id[]\" value=\"$v\"></td>\n";
                         endif;
                         echo "<td>$v</td>\n";
@@ -48,7 +53,7 @@
             ?>
             
         </table>
+        <input type="submit" name="toevoegen" value="Toevoegen" />
         <input type="submit" name="inline" value="Bewerk" />
-        <input type="submit" name="detail" value="Toon details" />
     </form>
 </body>
