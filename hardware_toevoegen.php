@@ -11,11 +11,19 @@
     $dropdown_connected_hw = mysqli_query($db, $qry_dropdown_connected_hw);
     
     if(isset($_POST['opslaan'])):
-        $insert = "INSERT INTO hardware (hw_id,soort_hw,locatie,OS,merk,leverancier,aanschafjaar,connected_hw) "
-            . "VALUES ('".$_POST['hw_id']."','".$_POST['soort_hw']."','".$_POST['locatie']."','".$_POST['OS']."','".$_POST['merk']."','".$_POST['leverancier']."','".$_POST['aanschafjaar']."','".$_POST['connected_hw']."')";
-        mysqli_query($db, $insert);
-        header('Location: hardware.php');
-        exit;
+        if(!empty($_POST['hw_id']) && !empty($_POST['soort_hw']) && !empty($_POST['locatie']) && !empty($_POST['merk']) && !empty($_POST['leverancier']) && !empty($_POST['aanschafjaar'])):
+            if(is_numeric($_POST['aanschafjaar'])):
+                $insert = "INSERT INTO hardware (hw_id,soort_hw,locatie,OS,merk,leverancier,aanschafjaar,connected_hw) "
+                    . "VALUES ('".$_POST['hw_id']."','".$_POST['soort_hw']."','".$_POST['locatie']."','".$_POST['OS']."','".$_POST['merk']."','".$_POST['leverancier']."','".$_POST['aanschafjaar']."','".$_POST['connected_hw']."')";
+                mysqli_query($db, $insert);
+                header('Location: hardware.php');
+                exit;
+            else:
+                echo "Aanschafjaar moet een jaartal zijn.";
+            endif;
+        else:
+            echo "U heeft nog niet alle verplichte velden ingevuld.";
+        endif;
     endif;
     
     if(isset($_POST['overzicht'])):
