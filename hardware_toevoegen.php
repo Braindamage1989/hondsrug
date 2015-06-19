@@ -12,14 +12,14 @@
     
     if(isset($_POST['opslaan'])):
         if(!empty($_POST['hw_id']) && !empty($_POST['soort_hw']) && !empty($_POST['locatie']) && !empty($_POST['merk']) && !empty($_POST['leverancier']) && !empty($_POST['aanschafjaar'])):
-            if(is_numeric($_POST['aanschafjaar'])):
+            if(is_numeric($_POST['aanschafjaar']) && $_POST['aanschafjaar'] < 3000 && $_POST['aanschafjaar'] >= 1960):
                 $insert = "INSERT INTO hardware (hw_id,soort_hw,locatie,OS,merk,leverancier,aanschafjaar,connected_hw) "
                     . "VALUES ('".$_POST['hw_id']."','".$_POST['soort_hw']."','".$_POST['locatie']."','".$_POST['OS']."','".$_POST['merk']."','".$_POST['leverancier']."','".$_POST['aanschafjaar']."','".$_POST['connected_hw']."')";
                 mysqli_query($db, $insert);
                 header('Location: hardware.php');
                 exit;
             else:
-                echo "Aanschafjaar moet een jaartal zijn.";
+                echo "Aanschafjaar moet een geldig jaartal zijn.";
             endif;
         else:
             echo "U heeft nog niet alle verplichte velden ingevuld.";
