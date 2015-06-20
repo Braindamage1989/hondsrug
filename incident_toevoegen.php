@@ -3,10 +3,6 @@
 
     require_once 'includes/connectdb.php';
     
-    $query = "SELECT * FROM incidenten LIMIT 1";
-    $result = mysqli_query($db, $query);
-    $titles = mysqli_fetch_assoc($result);
-    
     $qry_dropdown_toegekend_aan = "SELECT id, voornaam, achternaam FROM gebruikers";
     $dropdown_toegekend_aan = mysqli_query($db, $qry_dropdown_toegekend_aan);
     
@@ -36,21 +32,19 @@
     <form action="" method="POST">
         <table>
             <tr>
-                <?php
-                    foreach($titles as $k => $v):
-                        if($k == 'id'):
-                            //niks doen
-                        else:
-                            echo "<td><b>$k</b></td>\n";
-                        endif;
-                    endforeach;
-                ?>
+                <td><b>Omschrijving</b></td>
+                <td><b>Workaround(optioneel)</b></td>
+                <td><b>Datum</b></td>
+                <td><b>Starttijd</b></td>
+                <td><b>Eindtijd</b></td>
+                <td><b>Hardware ID</b></td>
+                <td><b>Software ID(optioneel)</b></td>
             </tr>
             <tr>
                 <td><input type="text" name="omschrijving" /></td>
                 <td><input type="text" name="workaround" /></td>
-                <td><input type="text" name="datum" /></td>
-                <td><input type="text" name="starttijd" /></td>
+                <td><input type="text" name="datum" readonly="readonly" value="<?php echo date('d-m-Y') ?>" /></td>
+                <td><input type="text" name="starttijd" readonly="readonly" value="<?php echo date('H:i:s') ?>" /></td>
                 <td><input type="text" name="eindtijd" /></td>
                 <td><select name="hw_id">
                     <?php
@@ -66,8 +60,30 @@
                         endwhile;
                     ?>
                 </select></td>
-                <td><input type="text" name="urgentie" /></td>
-                <td><input type="text" name="impact" /></td>
+            </tr>
+            <tr>
+                <td><b>Urgentie</b></td>
+                <td><b>Impact</b></td>
+                <td><b>Status</b></td>
+                <td><b>Soort</b></td>
+                <td><b>Toegekend aan</b></td>
+                <td><b>Melder</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="urgentie">
+                        <option value="1">Laag</option>
+                        <option value="2">Gemiddeld</option>
+                        <option value="3">Hoog</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="impact">
+                        <option value="1">Laag</option>
+                        <option value="2">Gemiddeld</option>
+                        <option value="3">Hoog</option>
+                    </select>
+                </td>
                 <td><input type="text" name="status" /></td>
                 <td><input type="text" name="soort" /></td>
                 <td><select name="toegekend_aan">

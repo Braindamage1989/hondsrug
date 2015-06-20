@@ -12,3 +12,15 @@ require_once 'includes/connectdb.php';
     endwhile;
     ?>
 </select>
+
+<select name="impact">
+    <option value="1">Laag</option>
+    <option value="2">Gemiddeld</option>
+    <option value="3">Hoog</option>
+</select>
+
+<select name="urgentie">
+    <option value="1">Laag</option>
+    <option value="2">Gemiddeld</option>
+    <option value="3">Hoog</option>
+</select>

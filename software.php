@@ -17,11 +17,11 @@
         print_r($_SESSION['ids']);
         header('Location: software_inline.php');
         exit;
+    endif;
         
     if(isset($_POST['toevoegen'])):
         header('Location: software_toevoegen.php');
         exit;
-    endif;
     endif;
 ?>
 <body>

@@ -12,18 +12,15 @@
     $result_one = mysqli_query($db, $query_one);
     $titles = mysqli_fetch_assoc($result_one);
     
-    $qry_dropdown_toegekend_aan = "SELECT id, voornaam, achternaam FROM gebruikers";
-    $dropdown_toegekend_aan = mysqli_query($db, $qry_dropdown_toegekend_aan);
+    // naam veranderen
+    $qry_dropdown_gebruikers = "SELECT id, voornaam, achternaam FROM gebruikers";
+    $dropdown_gebruikers = mysqli_query($db, $qry_dropdown_gebruikers);
     
     $qry_dropdown_hw_id = "SELECT hw_id FROM hardware";
     $dropdown_hw_id = mysqli_query($db, $qry_dropdown_hw_id);
     
     $qry_dropdown_sw_id = "SELECT sw_id FROM software";
     $dropdown_sw_id = mysqli_query($db, $qry_dropdown_sw_id);
-    
-    print_r($_POST);
-    echo "<br />";
-    echo "<br />";
     
     if(isset($_POST['opslaan'])):
         foreach ($_SESSION['ids'] as $id):
@@ -49,6 +46,18 @@
         header('Location: incidenten.php');
         exit;
     endif;
+    
+    while($sw_id = mysqli_fetch_assoc($dropdown_sw_id)):
+        $array_sw_id[] .= $sw_id['sw_id'];
+    endwhile;
+    
+    while($hw_id = mysqli_fetch_assoc($dropdown_hw_id)):
+        $array_hw_id[] .= $hw_id['hw_id'];
+    endwhile;
+    
+    while($gebruikers = mysqli_fetch_assoc($dropdown_gebruikers)):
+        $array_gebruikers[$gebruikers['id']] .= $gebruikers['voornaam']." ".$gebruikers['achternaam'];
+    endwhile;
 ?>
 <body>
     <form action="" method="POST">
@@ -65,43 +74,53 @@
             ?>
                 <tr>
             <?php
-                    foreach($row as $k => $v):
-                        if($k == 'id') :
-                            echo "<td><input type=\"text\" readonly=\"readonly\" name=\"".$row["id"]."[]\" value=\"$v\"/></td>\n";
-                        elseif($k == 'toegekend_aan') :
-                            echo"<td><select name=\"".$row["id"]."[]\">";
-                            while($medewerker = mysqli_fetch_assoc($dropdown_toegekend_aan)):
-                                if($v == $medewerker['id']) :
-                                    echo "<option value=\"".$medewerker['id']."\" selected>".$medewerker['voornaam']." ".$medewerker['achternaam']."</option>\n";
-                                else:
-                                    echo "<option value=\"".$medewerker['id']."\">".$medewerker['voornaam']." ".$medewerker['achternaam']."</option>\n";
-                                endif;
-                            endwhile;
-                            echo"</select></td>";
-                        elseif($k == 'hw_id') :
-                            echo"<td><select name=\"".$row["id"]."[]\">";
-                            while($hw_id = mysqli_fetch_assoc($dropdown_hw_id)):
-                                if($v == $hw_id['hw_id']) :
-                                    echo "<option value=\"".$hw_id['hw_id']."\" selected>".$hw_id['hw_id']."</option>\n";
-                                else:
-                                    echo "<option value=\"".$hw_id['hw_id']."\">".$hw_id['hw_id']."</option>\n";
-                                endif;
-                            endwhile;
-                            echo"</select></td>";
-                        elseif($k == 'sw_id') :
-                            echo"<td><select name=\"".$row["id"]."[]\">";
-                            while($sw_id = mysqli_fetch_assoc($dropdown_sw_id)):
-                                if($v == $sw_id['sw_id']) :
-                                    echo "<option value=\"".$sw_id['sw_id']."\" selected>".$sw_id['sw_id']."</option>\n";
-                                else:
-                                    echo "<option value=\"".$sw_id['sw_id']."\">".$sw_id['sw_id']."</option>\n";
-                                endif;
-                            endwhile;
-                            echo"</select></td>";
-                        else:
-                            echo "<td><input type=\"text\" name=\"".$row["id"]."[]\" value=\"$v\"/></td>\n";
-                        endif;
-                    endforeach;
+                foreach($row as $k => $v):
+                    if($k == 'id') :
+                        echo "<td><input type=\"text\" readonly=\"readonly\" name=\"".$row["id"]."[]\" value=\"$v\"/></td>\n";
+                    elseif($k == 'toegekend_aan') :
+                        echo"<td><select name=\"".$row["id"]."[]\">";
+                        foreach($array_gebruikers as $key => $value) :
+                            if($v == $key) :
+                                echo "<option value=\"".$key."\" selected>".$value."</option>\n";
+                            else:
+                                echo "<option value=\"".$key."\">".$value."</option>\n";
+                            endif;
+                        endforeach;
+                        echo"</select></td>";
+                    elseif($k == 'melder') :
+                        echo"<td><select name=\"".$row["id"]."[]\">";
+                        foreach($array_gebruikers as $key => $value) :
+                            if($v == $key) :
+                                echo "<option value=\"".$key."\" selected>".$value."</option>\n";
+                            else:
+                                echo "<option value=\"".$key."\">".$value."</option>\n";
+                            endif;
+                        endforeach;
+                        echo"</select></td>";  
+                    elseif($k == 'hw_id') :
+                        echo"<td><select name=\"".$row["id"]."[]\">";
+                        foreach($array_hw_id as $key => $value) :
+                            if($v == $value) :
+                                echo "<option value=\"".$value."\" selected>".$value."</option>\n";
+                            else:
+                                echo "<option value=\"".$value."\">".$value."</option>\n";
+                            endif;
+                        endforeach;
+                        echo"</select></td>";
+                    elseif($k == 'sw_id') :
+                        echo"<td><select name=\"".$row["id"]."[]\">";
+                        foreach($array_sw_id as $key => $value) :
+                            if($v == $value) :
+                                echo "<option value=\"".$value."\" selected>".$value."</option>\n";
+                            else:
+                                echo "<option value=\"".$value."\">".$value."</option>\n";
+                            endif;
+                        endforeach;
+                        echo"</select></td>";
+                    else:
+                        echo "<td><input type=\"text\" name=\"".$row["id"]."[]\" value=\"$v\"/></td>\n";
+                    endif;
+                endforeach;
             ?>
                 </tr>
             <?php
