@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -7,14 +9,12 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Homepage</title>
+        <title></title>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
-        This is the Homepage
-        </br></br>
-        <a href="vragenscript.php">Vragen</a>
+        Incident = netwerkkaart is kapot</br></br>
+        <pre>
+        <?php print_r($_SESSION); ?>
+        </pre>
     </body>
 </html>

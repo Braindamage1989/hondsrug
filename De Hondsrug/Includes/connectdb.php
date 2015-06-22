@@ -1,9 +1,9 @@
 <?php
  // 1. Verbinding maken met database
  $dbhost = "localhost";
- $dbuser = "pellebra";
- $dbpass = "nf8SRau490";
- $dbname = "pellebra_Eat-IT";
+ $dbuser = "root";
+ $dbpass = "";
+ $dbname = "de hondsrug";
  $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
  $db = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
  //Foutmelding wanneer connectie niet lukt

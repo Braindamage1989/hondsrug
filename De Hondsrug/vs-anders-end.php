@@ -7,14 +7,13 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Homepage</title>
+        <title>Vragenscript - finish</title>
     </head>
     <body>
         <?php
         // put your code here
         ?>
-        This is the Homepage
-        </br></br>
-        <a href="vragenscript.php">Vragen</a>
+        Bedankt voor het doorgeven van dit probleem.</br>
+        Uw probleem is doorgegeven en zal zo snel mogelijk behandelt worden.</br>
     </body>
 </html>
