@@ -31,9 +31,10 @@
     </div>
 </div>
 <div class="lijst">
-    <div class="container">
+    <div class="container-fluid">
+        <div class="col-md-11">
         <form action="" method="POST">
-            <table>
+            <table class='table'>
                 <tr>
                     <td></td>
                     <?php
@@ -60,8 +61,13 @@
                 ?>
 
             </table>
-            <input type="submit" name="toevoegen" value="Toevoegen" />
-            <input type="submit" name="inline" value="Bewerk" />
+            </div>
+            <div class='col-md-1'>
+                <div class='submenu col-md-1'>
+                <input type="submit" name="toevoegen" value="Toevoegen" class="btn btn-primary"/>
+                <input type="submit" name="inline" value="Bewerk" class="btn btn-default"/>
+                </div>
+            </div>
         </form>
     </div>
 </div>
