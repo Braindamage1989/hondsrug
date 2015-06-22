@@ -8,6 +8,8 @@
         <a href="software_toevoegen.php">software_toevoegen.php</a> <br />
         <a href="incidenten.php">incidenten.php</a> <br />
         <a href="incidenten_inline.php">incidenten_inline.php</a> <br />
+        <a href="gebruikers.php">gebruikers.php</a> <br />
+        <a href="geinstalleerde_software.php">geinstalleerde_software.php</a> <br />
         <a href="tester.php">tester.php</a><br />
     </body>
 </html>

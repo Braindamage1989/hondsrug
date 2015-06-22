@@ -5,14 +5,13 @@
     
     $ids = implode(' OR id = ', $_SESSION['ids']);
     
-    $query_all = "SELECT id, omschrijving, datum, starttijd, hw_id, sw_id, toegekend_aan, melder FROM incidenten WHERE id = $ids";
+    $query_all = "SELECT id, omschrijving, urgentie, impact, hw_id, sw_id, toegekend_aan, melder FROM incidenten WHERE id = $ids";
     $result_all = mysqli_query($db, $query_all);
     
-    $query_one = "SELECT id, omschrijving, datum, starttijd, hw_id, sw_id, toegekend_aan, melder FROM incidenten LIMIT 1";
+    $query_one = "SELECT id, omschrijving, urgentie, impact, hw_id, sw_id, toegekend_aan, melder FROM incidenten LIMIT 1";
     $result_one = mysqli_query($db, $query_one);
     $titles = mysqli_fetch_assoc($result_one);
     
-    // naam veranderen
     $qry_dropdown_gebruikers = "SELECT id, voornaam, achternaam FROM gebruikers";
     $dropdown_gebruikers = mysqli_query($db, $qry_dropdown_gebruikers);
     
@@ -21,6 +20,12 @@
     
     $qry_dropdown_sw_id = "SELECT sw_id FROM software";
     $dropdown_sw_id = mysqli_query($db, $qry_dropdown_sw_id);
+    
+    $qry_dropdown_impact = "SELECT impact FROM incidenten";
+    $dropdown_impact = mysqli_query($db, $qry_dropdown_impact);
+    
+    $qry_dropdown_urgentie = "SELECT urgentie FROM incidenten";
+    $dropdown_urgentie = mysqli_query($db, $qry_dropdown_urgentie);
     
     if(isset($_POST['opslaan'])):
         foreach ($_SESSION['ids'] as $id):
@@ -53,6 +58,18 @@
     
     while($hw_id = mysqli_fetch_assoc($dropdown_hw_id)):
         $array_hw_id[] .= $hw_id['hw_id'];
+    endwhile;
+    
+    while($hw_id = mysqli_fetch_assoc($dropdown_hw_id)):
+        $array_hw_id[] .= $hw_id['hw_id'];
+    endwhile;
+    
+    while($impact = mysqli_fetch_assoc($dropdown_impact)):
+        $array_impact[] .= $impact['impact'];
+    endwhile;
+    
+    while($urgentie = mysqli_fetch_assoc($dropdown_urgentie)):
+        $array_urgentie[] .= $urgentie['urgentie'];
     endwhile;
     
     while($gebruikers = mysqli_fetch_assoc($dropdown_gebruikers)):
@@ -104,6 +121,50 @@
                                 echo "<option value=\"".$value."\" selected>".$value."</option>\n";
                             else:
                                 echo "<option value=\"".$value."\">".$value."</option>\n";
+                            endif;
+                        endforeach;
+                        echo"</select></td>";
+                    elseif($k == 'urgentie') :
+                        echo"<td><select name=\"".$row["id"]."[]\">";
+                        foreach($array_urgentie as $key => $value) :
+                            if($value == $v) :
+                                if($v == 1) :
+                                    echo "<option value=\"1\" selected>Laag</option>";
+                                else:
+                                    echo "<option value=\"1\">Laag</option>";
+                                endif;
+                                if($v == 2) :
+                                    echo "<option value=\"2\" selected>Gemiddeld</option>";
+                                else:
+                                    echo "<option value=\"2\">Gemiddeld</option>";
+                                endif;
+                                if($v == 3) :
+                                    echo "<option value=\"3\" selected>Hoog</option>";
+                                else:
+                                    echo "<option value=\"3\">Hoog</option>";
+                                endif;
+                            endif;
+                        endforeach;
+                        echo"</select></td>";
+                    elseif($k == 'impact') :
+                        echo"<td><select name=\"".$row["id"]."[]\">";
+                        foreach($array_impact as $key => $value) :
+                            if($value == $v) :
+                                if($v == 1) :
+                                    echo "<option value=\"1\" selected>Laag</option>";
+                                else:
+                                    echo "<option value=\"1\">Laag</option>";
+                                endif;
+                                if($v == 2) :
+                                    echo "<option value=\"2\" selected>Gemiddeld</option>";
+                                else:
+                                    echo "<option value=\"2\">Gemiddeld</option>";
+                                endif;
+                                if($v == 3) :
+                                    echo "<option value=\"3\" selected>Hoog</option>";
+                                else:
+                                    echo "<option value=\"3\">Hoog</option>";
+                                endif;
                             endif;
                         endforeach;
                         echo"</select></td>";

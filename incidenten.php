@@ -3,16 +3,14 @@
 
     require_once 'includes/connectdb.php';
     
-    $query_all = "SELECT id, omschrijving, datum, starttijd, hw_id, sw_id, toegekend_aan, melder FROM incidenten WHERE status != '9'";
+    $query_all = "SELECT id, omschrijving, datum, starttijd, hw_id, sw_id, toegekend_aan, melder, status FROM incidenten WHERE status != '9'";
     $result_all = mysqli_query($db, $query_all);
-    
-    // kan weg
-    $query_one = "SELECT id, omschrijving, datum, starttijd, hw_id, sw_id, toegekend_aan, melder FROM incidenten LIMIT 1";
-    $result_one = mysqli_query($db, $query_one);
-    $titles = mysqli_fetch_assoc($result_one);
     
     $query_prioriteit = "SELECT id, urgentie, impact FROM incidenten WHERE status != '9'";
     $result_prioriteit = mysqli_query($db, $query_prioriteit);
+    
+    $query_gebruikers = "SELECT id, voornaam, achternaam FROM gebruikers";
+    $result_gebruikers = mysqli_query($db, $query_gebruikers);
     
     while($row = mysqli_fetch_assoc($result_prioriteit)) :
         $prioriteit = $row['urgentie'] * $row['impact'];
@@ -28,6 +26,10 @@
             $prioriteit = "Zeer hoog";
         endif;
         $array_prioriteit[$row['id']] .= $prioriteit;
+    endwhile;
+    
+    while($row = mysqli_fetch_assoc($result_gebruikers)) :
+        $array_gebruikers[$row['id']] .= $row['voornaam']." ".$row['achternaam'];
     endwhile;
     
     if(isset($_POST['inline'])):
@@ -53,12 +55,14 @@
         <table>
             <tr>
                 <td></td>
-                <?php
-                    // veranderen naar statisch
-                    foreach($titles as $k => $v):
-                        echo "<td><b>$k</b></td>\n";
-                    endforeach;
-                ?>
+                <td><b>Omschrijving</b></td>
+                <td><b>Datum</b></td>
+                <td><b>Starttijd</b></td>
+                <td><b>Hardware ID</b></td>
+                <td><b>Software ID</b></td>
+                <td><b>Toegekend aan</b></td>
+                <td><b>Melder</b></td>
+                <td><b>Status</b></td>
                 <td><b>Prioriteit</b></td>
             </tr>
             <?php
@@ -69,8 +73,23 @@
                     foreach($row as $k => $v):
                         if($k == 'id'):
                             echo "<td><input type=\"checkbox\" name=\"id[]\" value=\"$v\"></td>\n";
+                        elseif ($k == 'omschrijving') :
+                            echo "<td><a href=\"incident_detail.php?id=".$row['id']."\">$v</a>";
+                        elseif($k == 'melder') :
+                            echo "<td>$array_gebruikers[$v]</td>";
+                        elseif($k == 'toegekend_aan') :
+                            echo "<td>$array_gebruikers[$v]</td>";
+                        elseif($k == 'status') :
+                            if($v == 1):
+                                echo "<td>Open</td>";
+                            elseif ($v == 3):
+                                echo "<td>In behandeling</td>";
+                            elseif ($v == 5):
+                                echo "<td>Afgesloten</td>";
+                            endif;
+                        else:
+                            echo "<td>$v</td>\n";
                         endif;
-                        echo "<td>$v</td>\n";
                     endforeach;
                     
                     foreach($array_prioriteit as $k => $v):
@@ -87,7 +106,7 @@
         </table>
         <input type="submit" name="toevoegen" value="Toevoegen" />
         <input type="submit" name="inline" value="Bewerk" />
-        <input type="submit" name="detail" value="Toon details" />
         <input type="submit" name="verwijderen" value="Verwijderen" />
+        <br />Klik op omschrijving om details van incident te tonen/bewerken
     </form>
 </body>

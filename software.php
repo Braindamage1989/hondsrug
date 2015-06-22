@@ -3,14 +3,12 @@
 
     require_once 'includes/connectdb.php';
     
-    $query_all = "SELECT * FROM software";
+    $query_all = "SELECT sw_id, uitgebreidde_naam, soort, producent, leverancier, aantal_licenties, serverlicentie, aantal_gebruikers FROM software WHERE status !=9";
     $result_all = mysqli_query($db, $query_all);
     
     $query_one = "SELECT * FROM software LIMIT 1";
     $result_one = mysqli_query($db, $query_one);
     $titles = mysqli_fetch_assoc($result_one);
-    
-    //print_r($_POST);
     
     if(isset($_POST['inline'])):
         $_SESSION['ids'] = $_POST['id'];
@@ -22,6 +20,13 @@
     if(isset($_POST['toevoegen'])):
         header('Location: software_toevoegen.php');
         exit;
+    endif;
+    
+    if(isset($_POST['verwijderen'])):
+        foreach($_POST['id'] as $k => $v) :
+            $update = "UPDATE software SET status='9' WHERE sw_id='$v'";
+            mysqli_query($db, $update);
+        endforeach;
     endif;
 ?>
 <body>
@@ -55,5 +60,6 @@
         </table>
         <input type="submit" name="toevoegen" value="Toevoegen" />
         <input type="submit" name="inline" value="Bewerk" />
+        <input type="submit" name="verwijderen" value="Verwijderen" />
     </form>
 </body>
