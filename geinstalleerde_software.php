@@ -7,13 +7,16 @@
     $result = mysqli_query($db, $query);
     
     if(isset($_POST['toevoegen'])):
-        header('Location: incident_toevoegen.php');
+        header('Location: geinstalleerde_software_toevoegen.php');
         exit;
     endif;
     
     if(isset($_POST['verwijderen'])):
+        $aantal = 0;
         foreach($_POST['id'] as $k => $v) :
-            $update = "UPDATE incidenten SET status='9' WHERE id='$v'";
+            $key = explode("_", $_POST['id'][$aantal]);
+            $aantal++;
+            $update = "UPDATE geinstalleerde_software SET status='9' WHERE hw_id='$key[0]' AND sw_id='$key[1]'";
             mysqli_query($db, $update);
         endforeach;
     endif;

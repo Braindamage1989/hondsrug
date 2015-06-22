@@ -9,7 +9,10 @@
         <a href="incidenten.php">incidenten.php</a> <br />
         <a href="incidenten_inline.php">incidenten_inline.php</a> <br />
         <a href="gebruikers.php">gebruikers.php</a> <br />
+        <a href="gebruikers_inline.php">gebruikers_inline.php</a> <br />
+        <a href="gebruiker_toevoegen.php">gebruiker_toevoegen.php</a> <br />
         <a href="geinstalleerde_software.php">geinstalleerde_software.php</a> <br />
+        <a href="geinstalleerde_software_toevoegen.php">geinstalleerde_software_toevoegen.php</a> <br />
         <a href="tester.php">tester.php</a><br />
     </body>
 </html>
