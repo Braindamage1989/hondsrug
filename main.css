@@ -74,12 +74,19 @@ h2 {
     position: relative;
 }
 
-.lijst form {
+/*.lijst form {
     border-spacing: 15px 15px;
 } 
 
 .lijst table, th, td {
     border: 1px solid black;
+}*/
+
+.submenu {
+    display: block;
+    width: 150px;
+    margin: 2px 4px 6px 4px;
+    position: fixed;
 }
 
 .learn-more {
