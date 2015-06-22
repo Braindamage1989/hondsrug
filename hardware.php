@@ -67,7 +67,7 @@
                 </table>
             </div>
             <div class='col-md-2'>
-                <div class='submenu col-md-3'>
+                <div class='submenu col-md-2'>
                     <input type="submit" name="toevoegen" value="Toevoegen" class="btn btn-primary"/>
                     <input type="submit" name="inline" value="Bewerk" class="btn btn-default"/>
                     <input type="submit" name="verwijderen" value="Verwijderen" class="btn btn-default"/>
