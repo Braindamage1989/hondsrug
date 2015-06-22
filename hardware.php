@@ -37,38 +37,43 @@
 </div>
 <div class="lijst">
     <div class="container">
-        <form action="" method="POST">
-            <table>
-                <tr>
-                    <td></td>
-                    <?php
-                        foreach($titles as $k => $v):
-                            echo "<td><b>$k</b></td>\n";
-                        endforeach;
-                    ?>
-                </tr>
-                <?php
-                    while($row = mysqli_fetch_assoc($result_all)):
-                ?>
+        <div class="col-md-9">
+            <form action="" method="POST">
+                <table class='table'>
                     <tr>
-                <?php
-                        foreach($row as $k => $v):
-                            if($k == 'hw_id'):
-                                echo "<td><input type=\"checkbox\" name=\"id[]\" value=\"$v\"></td>\n";
-                            endif;
-                            echo "<td>$v</td>\n";
-                        endforeach;
-                ?>
+                        <td></td>
+                        <?php
+                            foreach($titles as $k => $v):
+                                echo "<td><b>$k</b></td>\n";
+                            endforeach;
+                        ?>
                     </tr>
-                <?php
-                    endwhile;
-                ?>
-
-            </table>
-            <input type="submit" name="toevoegen" value="Toevoegen" />
-            <input type="submit" name="inline" value="Bewerk" />
-            <input type="submit" name="verwijderen" value="Verwijderen" />
-        </form>
+                    <?php
+                        while($row = mysqli_fetch_assoc($result_all)):
+                    ?>
+                        <tr>
+                    <?php
+                            foreach($row as $k => $v):
+                                if($k == 'hw_id'):
+                                    echo "<td><input type=\"checkbox\" name=\"id[]\" value=\"$v\"></td>\n";
+                                endif;
+                                echo "<td>$v</td>\n";
+                            endforeach;
+                    ?>
+                        </tr>
+                    <?php
+                        endwhile;
+                    ?>
+                </table>
+            </div>
+            <div class='col-md-3'>
+                <div class='submenu col-md-3'>
+                    <input type="submit" name="toevoegen" value="Toevoegen" class="btn btn-primary"/>
+                    <input type="submit" name="inline" value="Bewerk" class="btn btn-default"/>
+                    <input type="submit" name="verwijderen" value="Verwijderen" class="btn btn-default"/>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <?php 
