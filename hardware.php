@@ -37,7 +37,7 @@
 </div>
 <div class="lijst">
     <div class="container">
-        <div class="col-md-9">
+        <div class="col-md-10">
             <form action="" method="POST">
                 <table class='table'>
                     <tr>
@@ -66,7 +66,7 @@
                     ?>
                 </table>
             </div>
-            <div class='col-md-3'>
+            <div class='col-md-2'>
                 <div class='submenu col-md-3'>
                     <input type="submit" name="toevoegen" value="Toevoegen" class="btn btn-primary"/>
                     <input type="submit" name="inline" value="Bewerk" class="btn btn-default"/>
