@@ -4,7 +4,7 @@
     require_once 'includes/header.html';
     require_once 'includes/connectdb.php';
     
-    $query_all = "SELECT * FROM hardware";
+    $query_all = "SELECT hw_id, soort_hw, locatie, OS, merk, leverancier, aanschafjaar, connected_hw FROM hardware WHERE status !=9";
     $result_all = mysqli_query($db, $query_all);
     
     $query_one = "SELECT * FROM hardware LIMIT 1";
@@ -22,6 +22,13 @@
         header('Location: hardware_toevoegen.php');
         exit;
     endif;
+    
+    if(isset($_POST['verwijderen'])):
+        foreach($_POST['id'] as $k => $v) :
+            $update = "UPDATE hardware SET status='9' WHERE hw_id='$v'";
+            mysqli_query($db, $update);
+        endforeach;
+    endif;
 ?>
 <div class="titel2">
     <div class="container">
@@ -30,7 +37,6 @@
 </div>
 <div class="lijst">
     <div class="container">
-        
         <form action="" method="POST">
             <table>
                 <tr>
@@ -61,6 +67,7 @@
             </table>
             <input type="submit" name="toevoegen" value="Toevoegen" />
             <input type="submit" name="inline" value="Bewerk" />
+            <input type="submit" name="verwijderen" value="Verwijderen" />
         </form>
     </div>
 </div>
