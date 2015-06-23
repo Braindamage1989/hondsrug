@@ -37,7 +37,7 @@
 </div>
 <div class="lijst">
     <div class="container">
-        <div class="col-md-10">
+        <div class="col-md-11">
             <form action="" method="POST">
                 <table class='table'>
                     <tr>
@@ -65,9 +65,9 @@
                         endwhile;
                     ?>
                 </table>
-            </div>
-            <div class='col-md-2'>
-                <div class='submenu col-md-2'>
+        </div>
+        <div class='col-md-1'>
+                <div class='submenu'>
                     <input type="submit" name="toevoegen" value="Toevoegen" class="btn btn-primary"/>
                     <input type="submit" name="inline" value="Bewerk" class="btn btn-default"/>
                     <input type="submit" name="verwijderen" value="Verwijderen" class="btn btn-default"/>
