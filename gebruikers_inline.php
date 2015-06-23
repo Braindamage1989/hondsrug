@@ -1,7 +1,8 @@
 <?php
     session_start();
-
+    
     require_once 'includes/connectdb.php';
+    require_once 'includes/header.html';
     
     $ids = implode(' OR id = ', $_SESSION['ids']);
     
@@ -31,48 +32,62 @@
         exit;
     endif;
 ?>
-<body>
-    <form action="" method="POST">
-        <table>
-            <tr>
-                <td><b>ID</b></td>
-                <td><b>Voornaam</b></td>
-                <td><b>Achternaam</b></td>
-                <td><b>E-mail</b></td>
-                <td><b>Wachtwoord</b></td>
-                <td><b>Functie</b></td>
-                <td><b>Status</b></td>
-            </tr>
-            <?php
-                while($row = mysqli_fetch_assoc($result)):
-            ?>
-                <tr>
-            <?php
-                    foreach($row as $key => $value) :
-                        if ($key == "functie") :
-                            ?>
-                            <td>
-                                <select name="<?php echo $row["id"] ?>[]">
-                                    <option value="Medewerker IT">Medewerker IT</option>
-                                    <option value="Leerling">Leerling</option>
-                                    <option value="Docent">Docent</option>
-                                </select>
-                            </td>
-                            <?php
-                        elseif ($key == "id") :
-                            echo "<td><input type=\"text\" name=\"".$row["id"]."[]\" value=\"$value\" readonly=\"readonly\"/></td>\n";
-                        else:
-                            echo "<td><input type=\"text\" name=\"".$row["id"]."[]\" value=\"$value\"/></td>\n";
-                        endif;
-                    endforeach;
-            ?>
-                </tr>
-            <?php
-                endwhile;
-            ?>
-            
-        </table>
-        <input type="submit" name="opslaan" value="Opslaan" />
-        <input type="submit" name="overzicht" value="Terug naar overzicht" /> 
-    </form>
-</body>
+?>
+<div class="titel2">
+    <div class="container">
+        <h1>Gebruiker toevoegen</h1>
+    </div>
+</div>
+<div class="lijst">
+    <div class="container">
+        <div class="col-md-10">
+            <form action="" method="POST">
+                <table class="table">
+                    <tr>
+                        <td><b>ID</b></td>
+                        <td><b>Voornaam</b></td>
+                        <td><b>Achternaam</b></td>
+                        <td><b>E-mail</b></td>
+                        <td><b>Wachtwoord</b></td>
+                        <td><b>Functie</b></td>
+                        <td><b>Status</b></td>
+                    </tr>
+                    <?php
+                        while($row = mysqli_fetch_assoc($result)):
+                    ?>
+                        <tr>
+                    <?php
+                            foreach($row as $key => $value) :
+                                if ($key == "functie") :
+                                    ?>
+                                    <td>
+                                        <select name="<?php echo $row["id"] ?>[]">
+                                            <option value="Medewerker IT">Medewerker IT</option>
+                                            <option value="Leerling">Leerling</option>
+                                            <option value="Docent">Docent</option>
+                                        </select>
+                                    </td>
+                                    <?php
+                                elseif ($key == "id") :
+                                    echo "<td><input type=\"text\" name=\"".$row["id"]."[]\" value=\"$value\" readonly=\"readonly\"/></td>\n";
+                                else:
+                                    echo "<td><input type=\"text\" name=\"".$row["id"]."[]\" value=\"$value\"/></td>\n";
+                                endif;
+                            endforeach;
+                    ?>
+                        </tr>
+                    <?php
+                        endwhile;
+                    ?>
+
+                </table>
+        </div>
+        <div class='col-md-2'>
+            <div class='submenu'>
+                <input type="submit" name="opslaan" value="Opslaan" class="btn btn-primary"/>
+                <input type="submit" name="overzicht" value="Terug naar overzicht" class="btn btn-default"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

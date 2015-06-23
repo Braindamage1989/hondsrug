@@ -1,5 +1,8 @@
 <?php
+    session_start();
+
     require_once 'includes/connectdb.php';
+    require_once 'includes/header.html';
     
     $query_hardware = "SELECT hw_id FROM hardware";
     $result_hardware = mysqli_query($db, $query_hardware);
@@ -30,43 +33,59 @@
         exit;
     endif;
 ?>
-<body>
-    <form action="" method="POST">
-        <table>
-            <tr>
-                <td><b>Hardware ID</b></td>
-                <td><b>Software ID</b></td>
-            </tr>
-                <tr>
-                    <td>
-                        <select name="hw_id">
-            <?php
-                foreach($array_hw_id as $key => $value) :
-                    if($record['hw_id'] == $value) :
-                        echo "<option value=\"".$value."\" selected>".$value."</option>\n";
-                    else:
-                        echo "<option value=\"".$value."\">".$value."</option>\n";
-                    endif;
-                endforeach;
-            ?>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="sw_id">
-            <?php
-                foreach($array_sw_id as $key => $value) :
-                    if($record['sw_id'] == $value) :
-                        echo "<option value=\"".$value."\" selected>".$value."</option>\n";
-                    else:
-                        echo "<option value=\"".$value."\">".$value."</option>\n";
-                    endif;
-                endforeach;
-            ?>
-                        </select>
-                    </td>
-                </tr>
-        </table>
-        <input type="submit" name="opslaan" value="Opslaan" />
-        <input type="submit" name="overzicht" value="Terug naar overzicht" /> 
-    </form>
-</body>
+<div class="titel2">
+    <div class="container">
+        <h1>Geïnstalleerde software toevoegen</h1>
+    </div>
+</div>
+<div class="lijst">
+    <div class="container-fluid">
+        <div class="col-md-10">
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <td><b>Hardware ID</b></td>
+                        <td><b>Software ID</b></td>
+                    </tr>
+                        <tr>
+                            <td>
+                                <select name="hw_id">
+                    <?php
+                        foreach($array_hw_id as $key => $value) :
+                            if($record['hw_id'] == $value) :
+                                echo "<option value=\"".$value."\" selected>".$value."</option>\n";
+                            else:
+                                echo "<option value=\"".$value."\">".$value."</option>\n";
+                            endif;
+                        endforeach;
+                    ?>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="sw_id">
+                    <?php
+                        foreach($array_sw_id as $key => $value) :
+                            if($record['sw_id'] == $value) :
+                                echo "<option value=\"".$value."\" selected>".$value."</option>\n";
+                            else:
+                                echo "<option value=\"".$value."\">".$value."</option>\n";
+                            endif;
+                        endforeach;
+                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                </table>
+        </div>
+        <div class='col-md-2'
+            <div class='submenu'>
+                <input type="submit" name="opslaan" value="Opslaan" class="btn btn-primary"/>
+                <input type="submit" name="overzicht" value="Terug naar overzicht" class="btn btn-default"/> 
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php 
+    require_once 'includes/header.html'; 
+?>

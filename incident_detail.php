@@ -1,6 +1,5 @@
 <?php
     session_start();
-
     require_once 'includes/connectdb.php';
     
     $query_detail = "SELECT * FROM incidenten WHERE id=".$_GET['id']."";
