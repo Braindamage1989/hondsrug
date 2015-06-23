@@ -49,7 +49,7 @@
             mysqli_query($db, $update_inc);
             echo $update_inc;
         endforeach;
-        //header('Location: problemen.php');
+        header('Location: problemen.php');
         //exit;
     endif;
     
