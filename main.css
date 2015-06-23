@@ -69,18 +69,11 @@ h2 {
     font-size: 15px;
 }
 
-.lijst .container{
+.lijst .container, .container-fluid{
     top:20px;
+    left:20px;
     position: relative;
 }
-
-/*.lijst form {
-    border-spacing: 15px 15px;
-} 
-
-.lijst table, th, td {
-    border: 1px solid black;
-}*/
 
 .submenu {
     display: block;
