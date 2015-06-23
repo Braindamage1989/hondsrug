@@ -63,7 +63,7 @@
             </table>
             </div>
             <div class='col-md-1'>
-                <div class='submenu col-md-1'>
+                <div class='submenu'>
                 <input type="submit" name="toevoegen" value="Toevoegen" class="btn btn-primary"/>
                 <input type="submit" name="inline" value="Bewerk" class="btn btn-default"/>
                 </div>
