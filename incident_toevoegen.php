@@ -2,6 +2,7 @@
     session_start();
 
     require_once 'includes/connectdb.php';
+    require_once 'includes/header.html';
     
     $query = "SELECT * FROM incidenten LIMIT 1";
     $result = mysqli_query($db, $query);
@@ -32,62 +33,77 @@
         exit;
     endif;
 ?>
-<body>
-    <form action="" method="POST">
-        <table>
-            <tr>
-                <?php
-                    foreach($titles as $k => $v):
-                        if($k == 'id'):
-                            //niks doen
-                        else:
-                            echo "<td><b>$k</b></td>\n";
-                        endif;
-                    endforeach;
-                ?>
-            </tr>
-            <tr>
-                <td><input type="text" name="omschrijving" /></td>
-                <td><input type="text" name="workaround" /></td>
-                <td><input type="text" name="datum" /></td>
-                <td><input type="text" name="starttijd" /></td>
-                <td><input type="text" name="eindtijd" /></td>
-                <td><select name="hw_id">
-                    <?php
-                        while($hw_id = mysqli_fetch_assoc($dropdown_hw_id)):
-                            echo "<option value=\"".$hw_id['hw_id']."\">".$hw_id['hw_id']."</option>\n";
-                        endwhile;
-                    ?>
-                </select></td>
-                <td><select name="sw_id">
-                    <?php
-                        while($sw_id = mysqli_fetch_assoc($dropdown_sw_id)):
-                            echo "<option value=\"".$sw_id['sw_id']."\">".$sw_id['sw_id']."</option>\n";
-                        endwhile;
-                    ?>
-                </select></td>
-                <td><input type="text" name="urgentie" /></td>
-                <td><input type="text" name="impact" /></td>
-                <td><input type="text" name="status" /></td>
-                <td><input type="text" name="soort" /></td>
-                <td><select name="toegekend_aan">
-                    <?php
-                        while($medewerker = mysqli_fetch_assoc($dropdown_toegekend_aan)):
-                            echo "<option value=\"".$medewerker['id']."\">".$medewerker['voornaam']." ".$medewerker['achternaam']."</option>\n";
-                        endwhile;
-                    ?>
-                </select></td>
-                <td><select name="melder">
-                    <?php
-                        while($melder = mysqli_fetch_assoc($dropdown_melder)):
-                            echo "<option value=\"".$melder['id']."\">".$melder['voornaam']." ".$melder['achternaam']."</option>\n";
-                        endwhile;
-                    ?>
-                </select></td>
-            </tr>
-            
-        </table>
-        <input type="submit" name="opslaan" value="Opslaan" />
-        <input type="submit" name="overzicht" value="Terug naar overzicht" /> 
-    </form>
-</body>
+<div class="titel2">
+    <div class="container">
+        <h1>Incident toevoegen</h1>
+    </div>
+</div>
+<div class="lijst">
+    <div class="container-fluid">
+        <div class="col-md-10">
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <?php
+                            foreach($titles as $k => $v):
+                                if($k == 'id'):
+                                    //niks doen
+                                else:
+                                    echo "<td><b>$k</b></td>\n";
+                                endif;
+                            endforeach;
+                        ?>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="omschrijving" /></td>
+                        <td><input type="text" name="workaround" /></td>
+                        <td><input type="text" name="datum" /></td>
+                        <td><input type="text" name="starttijd" /></td>
+                        <td><input type="text" name="eindtijd" /></td>
+                        <td><select name="hw_id">
+                            <?php
+                                while($hw_id = mysqli_fetch_assoc($dropdown_hw_id)):
+                                    echo "<option value=\"".$hw_id['hw_id']."\">".$hw_id['hw_id']."</option>\n";
+                                endwhile;
+                            ?>
+                        </select></td>
+                        <td><select name="sw_id">
+                            <?php
+                                while($sw_id = mysqli_fetch_assoc($dropdown_sw_id)):
+                                    echo "<option value=\"".$sw_id['sw_id']."\">".$sw_id['sw_id']."</option>\n";
+                                endwhile;
+                            ?>
+                        </select></td>
+                        <td><input type="text" name="urgentie" /></td>
+                        <td><input type="text" name="impact" /></td>
+                        <td><input type="text" name="status" /></td>
+                        <td><input type="text" name="soort" /></td>
+                        <td><select name="toegekend_aan">
+                            <?php
+                                while($medewerker = mysqli_fetch_assoc($dropdown_toegekend_aan)):
+                                    echo "<option value=\"".$medewerker['id']."\">".$medewerker['voornaam']." ".$medewerker['achternaam']."</option>\n";
+                                endwhile;
+                            ?>
+                        </select></td>
+                        <td><select name="melder">
+                            <?php
+                                while($melder = mysqli_fetch_assoc($dropdown_melder)):
+                                    echo "<option value=\"".$melder['id']."\">".$melder['voornaam']." ".$melder['achternaam']."</option>\n";
+                                endwhile;
+                            ?>
+                        </select></td>
+                    </tr>
+                </table>
+        </div>
+        <div class='col-md-2'
+            <div class='submenu'>
+                <input type="submit" name="opslaan" value="Opslaan" class="btn btn-primary"/>
+                <input type="submit" name="overzicht" value="Terug naar overzicht" class="btn btn-default"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php 
+    require_once 'includes/header.html'; 
+?>
