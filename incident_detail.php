@@ -49,7 +49,7 @@
             . "soort='".$_POST['soort']."',toegekend_aan='".$_POST['toegekend_aan']."',melder='".$_POST['melder']."' WHERE id=".$_GET['id']."";
         mysqli_query($db, $update);
         echo $update;
-        //header('Location: incidenten.php');
+        header('Location: incidenten.php');
         exit;
     endif;
     

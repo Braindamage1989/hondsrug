@@ -118,7 +118,7 @@
         <div class='col-md-1'>
             <div class='submenu'>
                 <input type="submit" name="inline" value="Bewerk" class="btn btn-primary"/>
-                <input type="submit" name="detail" value="Toon details" class="btn btn-default"/>
+                <input type="submit" name="verwijderen" value="Verwijderen" class="btn btn-default"/>
                 </div>
             </form>
         </div>

@@ -76,6 +76,12 @@
     while($gebruikers = mysqli_fetch_assoc($dropdown_gebruikers)):
         $array_gebruikers[$gebruikers['id']] .= $gebruikers['voornaam']." ".$gebruikers['achternaam'];
     endwhile;
+    
+    print_r($array_urgentie);
+    
+    echo "<br>";
+    
+    print_r($array_impact);
 ?>
 <div class="titel2">
     <div class="container">

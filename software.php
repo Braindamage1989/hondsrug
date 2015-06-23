@@ -74,6 +74,7 @@
                 <div class='submenu'>
                 <input type="submit" name="toevoegen" value="Toevoegen" class="btn btn-primary"/>
                 <input type="submit" name="inline" value="Bewerk" class="btn btn-default"/>
+                <input type="submit" name="verwijderen" value="Verwijderen" class="btn btn-default"/>
                 </div>
             </div>
         </form>
