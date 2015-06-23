@@ -1,6 +1,7 @@
 <?php
     session_start();
-
+    
+    require_once 'includes/header.html';
     require_once 'includes/connectdb.php';
    
     $query = "SELECT * FROM hardware LIMIT 1";
@@ -31,34 +32,50 @@
         exit;
     endif;
 ?>
-<body>
-    <form action="" method="POST">
-        <table>
-            <tr>
-                <?php
-                    foreach($titles as $k => $v):
-                        echo "<td><b>$k</b></td>\n";
-                    endforeach;
-                ?>
-            </tr>
-            <tr>
-                <td><input type="text" name="hw_id" /></td>
-                <td><input type="text" name="soort_hw" /></td>
-                <td><input type="text" name="locatie" /></td>
-                <td><input type="text" name="OS" /></td>
-                <td><input type="text" name="merk" /></td>
-                <td><input type="text" name="leverancier" /></td>
-                <td><input type="text" name="aanschafjaar" /></td>
-                <td><select name="connected_hw">
-                <?php
-                    while($hw_id = mysqli_fetch_assoc($dropdown_connected_hw)):
-                        echo "<option value=\"".$hw_id['hw_id']."\">".$hw_id['hw_id']."</option>\n";
-                    endwhile;
-                ?>
-                </select></td>
-            </tr>
-        </table>
-        <input type="submit" name="opslaan" value="Opslaan" />
-        <input type="submit" name="overzicht" value="Terug naar overzicht" /> 
-    </form>
-</body>
+<div class="titel2">
+    <div class="container">
+        <h1>Hardware toevoegen</h1>
+    </div>
+</div>
+<div class="lijst">
+    <div class="container-fluid">
+        <div class="col-md-10">
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <?php
+                            foreach($titles as $k => $v):
+                                echo "<td><b>$k</b></td>\n";
+                            endforeach;
+                        ?>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="hw_id" /></td>
+                        <td><input type="text" name="soort_hw" /></td>
+                        <td><input type="text" name="locatie" /></td>
+                        <td><input type="text" name="OS" /></td>
+                        <td><input type="text" name="merk" /></td>
+                        <td><input type="text" name="leverancier" /></td>
+                        <td><input type="text" name="aanschafjaar" /></td>
+                        <td><select name="connected_hw">
+                        <?php
+                            while($hw_id = mysqli_fetch_assoc($dropdown_connected_hw)):
+                                echo "<option value=\"".$hw_id['hw_id']."\">".$hw_id['hw_id']."</option>\n";
+                            endwhile;
+                        ?>
+                        </select></td>
+                    </tr>
+                </table>
+        </div>
+        <div class='col-md-2'>
+            <div class='submenu'>
+                <input type="submit" name="opslaan" value="Opslaan" class="btn btn-primary"/>
+                <input type="submit" name="overzicht" value="Terug naar overzicht" class="btn btn-default"/>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php 
+    require_once 'includes/header.html'; 
+?>
