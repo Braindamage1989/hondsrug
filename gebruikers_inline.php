@@ -39,10 +39,10 @@
     </div>
 </div>
 <div class="lijst">
-    <div class="container">
-        <div class="col-md-10">
+    <div class="container-fluid">
+        <div class="col-md-8">
             <form action="" method="POST">
-                <table class="table">
+                <table>
                     <tr>
                         <td><b>ID</b></td>
                         <td><b>Voornaam</b></td>
@@ -82,7 +82,7 @@
 
                 </table>
         </div>
-        <div class='col-md-2'>
+        <div class='col-md-4'>
             <div class='submenu'>
                 <input type="submit" name="opslaan" value="Opslaan" class="btn btn-primary"/>
                 <input type="submit" name="overzicht" value="Terug naar overzicht" class="btn btn-default"/>
