@@ -41,7 +41,7 @@
 ?>
 <div class="titel2">
     <div class="container">
-        <h1>Problemen</h1>
+        <h1>Omschrijving probleem</h1>
     </div>
 </div>
 <div class="lijst">
