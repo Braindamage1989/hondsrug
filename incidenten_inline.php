@@ -2,6 +2,7 @@
     session_start();
 
     require_once 'includes/connectdb.php';
+    require_once 'includes/header.html';
     
     $ids = implode(' OR id = ', $_SESSION['ids']);
     
@@ -50,66 +51,76 @@
         exit;
     endif;
 ?>
-<body>
-    <form action="" method="POST">
-        <table>
-            <tr>
-                <?php
-                    foreach($titles as $k => $v):
-                        echo "<td><b>$k</b></td>\n";
-                    endforeach;
-                ?>
-            </tr>
-            <?php
-                while($row = mysqli_fetch_assoc($result_all)):
-            ?>
-                <tr>
-            <?php
-                    foreach($row as $k => $v):
-                        if($k == 'id') :
-                            echo "<td><input type=\"text\" readonly=\"readonly\" name=\"".$row["id"]."[]\" value=\"$v\"/></td>\n";
-                        elseif($k == 'toegekend_aan') :
-                            echo"<td><select name=\"".$row["id"]."[]\">";
-                            while($medewerker = mysqli_fetch_assoc($dropdown_toegekend_aan)):
-                                if($v == $medewerker['id']) :
-                                    echo "<option value=\"".$medewerker['id']."\" selected>".$medewerker['voornaam']." ".$medewerker['achternaam']."</option>\n";
+<div class="titel2">
+    <div class="container">
+        <h1>Incidenten bewerken</h1>
+    </div>
+</div>
+<div class="lijst">
+    <div class="container-fluid">
+        <div class="col-md-10">
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <?php
+                            foreach($titles as $k => $v):
+                                echo "<td><b>$k</b></td>\n";
+                            endforeach;
+                        ?>
+                    </tr>
+                    <?php
+                        while($row = mysqli_fetch_assoc($result_all)):
+                    ?>
+                        <tr>
+                    <?php
+                            foreach($row as $k => $v):
+                                if($k == 'id') :
+                                    echo "<td><input type=\"text\" readonly=\"readonly\" name=\"".$row["id"]."[]\" value=\"$v\"/></td>\n";
+                                elseif($k == 'toegekend_aan') :
+                                    echo"<td><select name=\"".$row["id"]."[]\">";
+                                    while($medewerker = mysqli_fetch_assoc($dropdown_toegekend_aan)):
+                                        if($v == $medewerker['id']) :
+                                            echo "<option value=\"".$medewerker['id']."\" selected>".$medewerker['voornaam']." ".$medewerker['achternaam']."</option>\n";
+                                        else:
+                                            echo "<option value=\"".$medewerker['id']."\">".$medewerker['voornaam']." ".$medewerker['achternaam']."</option>\n";
+                                        endif;
+                                    endwhile;
+                                    echo"</select></td>";
+                                elseif($k == 'hw_id') :
+                                    echo"<td><select name=\"".$row["id"]."[]\">";
+                                    while($hw_id = mysqli_fetch_assoc($dropdown_hw_id)):
+                                        if($v == $hw_id['hw_id']) :
+                                            echo "<option value=\"".$hw_id['hw_id']."\" selected>".$hw_id['hw_id']."</option>\n";
+                                        else:
+                                            echo "<option value=\"".$hw_id['hw_id']."\">".$hw_id['hw_id']."</option>\n";
+                                        endif;
+                                    endwhile;
+                                    echo"</select></td>";
+                                elseif($k == 'sw_id') :
+                                    echo"<td><select name=\"".$row["id"]."[]\">";
+                                    while($sw_id = mysqli_fetch_assoc($dropdown_sw_id)):
+                                        if($v == $sw_id['sw_id']) :
+                                            echo "<option value=\"".$sw_id['sw_id']."\" selected>".$sw_id['sw_id']."</option>\n";
+                                        else:
+                                            echo "<option value=\"".$sw_id['sw_id']."\">".$sw_id['sw_id']."</option>\n";
+                                        endif;
+                                    endwhile;
+                                    echo"</select></td>";
                                 else:
-                                    echo "<option value=\"".$medewerker['id']."\">".$medewerker['voornaam']." ".$medewerker['achternaam']."</option>\n";
+                                    echo "<td><input type=\"text\" name=\"".$row["id"]."[]\" value=\"$v\"/></td>\n";
                                 endif;
-                            endwhile;
-                            echo"</select></td>";
-                        elseif($k == 'hw_id') :
-                            echo"<td><select name=\"".$row["id"]."[]\">";
-                            while($hw_id = mysqli_fetch_assoc($dropdown_hw_id)):
-                                if($v == $hw_id['hw_id']) :
-                                    echo "<option value=\"".$hw_id['hw_id']."\" selected>".$hw_id['hw_id']."</option>\n";
-                                else:
-                                    echo "<option value=\"".$hw_id['hw_id']."\">".$hw_id['hw_id']."</option>\n";
-                                endif;
-                            endwhile;
-                            echo"</select></td>";
-                        elseif($k == 'sw_id') :
-                            echo"<td><select name=\"".$row["id"]."[]\">";
-                            while($sw_id = mysqli_fetch_assoc($dropdown_sw_id)):
-                                if($v == $sw_id['sw_id']) :
-                                    echo "<option value=\"".$sw_id['sw_id']."\" selected>".$sw_id['sw_id']."</option>\n";
-                                else:
-                                    echo "<option value=\"".$sw_id['sw_id']."\">".$sw_id['sw_id']."</option>\n";
-                                endif;
-                            endwhile;
-                            echo"</select></td>";
-                        else:
-                            echo "<td><input type=\"text\" name=\"".$row["id"]."[]\" value=\"$v\"/></td>\n";
-                        endif;
-                    endforeach;
-            ?>
-                </tr>
-            <?php
-                endwhile;
-            ?>
-            
-        </table>
-        <input type="submit" name="opslaan" value="Opslaan" />
-        <input type="submit" name="overzicht" value="Terug naar overzicht" /> 
-    </form>
+                            endforeach;
+                    ?>
+                        </tr>
+                    <?php
+                        endwhile;
+                    ?>
+
+                </table>
+        </div>
+        <div class='col-md-2'>
+            <div class='submenu'>
+                <input type="submit" name="opslaan" value="Opslaan" class="btn btn-primary"/>
+                <input type="submit" name="overzicht" value="Terug naar overzicht" class="btn btn-default"/>
+            </form>
 </body>
