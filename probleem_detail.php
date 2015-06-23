@@ -2,6 +2,7 @@
     session_start();
 
     require_once 'includes/connectdb.php';
+    require_once 'includes/header.html';
     
     $query_problemen = "SELECT * FROM problemen WHERE id=".$_GET['id']."";
     $result_problemen = mysqli_query($db, $query_problemen);
@@ -38,50 +39,66 @@
         exit;
     endif;
 ?>
-<body>
-    <form action="" method="POST">
-        <table>
-            <tr>
-                <td><b>ID</b></td>
-                <td><b>Omschrijving</b></td>
-                <td><b>Known Error</b></td>
-                <td><b>Toegekend aan</b></td>
-                <td><b>Workaround</b></td>
-                <td><b>Status</b></td>
-                <td><b>Incidentnummers</b></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="id" readonly="readonly" value="<?php echo $record['id']; ?>"/></td>
-                <td><input type="text" name="omschrijving" value="<?php echo $record['omschrijving']; ?>"/></td>
-                <td><input type="text" name="known_error" value="<?php echo $record['known_error']; ?>" /></td>
-                <td><select name="toegekend_aan">
-                    <?php
-                        foreach($array_gebruikers as $key => $value) :
-                            if($record['toegekend_aan'] == $key) :
-                                echo "<option value=\"".$key."\" selected>".$value."</option>\n";
-                            else:
-                                echo "<option value=\"".$key."\">".$value."</option>\n";
-                            endif;
-                        endforeach;
-                    ?>
-                </select></td>
-                <td><input type="text" name="workaround" value="<?php echo $record['workaround']; ?>"/></td>
-                <td><input type="text" name="status" value="<?php echo $record['status']; ?>"/></td>
-                <td><select name="incidenten" multiple>
-                    <?php
-                        foreach($alle_incidentnummers as $key => $value) :
-                            if($value == $incidentnummers[$value]) :
-                                echo "<option value=\"".$value."\" selected>".$value."</option>\n";
-                            else:
-                                echo "<option value=\"".$value."\">".$value."</option>\n";
-                            endif;
-                        endforeach;
-                    ?>
-                </select></td>
-            </tr>
-        </table>
-        <input type="submit" name="opslaan" value="Opslaan" />
-        <input type="submit" name="overzicht" value="Terug naar overzicht" />
-        <br />* = optioneel
-    </form>
-</body>
+<div class="titel2">
+    <div class="container">
+        <h1>Problemen</h1>
+    </div>
+</div>
+<div class="lijst">
+    <div class="container-fluid">
+        <div class="col-md-9">
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <td><b>ID</b></td>
+                        <td><b>Omschrijving</b></td>
+                        <td><b>Known Error</b></td>
+                        <td><b>Toegekend aan</b></td>
+                        <td><b>Workaround</b></td>
+                        <td><b>Status</b></td>
+                        <td><b>Incidentnummers</b></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="id" readonly="readonly" value="<?php echo $record['id']; ?>"/></td>
+                        <td><input type="text" name="omschrijving" value="<?php echo $record['omschrijving']; ?>"/></td>
+                        <td><input type="text" name="known_error" value="<?php echo $record['known_error']; ?>" /></td>
+                        <td><select name="toegekend_aan">
+                            <?php
+                                foreach($array_gebruikers as $key => $value) :
+                                    if($record['toegekend_aan'] == $key) :
+                                        echo "<option value=\"".$key."\" selected>".$value."</option>\n";
+                                    else:
+                                        echo "<option value=\"".$key."\">".$value."</option>\n";
+                                    endif;
+                                endforeach;
+                            ?>
+                        </select></td>
+                        <td><input type="text" name="workaround" value="<?php echo $record['workaround']; ?>"/></td>
+                        <td><input type="text" name="status" value="<?php echo $record['status']; ?>"/></td>
+                        <td><select name="incidenten" multiple>
+                            <?php
+                                foreach($alle_incidentnummers as $key => $value) :
+                                    if($value == $incidentnummers[$value]) :
+                                        echo "<option value=\"".$value."\" selected>".$value."</option>\n";
+                                    else:
+                                        echo "<option value=\"".$value."\">".$value."</option>\n";
+                                    endif;
+                                endforeach;
+                            ?>
+                        </select></td>
+                    </tr>
+                </table>
+            </div>
+        <div class='col-md-3'>
+            <div class='submenu'>
+                <input type="submit" name="opslaan" value="Opslaan" class="btn btn-primary"/>
+                <input type="submit" name="overzicht" value="Terug naar overzicht" class="btn btn-default"/>
+                <br />* = optioneel
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php 
+    require_once 'includes/header.html'; 
+?>
