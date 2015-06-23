@@ -31,8 +31,8 @@
         foreach ($_SESSION['ids'] as $id):
             $update = "UPDATE incidenten SET id='".$_POST[$id][0]."',"
             . "omschrijving='".$_POST[$id][1]."', "
-            . "datum='".$_POST[$id][2]."', "
-            . "starttijd='".$_POST[$id][3]."', "
+            . "urgentie='".$_POST[$id][2]."', "
+            . "impact='".$_POST[$id][3]."', "
             . "hw_id='".$_POST[$id][4]."', "
             . "sw_id='".$_POST[$id][5]."', "
             . "toegekend_aan='".$_POST[$id][6]."', "
@@ -80,11 +80,14 @@
     <form action="" method="POST">
         <table>
             <tr>
-                <?php
-                    foreach($titles as $k => $v):
-                        echo "<td><b>$k</b></td>\n";
-                    endforeach;
-                ?>
+                <td><b>ID</b></td>
+                <td><b>Omschrijving</b></td>
+                <td><b>Urgentie</b></td>
+                <td><b>Impact</b></td>
+                <td><b>Hardware ID</b></td>
+                <td><b>Software ID</b></td>
+                <td><b>Toegekend aan</b></td>
+                <td><b>Melder</b></td>
             </tr>
             <?php
                 while($row = mysqli_fetch_assoc($result_all)):

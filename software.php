@@ -34,11 +34,14 @@
         <table>
             <tr>
                 <td></td>
-                <?php
-                    foreach($titles as $k => $v):
-                        echo "<td><b>$k</b></td>\n";
-                    endforeach;
-                ?>
+                <td><b>Software ID</b></td>
+                <td><b>Uitgebreide naam</b></td>
+                <td><b>Soort</b></td>
+                <td><b>Producent</b></td>
+                <td><b>Leverancier</b></td>
+                <td><b>Aantal Licenties</b></td>
+                <td><b>Serverlicenties</b></td>
+                <td><b>Aantal gebruikers</b></td>
             </tr>
             <?php
                 while($row = mysqli_fetch_assoc($result_all)):

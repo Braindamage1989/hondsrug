@@ -17,8 +17,7 @@
     
     if(isset($_POST['opslaan'])):
         foreach ($_SESSION['ids'] as $id):
-            $update = "UPDATE hardware SET hw_id='".$_POST[$id][0]."',"
-            . "soort_hw='".$_POST[$id][1]."', "
+            $update = "UPDATE hardware SET soort_hw='".$_POST[$id][1]."', "
             . "locatie='".$_POST[$id][2]."', "
             . "OS='".$_POST[$id][3]."', "
             . "merk='".$_POST[$id][4]."', "
@@ -31,7 +30,7 @@
             echo "<br/>";
         endforeach;
         empty($SESSION['ids']);
-        header('Location: hardware.php');
+        //header('Location: hardware.php');
         exit;
     endif;
     

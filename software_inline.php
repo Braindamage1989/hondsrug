@@ -24,8 +24,6 @@
             . "aantal_gebruikers='".$_POST[$id][7]."' "
             . "WHERE sw_id='".$id."'";
             mysqli_query($db, $update);
-            echo $update;
-            echo "<br/>";
         endforeach;
         empty($SESSION['ids']);
         header('Location: software.php');
@@ -41,11 +39,14 @@
     <form action="" method="POST">
         <table>
             <tr>
-                <?php
-                    foreach($titles as $k => $v):
-                        echo "<td><b>$k</b></td>\n";
-                    endforeach;
-                ?>
+                <td><b>Software ID</b></td>
+                <td><b>Uitgebreide naam</b></td>
+                <td><b>Soort</b></td>
+                <td><b>Producent</b></td>
+                <td><b>Leverancier</b></td>
+                <td><b>Aantal Licenties</b></td>
+                <td><b>Serverlicenties</b></td>
+                <td><b>Aantal gebruikers</b></td>
             </tr>
             <?php
                 while($row = mysqli_fetch_assoc($result_all)):
@@ -55,6 +56,14 @@
                     foreach($row as $k => $v):
                         if($k == 'sw_id') :
                             echo "<td><input type=\"text\" readonly=\"readonly\" name=\"".$row["sw_id"]."[]\" value=\"$v\"/></td>\n";
+                        elseif($k == 'aantal_licenties') :
+                            echo "<td><input type=\"number\" min=\"0\" name=\"".$row["sw_id"]."[]\" value=\"$v\"/></td>\n";
+                        elseif($k == 'serverlicentie') :
+                            echo "<td><input type=\"number\" min=\"0\" name=\"".$row["sw_id"]."[]\" value=\"$v\"/></td>\n";
+                        elseif($k == 'aantal_gebruikers') :
+                            echo "<td><input type=\"number\" min=\"0\" name=\"".$row["sw_id"]."[]\" value=\"$v\"/></td>\n";
+                        elseif($k == 'status') :
+                            // doe niks
                         else:
                             echo "<td><input type=\"text\" name=\"".$row["sw_id"]."[]\" value=\"$v\"/></td>\n";
                         endif;

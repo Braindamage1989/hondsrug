@@ -13,6 +13,8 @@
         <a href="gebruiker_toevoegen.php">gebruiker_toevoegen.php</a> <br />
         <a href="geinstalleerde_software.php">geinstalleerde_software.php</a> <br />
         <a href="geinstalleerde_software_toevoegen.php">geinstalleerde_software_toevoegen.php</a> <br />
+        <a href="problemen.php">problemen.php</a> <br />
+        <a href="probleem_detail.php">probleem_detail.php</a> <br />
         <a href="tester.php">tester.php</a><br />
     </body>
 </html>

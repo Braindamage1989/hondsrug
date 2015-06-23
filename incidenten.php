@@ -20,6 +20,8 @@
             $prioriteit = "Laag";
         elseif($prioriteit == 3):
             $prioriteit = "Gemiddeld";
+        elseif($prioriteit == 4):
+            $prioriteit = "Gemiddeld";
         elseif($prioriteit == 6):
             $prioriteit = "Hoog";
         elseif($prioriteit == 9):

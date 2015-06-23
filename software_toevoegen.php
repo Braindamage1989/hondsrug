@@ -24,11 +24,14 @@
     <form action="" method="POST">
         <table>
             <tr>
-                <?php
-                    foreach($titles as $k => $v):
-                        echo "<td><b>$k</b></td>\n";
-                    endforeach;
-                ?>
+                <td><b>Software ID</b></td>
+                <td><b>Uitgebreide naam</b></td>
+                <td><b>Soort</b></td>
+                <td><b>Producent</b></td>
+                <td><b>Leverancier</b></td>
+                <td><b>Aantal Licenties</b></td>
+                <td><b>Serverlicenties</b></td>
+                <td><b>Aantal gebruikers</b></td>
             </tr>
             <tr>
                 <td><input type="text" name="sw_id" /></td>
@@ -36,9 +39,9 @@
                 <td><input type="text" name="soort" /></td>
                 <td><input type="text" name="producent" /></td>
                 <td><input type="text" name="leverancier" /></td>
-                <td><input type="number" name="aantal_licenties" /></td>
-                <td><input type="number" name="serverlicentie" /></td>
-                <td><input type="number" name="aantal_gebruikers" /></td>
+                <td><input type="number" min="0" name="aantal_licenties" /></td>
+                <td><input type="number" min="0" name="serverlicentie" /></td>
+                <td><input type="number" min="0" name="aantal_gebruikers" /></td>
             </tr>
         </table>
         <input type="submit" name="opslaan" value="Opslaan" />

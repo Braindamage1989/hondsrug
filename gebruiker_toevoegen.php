@@ -10,8 +10,7 @@
         $insert = "INSERT INTO gebruikers (voornaam,achternaam,email,wachtwoord,functie,status) "
             . "VALUES ('".$_POST['voornaam']."','".$_POST['achternaam']."','".$_POST['email']."','".$_POST['wachtwoord']."','".$_POST['functie']."','1')";
         mysqli_query($db, $insert);
-        echo $insert;
-        //header('Location: gebruikers.php');
+        header('Location: gebruikers.php');
         exit;
     endif;
     

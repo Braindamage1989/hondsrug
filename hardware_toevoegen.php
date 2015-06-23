@@ -11,8 +11,8 @@
     $dropdown_connected_hw = mysqli_query($db, $qry_dropdown_connected_hw);
     
     if(isset($_POST['opslaan'])):
-        $insert = "INSERT INTO hardware (hw_id,soort_hw,locatie,OS,merk,leverancier,aanschafjaar,connected_hw) "
-            . "VALUES ('".$_POST['hw_id']."','".$_POST['soort_hw']."','".$_POST['locatie']."','".$_POST['OS']."','".$_POST['merk']."','".$_POST['leverancier']."','".$_POST['aanschafjaar']."','".$_POST['connected_hw']."')";
+        $insert = "INSERT INTO hardware (hw_id,soort_hw,locatie,OS,merk,leverancier,aanschafjaar,connected_hw,status) "
+            . "VALUES ('".$_POST['hw_id']."','".$_POST['soort_hw']."','".$_POST['locatie']."','".$_POST['OS']."','".$_POST['merk']."','".$_POST['leverancier']."','".$_POST['aanschafjaar']."','".$_POST['connected_hw']."',1)";
         mysqli_query($db, $insert);
         header('Location: hardware.php');
         exit;
@@ -27,11 +27,14 @@
     <form action="" method="POST">
         <table>
             <tr>
-                <?php
-                    foreach($titles as $k => $v):
-                        echo "<td><b>$k</b></td>\n";
-                    endforeach;
-                ?>
+                <td><b>Hardware ID</b></td>
+                <td><b>Soort Hardware</b></td>
+                <td><b>Locatie</b></td>
+                <td><b>OS</b></td>
+                <td><b>Merk</b></td>
+                <td><b>Leverancier</b></td>
+                <td><b>Aanschafjaar</b></td>
+                <td><b>Verbonden met</b></td>
             </tr>
             <tr>
                 <td><input type="text" name="hw_id" /></td>
@@ -40,7 +43,7 @@
                 <td><input type="text" name="OS" /></td>
                 <td><input type="text" name="merk" /></td>
                 <td><input type="text" name="leverancier" /></td>
-                <td><input type="text" name="aanschafjaar" /></td>
+                <td><input type="number" name="aanschafjaar" value="2015"/></td>
                 <td><select name="connected_hw">
                 <?php
                     while($hw_id = mysqli_fetch_assoc($dropdown_connected_hw)):

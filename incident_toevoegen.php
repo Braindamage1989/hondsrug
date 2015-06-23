@@ -17,9 +17,10 @@
     
     if(isset($_POST['opslaan'])):
         $insert = "INSERT INTO incidenten (omschrijving,workaround,datum,starttijd,eindtijd,hw_id,sw_id,urgentie,impact,status,soort,toegekend_aan,melder) "
-            . "VALUES ('".$_POST['omschrijving']."','".$_POST['workaround']."','".$_POST['datum']."','".$_POST['starttijd']."','".$_POST['eindtijd']."','".$_POST['hw_id']."','".$_POST['sw_id']."','".$_POST['urgentie']."','".$_POST['impact']."','".$_POST['status']."','".$_POST['soort']."','".$_POST['toegekend_aan']."','".$_POST['melder']."')";
+            . "VALUES ('".$_POST['omschrijving']."','".$_POST['workaround']."','".$_POST['datum']."','".$_POST['starttijd']."','".$_POST['eindtijd']."','".$_POST['hw_id']."','".$_POST['sw_id']."','".$_POST['urgentie']."','".$_POST['impact']."','1','".$_POST['soort']."','".$_POST['toegekend_aan']."','".$_POST['melder']."')";
         mysqli_query($db, $insert);
-        header('Location: incidenten.php');
+        echo $insert;
+        //header('Location: incidenten.php');
         exit;
     endif;
     
@@ -33,19 +34,19 @@
         <table>
             <tr>
                 <td><b>Omschrijving</b></td>
-                <td><b>Workaround(optioneel)</b></td>
+                <td><b>Workaround*</b></td>
                 <td><b>Datum</b></td>
                 <td><b>Starttijd</b></td>
                 <td><b>Eindtijd</b></td>
                 <td><b>Hardware ID</b></td>
-                <td><b>Software ID(optioneel)</b></td>
+                <td><b>Software ID*</b></td>
             </tr>
             <tr>
                 <td><input type="text" name="omschrijving" /></td>
                 <td><input type="text" name="workaround" /></td>
                 <td><input type="text" name="datum" readonly="readonly" value="<?php echo date('d-m-Y') ?>" /></td>
                 <td><input type="text" name="starttijd" readonly="readonly" value="<?php echo date('H:i:s') ?>" /></td>
-                <td><input type="text" name="eindtijd" /></td>
+                <td><input type="time" name="eindtijd" /></td>
                 <td><select name="hw_id">
                     <?php
                         while($hw_id = mysqli_fetch_assoc($dropdown_hw_id)):
@@ -64,7 +65,6 @@
             <tr>
                 <td><b>Urgentie</b></td>
                 <td><b>Impact</b></td>
-                <td><b>Status</b></td>
                 <td><b>Soort</b></td>
                 <td><b>Toegekend aan</b></td>
                 <td><b>Melder</b></td>
@@ -84,7 +84,6 @@
                         <option value="3">Hoog</option>
                     </select>
                 </td>
-                <td><input type="text" name="status" /></td>
                 <td><input type="text" name="soort" /></td>
                 <td><select name="toegekend_aan">
                     <?php
@@ -104,6 +103,7 @@
             
         </table>
         <input type="submit" name="opslaan" value="Opslaan" />
-        <input type="submit" name="overzicht" value="Terug naar overzicht" /> 
+        <input type="submit" name="overzicht" value="Terug naar overzicht" />
+        <br />* = optioneel
     </form>
 </body>

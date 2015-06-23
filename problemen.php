@@ -3,32 +3,29 @@
 
     require_once 'includes/connectdb.php';
     
-    $query_problemen = "SELECT * FROM problemen";
+    $query_problemen = "SELECT * FROM problemen WHERE status !=9";
     $result_problemen = mysqli_query($db, $query_problemen);
     
     /*
     $query_incidenten = "SELECT * FROM incidenten_probleem";
     $result_incidenten = mysqli_query($db, $query_incidenten);
+    */
+    
+    $query_gebruikers = "SELECT id, voornaam, achternaam FROM gebruikers";
+    $result_gebruikers = mysqli_query($db, $query_gebruikers);
     
     while($row = mysqli_fetch_assoc($result_gebruikers)) :
         $array_gebruikers[$row['id']] .= $row['voornaam']." ".$row['achternaam'];
     endwhile;
-    */
-    
-    if(isset($_POST['inline'])):
-        $_SESSION['ids'] = $_POST['id'];
-        header('Location: incidenten_inline.php');
-        exit;
-    endif;
     
     if(isset($_POST['toevoegen'])):
-        header('Location: incident_toevoegen.php');
+        header('Location: probleem_toevoegen.php');
         exit;
     endif;
     
     if(isset($_POST['verwijderen'])):
         foreach($_POST['id'] as $k => $v) :
-            $update = "UPDATE incidenten SET status='9' WHERE id='$v'";
+            $update = "UPDATE problemen SET status='9' WHERE id='$v'";
             mysqli_query($db, $update);
         endforeach;
     endif;
@@ -51,8 +48,29 @@
             ?>
                 <tr>
             <?php
+                    echo "<td><input type=\"checkbox\" name=\"id[]\" value=\"".$row['id']."\"></td>\n";
                     foreach($row as $k => $v):
-                        echo "<td>$v</td>";
+                        if($k == 'omschrijving'):
+                            echo "<td><a href=\"probleem_detail.php?id=".$row['id']."\">$v</a>";
+                        elseif($k == 'toegekend_aan') :
+                            echo "<td>$array_gebruikers[$v]</td>";
+                        elseif($k == 'status') :
+                            if($v == 1):
+                                echo "<td>Open</td>";
+                            elseif ($v == 3):
+                                echo "<td>In behandeling</td>";
+                            elseif ($v == 5):
+                                echo "<td>Afgesloten</td>";
+                            endif;
+                        elseif($k == 'known_error') :
+                            if($v == 0):
+                                echo "<td>Nee</td>";
+                            elseif ($v == 1):
+                                echo "<td>Ja</td>";
+                            endif;
+                        else:
+                            echo "<td>$v</td>";
+                        endif;
                     endforeach;
                     
                     echo "<td>";
@@ -76,7 +94,6 @@
             
         </table>
         <input type="submit" name="toevoegen" value="Toevoegen" />
-        <input type="submit" name="inline" value="Bewerk" />
         <input type="submit" name="verwijderen" value="Verwijderen" />
         <br />Klik op omschrijving om details van incident te tonen/bewerken
     </form>

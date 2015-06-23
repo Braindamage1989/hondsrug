@@ -16,6 +16,9 @@
     $qry_dropdown_sw_id = "SELECT sw_id FROM software";
     $dropdown_sw_id = mysqli_query($db, $qry_dropdown_sw_id);
     
+    $qry_dropdown_status = "SELECT status FROM incidenten WHERE id=".$_GET['id']."";
+    $dropdown_status = mysqli_query($db, $qry_dropdown_status);
+    
     $qry_dropdown_prioriteit = "SELECT impact, urgentie FROM incidenten WHERE id=".$_GET['id']."";
     $dropdown_prioriteit = mysqli_query($db, $qry_dropdown_prioriteit);
     
@@ -25,6 +28,10 @@
     
     while($sw_id = mysqli_fetch_assoc($dropdown_sw_id)):
         $array_sw_id[] .= $sw_id['sw_id'];
+    endwhile;
+    
+    while($status = mysqli_fetch_assoc($dropdown_status)):
+        $array_status[] .= $status['status'];
     endwhile;
     
     while($gebruikers = mysqli_fetch_assoc($dropdown_gebruikers)):
@@ -37,7 +44,13 @@
     endwhile;
     
     if(isset($_POST['opslaan'])):
-        header('Location: incidenten.php');
+        $update = "UPDATE incidenten SET omschrijving='".$_POST['omschrijving']."',workaround='".$_POST['workaround']."',"
+            . "datum='".$_POST['datum']."',starttijd='".$_POST['starttijd']."',eindtijd='".$_POST['eindtijd']."',hw_id='".$_POST['hw_id']."',"
+            . "sw_id='".$_POST['sw_id']."',urgentie='".$_POST['urgentie']."',impact='".$_POST['impact']."',status='".$_POST['status']."',"
+            . "soort='".$_POST['soort']."',toegekend_aan='".$_POST['toegekend_aan']."',melder='".$_POST['melder']."' WHERE id=".$_GET['id']."";
+        mysqli_query($db, $update);
+        echo $update;
+        //header('Location: incidenten.php');
         exit;
     endif;
     
@@ -81,6 +94,7 @@
                 </select></td>
                 <td><select name="sw_id">
                     <?php
+                        echo "<option value=\"\"></option>";
                         foreach($array_sw_id as $key => $value) :
                             if($record['sw_id'] == $value) :
                                 echo "<option value=\"".$value."\" selected>".$value."</option>\n";
@@ -150,7 +164,36 @@
                         ?>
                     </select>
                 </td>
-                <td><input type="text" name="status" /></td>
+                <td>
+                    <select name="status">
+                        <?php
+                        foreach($array_status as $key => $value) :
+                            if($value == $record['status']) :
+                                if($record['status'] == 1) :
+                                    echo "<option value=\"1\" selected>Open</option>";
+                                else:
+                                    echo "<option value=\"1\">Laag</option>";
+                                endif;
+                                if($record['status'] == 3) :
+                                    echo "<option value=\"3\" selected>In behandeling</option>";
+                                else:
+                                    echo "<option value=\"3\">In behandeling</option>";
+                                endif;
+                                if($record['status'] == 5) :
+                                    echo "<option value=\"5\" selected>Afgesloten</option>";
+                                else:
+                                    echo "<option value=\"5\">Afgesloten</option>";
+                                endif;
+                                if($record['status'] == 9) :
+                                    echo "<option value=\"9\" selected>Verwijderd</option>";
+                                else:
+                                    echo "<option value=\"9\">Verwijderd</option>";
+                                endif;
+                            endif;
+                        endforeach;
+                        ?>
+                    </select>
+                </td>
                 <td><input type="text" name="soort" /></td>
                 <td><select name="toegekend_aan">
                     <?php
