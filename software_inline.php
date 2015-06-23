@@ -1,7 +1,9 @@
 <?php
     session_start();
-
+    
+    require_once 'includes/header.html';
     require_once 'includes/connectdb.php';
+    
     $ids = implode('" OR sw_id = "', $_SESSION['ids']);
     
     $query_all = "SELECT * FROM software WHERE sw_id = \"$ids\"";
@@ -37,36 +39,52 @@
         exit;
     endif;
 ?>
-<body>
-    <form action="" method="POST">
-        <table>
-            <tr>
-                <?php
-                    foreach($titles as $k => $v):
-                        echo "<td><b>$k</b></td>\n";
-                    endforeach;
-                ?>
-            </tr>
-            <?php
-                while($row = mysqli_fetch_assoc($result_all)):
-            ?>
-                <tr>
-            <?php
-                    foreach($row as $k => $v):
-                        if($k == 'sw_id') :
-                            echo "<td><input type=\"text\" readonly=\"readonly\" name=\"".$row["sw_id"]."[]\" value=\"$v\"/></td>\n";
-                        else:
-                            echo "<td><input type=\"text\" name=\"".$row["sw_id"]."[]\" value=\"$v\"/></td>\n";
-                        endif;
-                    endforeach;
-            ?>
-                </tr>
-            <?php
-                endwhile;
-            ?>
-            
-        </table>
-        <input type="submit" name="opslaan" value="Opslaan" />
-        <input type="submit" name="overzicht" value="Terug naar overzicht" /> 
-    </form>
-</body>
+<div class="titel2">
+    <div class="container">
+        <h1>Software bewerken</h1>
+    </div>
+</div>
+<div class="lijst">
+    <div class="container-fluid">
+        <div class="col-md-10">
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <?php
+                            foreach($titles as $k => $v):
+                                echo "<td><b>$k</b></td>\n";
+                            endforeach;
+                        ?>
+                    </tr>
+                    <?php
+                        while($row = mysqli_fetch_assoc($result_all)):
+                    ?>
+                        <tr>
+                    <?php
+                            foreach($row as $k => $v):
+                                if($k == 'sw_id') :
+                                    echo "<td><input type=\"text\" readonly=\"readonly\" name=\"".$row["sw_id"]."[]\" value=\"$v\"/></td>\n";
+                                else:
+                                    echo "<td><input type=\"text\" name=\"".$row["sw_id"]."[]\" value=\"$v\"/></td>\n";
+                                endif;
+                            endforeach;
+                    ?>
+                        </tr>
+                    <?php
+                        endwhile;
+                    ?>
+
+                </table>
+        </div>
+        <div class='col-md-2'>
+            <div class='submenu'>
+                <input type="submit" name="opslaan" value="Opslaan" class="btn btn-primary"/>
+                <input type="submit" name="overzicht" value="Terug naar overzicht" class="btn btn-default"/>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php 
+    require_once 'includes/header.html'; 
+?>
