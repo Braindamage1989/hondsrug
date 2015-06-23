@@ -122,5 +122,11 @@
             <div class='submenu'>
                 <input type="submit" name="opslaan" value="Opslaan" class="btn btn-primary"/>
                 <input type="submit" name="overzicht" value="Terug naar overzicht" class="btn btn-default"/>
+                </div>
             </form>
-</body>
+        </div>
+    </div>
+</div>
+<?php 
+    require_once 'includes/header.html'; 
+?>
