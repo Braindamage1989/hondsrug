@@ -1,5 +1,7 @@
 <?php
     session_start();
+    
+    error_reporting(0);
 
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
@@ -22,10 +24,10 @@
     $qry_dropdown_sw_id = "SELECT sw_id FROM software";
     $dropdown_sw_id = mysqli_query($db, $qry_dropdown_sw_id);
     
-    $qry_dropdown_impact = "SELECT impact FROM incidenten";
+    $qry_dropdown_impact = "SELECT id, impact FROM incidenten";
     $dropdown_impact = mysqli_query($db, $qry_dropdown_impact);
     
-    $qry_dropdown_urgentie = "SELECT urgentie FROM incidenten";
+    $qry_dropdown_urgentie = "SELECT id, urgentie FROM incidenten";
     $dropdown_urgentie = mysqli_query($db, $qry_dropdown_urgentie);
     
     if(isset($_POST['opslaan'])):
@@ -66,22 +68,16 @@
     endwhile;
     
     while($impact = mysqli_fetch_assoc($dropdown_impact)):
-        $array_impact[] .= $impact['impact'];
+        $array_impact[$impact['id']] .= $impact['impact'];
     endwhile;
     
     while($urgentie = mysqli_fetch_assoc($dropdown_urgentie)):
-        $array_urgentie[] .= $urgentie['urgentie'];
+        $array_urgentie[$urgentie['id']] .= $urgentie['urgentie'];
     endwhile;
     
     while($gebruikers = mysqli_fetch_assoc($dropdown_gebruikers)):
         $array_gebruikers[$gebruikers['id']] .= $gebruikers['voornaam']." ".$gebruikers['achternaam'];
     endwhile;
-    
-    print_r($array_urgentie);
-    
-    echo "<br>";
-    
-    print_r($array_impact);
 ?>
 <div class="titel2">
     <div class="container">
@@ -144,7 +140,7 @@
                             elseif($k == 'urgentie') :
                                 echo"<td><select name=\"".$row["id"]."[]\">";
                                 foreach($array_urgentie as $key => $value) :
-                                    if($value == $v) :
+                                    if($key == $row['id']) :
                                         if($v == 1) :
                                             echo "<option value=\"1\" selected>Laag</option>";
                                         else:
@@ -166,7 +162,7 @@
                             elseif($k == 'impact') :
                                 echo"<td><select name=\"".$row["id"]."[]\">";
                                 foreach($array_impact as $key => $value) :
-                                    if($value == $v) :
+                                    if($key == $row['id']) :
                                         if($v == 1) :
                                             echo "<option value=\"1\" selected>Laag</option>";
                                         else:
