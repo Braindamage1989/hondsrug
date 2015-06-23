@@ -1,6 +1,8 @@
 <?php
     session_start();
-
+    
+    error_reporting(0);
+    
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
     
@@ -8,36 +10,55 @@
     $result_problemen = mysqli_query($db, $query_problemen);
     $record = mysqli_fetch_assoc($result_problemen);
     
-    $query_alle_incidenten = "SELECT inc_id FROM incidenten_probleem";
+    $query_alle_incidenten = "SELECT id FROM incidenten";
     $result_alle_incidenten = mysqli_query($db, $query_alle_incidenten);
     
-    $query_incidenten = "SELECT inc_id FROM incidenten_probleem WHERE pro_id=".$_GET['id']."";
+    $query_incidenten = "SELECT id, inc_id FROM incidenten_probleem WHERE pro_id=".$_GET['id']."";
     $result_incidenten = mysqli_query($db, $query_incidenten);
     
     $qry_dropdown_gebruikers = "SELECT id, voornaam, achternaam FROM gebruikers";
     $dropdown_gebruikers = mysqli_query($db, $qry_dropdown_gebruikers);
+    
+    $qry_dropdown_status = "SELECT status FROM problemen WHERE id=".$_GET['id']."";
+    $dropdown_status = mysqli_query($db, $qry_dropdown_status);
     
     while($gebruikers = mysqli_fetch_assoc($dropdown_gebruikers)):
         $array_gebruikers[$gebruikers['id']] .= $gebruikers['voornaam']." ".$gebruikers['achternaam'];
     endwhile;
     
     while($incidenten = mysqli_fetch_assoc($result_incidenten)):
-        $incidentnummers[] .= $incidenten['inc_id'];
+        $incidentnummers[$incidenten['id']] .= $incidenten['inc_id'];
     endwhile;
     
     while($alle_incidenten = mysqli_fetch_assoc($result_alle_incidenten)):
-        $alle_incidentnummers[] .= $alle_incidenten['inc_id'];
+        $alle_incidentnummers[$alle_incidenten['id']] .= $alle_incidenten['id'];
+    endwhile;
+    
+    while($status = mysqli_fetch_assoc($dropdown_status)):
+        $array_status[] .= $status['status'];
     endwhile;
     
     if(isset($_POST['opslaan'])):
-        header('Location: problemen.php');
-        exit;
+        $update = "UPDATE problemen SET omschrijving='".$_POST['omschrijving']."',known_error='".$_POST['known_error']."',"
+            . "toegekend_aan='".$_POST['toegekend_aan']."',workaround='".$_POST['workaround']."',status='".$_POST['status']."' "
+            . "WHERE id=".$_GET['id']."";
+        mysqli_query($db, $update);
+        
+        foreach($_POST['db_incidenten'] as $key => $value):
+            $update_inc = "UPDATE incidenten_probleem SET inc_id='".$value."' WHERE pro_id=".$_GET['id']."";
+            mysqli_query($db, $update_inc);
+            echo $update_inc;
+        endforeach;
+        //header('Location: problemen.php');
+        //exit;
     endif;
     
     if(isset($_POST['overzicht'])):
         header('Location: problemen.php');
         exit;
     endif;
+    
+    print_r($_POST['incidenten']);
 ?>
 <div class="titel2">
     <div class="container">
@@ -74,11 +95,40 @@
                             ?>
                         </select></td>
                         <td><input type="text" name="workaround" value="<?php echo $record['workaround']; ?>"/></td>
-                        <td><input type="text" name="status" value="<?php echo $record['status']; ?>"/></td>
-                        <td><select name="incidenten" multiple>
+                        <td>
+                            <select name="status">
+                                <?php
+                                foreach($array_status as $key => $value) :
+                                    if($value == $record['status']) :
+                                        if($record['status'] == 1) :
+                                            echo "<option value=\"1\" selected>Open</option>";
+                                        else:
+                                            echo "<option value=\"1\">Open</option>";
+                                        endif;
+                                        if($record['status'] == 3) :
+                                            echo "<option value=\"3\" selected>In behandeling</option>";
+                                        else:
+                                            echo "<option value=\"3\">In behandeling</option>";
+                                        endif;
+                                        if($record['status'] == 5) :
+                                            echo "<option value=\"5\" selected>Afgesloten</option>";
+                                        else:
+                                            echo "<option value=\"5\">Afgesloten</option>";
+                                        endif;
+                                        if($record['status'] == 9) :
+                                            echo "<option value=\"9\" selected>Verwijderd</option>";
+                                        else:
+                                            echo "<option value=\"9\">Verwijderd</option>";
+                                        endif;
+                                    endif;
+                                endforeach;
+                                ?>
+                            </select>
+                        </td>
+                        <td><select name="db_incidenten[]" multiple>
                             <?php
                                 foreach($alle_incidentnummers as $key => $value) :
-                                    if($value == $incidentnummers[$value]) :
+                                    if($value == $incidentnummers[$key]) :
                                         echo "<option value=\"".$value."\" selected>".$value."</option>\n";
                                     else:
                                         echo "<option value=\"".$value."\">".$value."</option>\n";

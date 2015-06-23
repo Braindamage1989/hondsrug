@@ -1,5 +1,7 @@
 <?php
     session_start();
+    
+    error_reporting(0);
 
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
@@ -117,7 +119,8 @@
         </div>
         <div class='col-md-1'>
             <div class='submenu'>
-                <input type="submit" name="inline" value="Bewerk" class="btn btn-primary"/>
+                <input type="submit" name="toevoegen" value="Toevoegen" class="btn btn-primary"/>
+                <input type="submit" name="inline" value="Bewerk" class="btn btn-default"/>
                 <input type="submit" name="verwijderen" value="Verwijderen" class="btn btn-default"/>
                 </div>
             </form>

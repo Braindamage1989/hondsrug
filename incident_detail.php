@@ -50,7 +50,6 @@
             . "sw_id='".$_POST['sw_id']."',urgentie='".$_POST['urgentie']."',impact='".$_POST['impact']."',status='".$_POST['status']."',"
             . "soort='".$_POST['soort']."',toegekend_aan='".$_POST['toegekend_aan']."',melder='".$_POST['melder']."' WHERE id=".$_GET['id']."";
         mysqli_query($db, $update);
-        echo $update;
         header('Location: incidenten.php');
         exit;
     endif;
@@ -59,10 +58,6 @@
         header('Location: incidenten.php');
         exit;
     endif;
-    
-    print_r($record);
-    echo "<br /> <br />";
-    print_r($array_impact)
 ?>
 <div class="titel2">
     <div class="container">

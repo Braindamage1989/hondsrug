@@ -64,6 +64,7 @@
                         </select></td>
                         <td><select name="sw_id">
                             <?php
+                                echo "<option value=\"\" ></option>";
                                 while($sw_id = mysqli_fetch_assoc($dropdown_sw_id)):
                                     echo "<option value=\"".$sw_id['sw_id']."\">".$sw_id['sw_id']."</option>\n";
                                 endwhile;

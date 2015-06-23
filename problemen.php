@@ -105,7 +105,6 @@
         <div class='col-md-1'>
             <div class='submenu'>
                 <input type="submit" name="toevoegen" value="Toevoegen" class="btn btn-primary"/>
-                <input type="submit" name="inline" value="Bewerk" class="btn btn-default"/>
                 <input type="submit" name="verwijderen" value="Verwijderen" class="btn btn-default"/>
                 <br />Klik op omschrijving om details van incident te tonen/bewerken
                 </div>
