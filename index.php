@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if(isset($_SESSION['ingelogd'])) {
+        echo "U bent ingelogd";
+    }
     require_once 'includes/header.html';
 ?>
 
@@ -6,7 +10,7 @@
   <div class="container">
     <h1>Welkom op de beheertool van De Hondsrug.</h1>
     <p>Om de tool te gebruiken moet u eerst inloggen</p>
-    <a href="#">Log in</a>
+    <a href="login.php">Log in</a>
   </div>
 </div> 
 
