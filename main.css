@@ -31,7 +31,7 @@ h2 {
 .titel1 h1 {
   color: #fff;
   font-size: 48px;  
-  font-family: 'Shift', sans-serif;
+  //font-family: 'Shift', sans-serif;
   font-weight: bold;
 }
 
@@ -46,21 +46,14 @@ h2 {
 }
 
 .titel2 {
-    background-image:url("images/ICT_w1.jpg");
-    height: 200px;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #f7f7f7;
+    height: 100px;
 }
 
-.titel2 .container {
-    position: relative;
-    top:100px;
-}
+
 
 .titel2 h1 {
-  color: #fff;
-  font-size: 48px;  
-  font-family: 'Shift', sans-serif;
+  font-size: 38px;  
   font-weight: bold;
 }
 

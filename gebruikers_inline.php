@@ -1,6 +1,10 @@
 <?php
     session_start();
     
+    if(!isset($_SESSION['ingelogd'])) {
+        header("location:login.php");
+    }
+    
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
     
