@@ -6,7 +6,7 @@
     }
 
     require_once 'includes/connectdb.php';
-    require_once 'includes/header.html';
+    require_once 'includes/header.php';
     
     $melding ="";
     
@@ -95,5 +95,5 @@
     </div>
 </div>
 <?php
-    require_once 'includes/header.html'; 
+    require_once 'includes/footer.html'; 
 ?>

@@ -6,7 +6,7 @@
     }
     
     require_once 'includes/connectdb.php';
-    require_once 'includes/header.html';
+    require_once 'includes/header.php';
     
     $ids = implode(' OR id = ', $_SESSION['ids']);
     

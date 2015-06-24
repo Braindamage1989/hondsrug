@@ -8,7 +8,7 @@
     error_reporting(0);
 
     require_once 'includes/connectdb.php';
-    require_once 'includes/header.html';
+    require_once 'includes/header.php';
     
     $query_hardware = "SELECT hw_id FROM hardware";
     $result_hardware = mysqli_query($db, $query_hardware);
@@ -93,5 +93,5 @@
     </div>
 </div>
 <?php 
-    require_once 'includes/header.html'; 
+    require_once 'includes/footer.html'; 
 ?>

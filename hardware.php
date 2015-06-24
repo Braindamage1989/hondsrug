@@ -5,7 +5,7 @@
         header("location:login.php");
     }
     
-    require_once 'includes/header.html';
+    require_once 'includes/header.php';
     require_once 'includes/connectdb.php';
     
     $query_all = "SELECT hw_id, soort_hw, locatie, OS, merk, leverancier, aanschafjaar, connected_hw FROM hardware WHERE status !=9";
@@ -96,5 +96,5 @@
     </div>
 </div>
 <?php 
-    require_once 'includes/header.html'; 
+    require_once 'includes/footer.html'; 
 ?>

@@ -8,7 +8,7 @@
     error_reporting(0);
     
     require_once 'includes/connectdb.php';
-    require_once 'includes/header.html';
+    require_once 'includes/header.php';
     
     $query_problemen = "SELECT * FROM problemen WHERE id=".$_GET['id']."";
     $result_problemen = mysqli_query($db, $query_problemen);
@@ -164,5 +164,5 @@
     </div>
 </div>
 <?php 
-    require_once 'includes/header.html'; 
+    require_once 'includes/footer.html'; 
 ?>

@@ -3,7 +3,7 @@
     if(isset($_SESSION['ingelogd'])) {
         echo "U bent ingelogd";
     }
-    require_once 'includes/header.html';
+    require_once 'includes/header.php';
 ?>
 
 <div class="titel1">

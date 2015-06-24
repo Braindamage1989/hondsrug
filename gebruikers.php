@@ -5,7 +5,7 @@
         header("location:login.php");
     }
     
-    require_once 'includes/header.html';
+    require_once 'includes/header.php';
     require_once 'includes/connectdb.php';
     
     $melding = "";
@@ -92,5 +92,5 @@
     </div>
 </div>
 <?php 
-    require_once 'includes/header.html'; 
+    require_once 'includes/footer.html'; 
 ?>
