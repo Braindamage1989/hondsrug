@@ -18,12 +18,20 @@ and open the template in the editor.
         <?php } ?>
         
         <div id="form">
-            <form action="redirect-sw0.php" name="form" method="post">
-                Wat is de naam van de applicatie?
+            <form action="redirect-hw.php" name="form" method="post">
+                Kies de beste beschrijving van uw probleem:
                 </br>
-                <input type="text" name='id' value="" placeholder="Voer hier het WS-ID in"></input>
+                <input type="radio" name='problem' value="opstart">Het werkstation wil niet opstarten.</input>
                 </br>
-                <input type="submit" name="submit" value="Return" />
+                <input type="radio" name='problem' value="afsluiten">Het werkstation sluit zichzelf automatisch af.</input>
+                </br>
+                <input type="radio" name='problem' value="beeldscherm">Het beeldscherm werkt niet.</input>
+                </br>
+                <input type="radio" name='problem' value="muis/toetsenbord">De muis en/of toetsenbord doet het niet.</input>
+                </br>
+                <input type="radio" name='problem' value="anders">Anders</input>
+                </br>
+                <INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">
                 <input type="submit" name="submit" value="Submit" />
             </form>
         </div>

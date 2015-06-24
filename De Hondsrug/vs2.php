@@ -22,6 +22,12 @@ and open the template in the editor.
         <title>Vs2</title>
     </head>
     <body>
+        </br>
+        <pre>
+         <?php print_r($_SESSION)."<br />".print_r($_POST); ?>
+        </pre>
+        <br />
+        
         
         <?php if(isset($error)) { ?>
         <div id="error">
@@ -35,7 +41,7 @@ and open the template in the editor.
                 </br>
                 <input type="text" name='id' value="" placeholder="Voer hier het WS-ID in"></input>
                 </br>
-                <input type="submit" name="submit" value="Return" />
+                <INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">
                 <input type="submit" name="submit" value="Submit" />
             </form>
         </div>

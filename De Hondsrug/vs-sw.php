@@ -64,7 +64,7 @@ and open the template in the editor.
                     ?>
                 </select>
                 </br>
-                <input type="submit" name="submit" value="Return" />
+                <INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">
                 <input type="submit" name="submit" value="Submit" />
             </form>
         </div>
