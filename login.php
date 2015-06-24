@@ -10,16 +10,15 @@
         $email=$_POST['email'];
         $wachtwoord=$_POST['wachtwoord'];
 
-        $sql="SELECT email, wachtwoord, functie FROM gebruikers WHERE email='$email' AND wachtwoord='$wachtwoord' AND functie='Medewerker IT'";
+        $sql="SELECT voornaam, email, wachtwoord, functie FROM gebruikers WHERE email='$email' AND wachtwoord='$wachtwoord' AND functie='Medewerker IT'";
         $result= mysqli_query($db, $sql);
         
         $count=mysqli_num_rows($result);
 
         if($count==1){
             while ($rij = mysqli_fetch_assoc($result)) :
-                $_SESSION['functie'] = $rij['functie'];
+                $_SESSION['voornaam'] = $rij['voornaam'];
             endwhile;
-            $result_functie= mysqli_query($db, $sql);
             $_SESSION['ingelogd'] = true;
             header("location:index.php");
         }

@@ -1,16 +1,25 @@
 <?php
     session_start();
-    if(isset($_SESSION['ingelogd'])) {
-        echo "U bent ingelogd";
-    }
+    
     require_once 'includes/header.php';
 ?>
 
 <div class="titel1">
   <div class="container">
-    <h1>Welkom op de beheertool van De Hondsrug.</h1>
-    <p>Om de tool te gebruiken moet u eerst inloggen</p>
-    <a href="login.php">Log in</a>
+      <?php
+        if(isset($_SESSION['ingelogd'])) {
+            $voornaam = $_SESSION['voornaam'];
+            echo "<h1>Welkom, $voornaam.</h1>"
+                    . "<p>U kunt nu gebruik maken van de tool.</p>"
+                    . "<a href=\"logout.php\">Of log out</a>";
+        }
+        else {
+            echo "<h1>Welkom op de beheertool van De Hondsrug.</h1>"
+            . "<p>Om de tool te gebruiken moet u eerst inloggen</p>"
+                    . "<a href=\"login.php\">Log in</a>";
+        }
+      ?>
+    
   </div>
 </div> 
 
