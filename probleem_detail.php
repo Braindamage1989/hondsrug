@@ -10,6 +10,9 @@
     require_once 'includes/connectdb.php';
     require_once 'includes/header.php';
     
+    $melding = "";
+    $teller = 0;
+    
     $query_problemen = "SELECT * FROM problemen WHERE id=".$_GET['id']."";
     $result_problemen = mysqli_query($db, $query_problemen);
     $record = mysqli_fetch_assoc($result_problemen);
@@ -43,17 +46,27 @@
     endwhile;
     
     if(isset($_POST['opslaan'])):
-        $update = "UPDATE problemen SET omschrijving='".$_POST['omschrijving']."',known_error='".$_POST['known_error']."',"
-            . "toegekend_aan='".$_POST['toegekend_aan']."',workaround='".$_POST['workaround']."',status='".$_POST['status']."' "
-            . "WHERE id=".$_GET['id']."";
-        mysqli_query($db, $update);
-        
-        foreach($_POST['db_incidenten'] as $key => $value):
-            $update_inc = "UPDATE incidenten_probleem SET inc_id='".$value."' WHERE pro_id=".$_GET['id']."";
-            mysqli_query($db, $update_inc);
-        endforeach;
-        header('Location: problemen.php');
-        exit;
+        if(empty($_POST['omschrijving'])) :
+            $melding .= "<font color=\"red\"><b>Omschrijving mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['db_incidenten'])) :
+            $melding .= "<font color=\"red\"><b>Er zijn geen incidentnummer geselecteerd</b></font><br/>";
+            $teller++;
+        endif;
+        if($teller == 0) :
+            $update = "UPDATE problemen SET omschrijving='".$_POST['omschrijving']."',known_error='".$_POST['known_error']."',"
+                . "toegekend_aan='".$_POST['toegekend_aan']."',workaround='".$_POST['workaround']."',status='".$_POST['status']."' "
+                . "WHERE id=".$_GET['id']."";
+            mysqli_query($db, $update);
+
+            foreach($_POST['db_incidenten'] as $key => $value):
+                $update_inc = "UPDATE incidenten_probleem SET inc_id='".$value."' WHERE pro_id=".$_GET['id']."";
+                mysqli_query($db, $update_inc);
+            endforeach;
+            header('Location: problemen.php');
+            exit;
+        endif;
     endif;
     
     if(isset($_POST['overzicht'])):
@@ -69,6 +82,7 @@
 <div class="lijst">
     <div class="container-fluid">
         <div class="col-md-9">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table>
                     <tr>

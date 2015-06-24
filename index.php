@@ -52,9 +52,9 @@
                     <p><a href="software.php">Ga naar software</a></p>
               </div>
               <div class="col-md-4">
-                    <h3>Geïnstalleerde software</h3>
-                    <p>Toont alle geïnstalleerde software.</p>
-                    <p><a href="geinstalleerde_software.php">Ga naar geïnstalleerde software</a></p>
+                    <h3>Geinstalleerde software</h3>
+                    <p>Toont alle geinstalleerde software.</p>
+                    <p><a href="geinstalleerde_software.php">Ga naar geinstalleerde software</a></p>
               </div>
         </div>
     </div>
