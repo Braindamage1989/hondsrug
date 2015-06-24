@@ -14,7 +14,7 @@
     $query_prioriteit = "SELECT id, urgentie, impact FROM incidenten WHERE status != '9'";
     $result_prioriteit = mysqli_query($db, $query_prioriteit);
     
-    $query_gebruikers = "SELECT id, voornaam, achternaam FROM gebruikers";
+    $query_gebruikers = "SELECT id, voornaam, achternaam, functie FROM gebruikers";
     $result_gebruikers = mysqli_query($db, $query_gebruikers);
     
     while($row = mysqli_fetch_assoc($result_prioriteit)) :
@@ -61,6 +61,8 @@
             foreach($_POST['id'] as $k => $v) :
                 $update = "UPDATE incidenten SET status='9' WHERE id='$v'";
                 mysqli_query($db, $update);
+                header('Location: incidenten_inline.php');
+                exit;
             endforeach;
         endif;
     endif;
@@ -93,33 +95,40 @@
                     ?>
                         <tr>
                     <?php
-                            foreach($row as $k => $v):
-                                if($k == 'id'):
-                                    echo "<td><input type=\"checkbox\" name=\"id[]\" value=\"$v\"></td>\n";
-                                elseif ($k == 'omschrijving') :
-                                    echo "<td><a href=\"incident_detail.php?id=".$row['id']."\">$v</a>";
-                                elseif($k == 'melder') :
-                                    echo "<td>$array_gebruikers[$v]</td>";
-                                elseif($k == 'toegekend_aan') :
-                                    echo "<td>$array_gebruikers[$v]</td>";
-                                elseif($k == 'status') :
-                                    if($v == 1):
-                                        echo "<td>Open</td>";
-                                    elseif ($v == 3):
-                                        echo "<td>In behandeling</td>";
-                                    elseif ($v == 5):
-                                        echo "<td>Afgesloten</td>";
-                                    endif;
-                                else:
-                                    echo "<td>$v</td>\n";
+                        foreach($row as $k => $v):
+                            if($k == 'id'):
+                                echo "<td><input type=\"checkbox\" name=\"id[]\" value=\"$v\"></td>\n";
+                            elseif ($k == 'omschrijving') :
+                                echo "<td><a href=\"incident_detail.php?id=".$row['id']."\">$v</a>";
+                            elseif($k == 'melder') :
+                                echo "<td>$array_gebruikers[$v]</td>";
+                            elseif($k == 'toegekend_aan') :
+                                echo "<td>$array_gebruikers[$v]</td>";
+                            elseif($k == 'status') :
+                                if($v == 1):
+                                    echo "<td>Open</td>";
+                                elseif ($v == 3):
+                                    echo "<td>In behandeling</td>";
+                                elseif ($v == 5):
+                                    echo "<td>Afgesloten</td>";
                                 endif;
-                            endforeach;
+                            elseif($k == 'datum'):
+                                $timestamp = explode("-", $v);
+                                echo "<td>$timestamp[2]-$timestamp[1]-$timestamp[0]</td>\n";
+                            elseif($k == starttijd) :
+                                $time = explode(":", $v);
+                                $second = explode(".",$time[2]);
+                                echo "<td>$time[0]:$time[1]:$second[0]</td>\n";
+                            else:
+                                echo "<td>$v</td>\n";
+                            endif;
+                        endforeach;
 
-                            foreach($array_prioriteit as $k => $v):
-                                if($row['id'] == $k) :
-                                    echo "<td>$v</td>";
-                                endif;
-                            endforeach;
+                        foreach($array_prioriteit as $k => $v):
+                            if($row['id'] == $k) :
+                                echo "<td>$v</td>";
+                            endif;
+                        endforeach;
                     ?>
                         </tr>
                     <?php

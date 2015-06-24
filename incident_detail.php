@@ -6,6 +6,9 @@
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
     
+    $melding = "";
+    $teller = 0;
+    
     $query_detail = "SELECT * FROM incidenten WHERE id=".$_GET['id']."";
     $result_detail = mysqli_query($db, $query_detail);
     $record = mysqli_fetch_assoc($result_detail);
@@ -47,12 +50,30 @@
     endwhile;
     
     if(isset($_POST['opslaan'])):
-        $update = "UPDATE incidenten SET omschrijving='".$_POST['omschrijving']."',workaround='".$_POST['workaround']."',"
-            . "datum='".$_POST['datum']."',starttijd='".$_POST['starttijd']."',eindtijd='".$_POST['eindtijd']."',hw_id='".$_POST['hw_id']."',"
-            . "sw_id='".$_POST['sw_id']."',urgentie='".$_POST['urgentie']."',impact='".$_POST['impact']."',status='".$_POST['status']."',"
-            . "soort='".$_POST['soort']."',toegekend_aan='".$_POST['toegekend_aan']."',melder='".$_POST['melder']."' WHERE id=".$_GET['id']."";
-        mysqli_query($db, $update);
-        header('Location: incidenten.php');
+        if(empty($_POST['omschrijving'])) :
+            $melding .= "<font color=\"red\"><b>Omschrijving mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['datum'])) :
+            $melding .= "<font color=\"red\"><b>Datum mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['starttijd'])) :
+            $melding .= "<font color=\"red\"><b>Starttijd mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['soort'])) :
+            $melding .= "<font color=\"red\"><b>Soort mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if($teller == 0) :
+            $update = "UPDATE incidenten SET omschrijving='".$_POST['omschrijving']."',workaround='".$_POST['workaround']."',"
+                . "datum='".$_POST['datum']."',starttijd='".$_POST['starttijd']."',eindtijd='".$_POST['eindtijd']."',hw_id='".$_POST['hw_id']."',"
+                . "sw_id='".$_POST['sw_id']."',urgentie='".$_POST['urgentie']."',impact='".$_POST['impact']."',status='".$_POST['status']."',"
+                . "soort='".$_POST['soort']."',toegekend_aan='".$_POST['toegekend_aan']."',melder='".$_POST['melder']."' WHERE id=".$_GET['id']."";
+            mysqli_query($db, $update);
+            header('Location: incidenten.php');
+        endif;
         exit;
     endif;
     
@@ -69,6 +90,7 @@
 <div class="lijst">
     <div class="container-fluid">
         <div class="col-md-9">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table>
                     <tr>

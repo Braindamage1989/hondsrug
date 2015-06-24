@@ -27,7 +27,7 @@
     endwhile;
     
     while($incidenten = mysqli_fetch_assoc($result_incidenten)):
-        $incidentnummers[$incidenten['id']] .= $incidenten['inc_id'];
+        $incidentnummers[$incidenten['inc_id']] .= $incidenten['inc_id'];
     endwhile;
     
     while($alle_incidenten = mysqli_fetch_assoc($result_alle_incidenten)):
@@ -47,7 +47,6 @@
         foreach($_POST['db_incidenten'] as $key => $value):
             $update_inc = "UPDATE incidenten_probleem SET inc_id='".$value."' WHERE pro_id=".$_GET['id']."";
             mysqli_query($db, $update_inc);
-            echo $update_inc;
         endforeach;
         header('Location: problemen.php');
         exit;

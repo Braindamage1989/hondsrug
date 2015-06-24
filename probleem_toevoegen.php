@@ -37,15 +37,15 @@
             $teller++;
         endif;
         if($teller == 0) :
-            $update = "UPDATE problemen SET omschrijving='".$_POST['omschrijving']."',known_error='".$_POST['known_error']."',"
-                . "toegekend_aan='".$_POST['toegekend_aan']."',workaround='".$_POST['workaround']."',status='".$_POST['status']."' "
-                . "WHERE id=".$_GET['id']."";
+            $update = "INSERT INTO problemen (omschrijving, known_error, toegekend_aan, workaround, status)"
+                . " VALUES ('".$_POST['omschrijving']."','".$_POST['known_error']."','".$_POST['toegekend_aan']."','".$_POST['workaround']."','".$_POST['status']."')";
             mysqli_query($db, $update);
-
+            
+            $probleemid = mysqli_insert_id($db);
+            
             foreach($_POST['db_incidenten'] as $key => $value):
-                $update_inc = "UPDATE incidenten_probleem SET inc_id='".$value."' WHERE pro_id=".$_GET['id']."";
+                $update_inc = "INSERT INTO incidenten_probleem (inc_id, pro_id) VALUES ('".$value."', '$probleemid')";
                 mysqli_query($db, $update_inc);
-                echo $update_inc;
             endforeach;
             header('Location: problemen.php');
             exit;
