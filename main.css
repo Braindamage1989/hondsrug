@@ -4,6 +4,10 @@ h2 {
     font-weight: bold;
 }
 
+.nav {
+    background-color:#F7F7F7;
+}
+
 .nav a {
   color: #5a5a5a;
   font-size: 11px;

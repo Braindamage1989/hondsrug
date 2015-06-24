@@ -28,7 +28,7 @@
             <div class="row">
           <div class="col-md-4">
                     <h3>Incidenten</h3>
-                    <p>Toont alle binnengekomen incidenten.</p>
+                    <p>Toont alle binnengekomen incidenten. Ook kunt u incidenten toevoegen of bewerken.</p>
                     <p><a href="incidenten.php">Ga naar incidenten</a></p>
           </div>
               <div class="col-md-4">
@@ -38,7 +38,7 @@
               </div>
               <div class="col-md-4">
                     <h3>Gebruikers</h3>
-                    <p>Toon alle gebruikers van de beheertool. Ook kunnen er nieuwe gebruikers toegevoegd worden.</p>
+                    <p>Toont alle gebruikers van de beheertool. Ook kunnen er nieuwe gebruikers toegevoegd of bewerkt worden.</p>
                     <p><a href="gebruikers.php">Ga naar gebruikers</a></p>
               </div>
               <div class="col-md-4">
@@ -53,7 +53,7 @@
               </div>
               <div class="col-md-4">
                     <h3>Geïnstalleerde software</h3>
-                    <p>Toont alle geïnstalleerde software.</p>
+                    <p>Toont alle geïnstalleerde software. Ook kunt u nieuwe geïnstalleerde software toevoegen.</p>
                     <p><a href="geinstalleerde_software.php">Ga naar geïnstalleerde software</a></p>
               </div>
         </div>
