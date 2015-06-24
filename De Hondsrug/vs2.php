@@ -22,12 +22,6 @@ and open the template in the editor.
         <title>Vs2</title>
     </head>
     <body>
-        </br>
-        <pre>
-         <?php print_r($_SESSION)."<br />".print_r($_POST); ?>
-        </pre>
-        <br />
-        
         
         <?php if(isset($error)) { ?>
         <div id="error">

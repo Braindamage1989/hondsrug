@@ -2,6 +2,10 @@
     session_start();
 	require_once 'includes/functions.php';
 	
+    if (!isset($_POST["type"])){
+        redirect_to("vs3.php?error=noinput");
+    }
+    
     if (isset($_POST["bool"])) {
         $_SESSION["antwoorden"]["3"]=$_POST["bool"];
         $bool=$_POST["bool"];

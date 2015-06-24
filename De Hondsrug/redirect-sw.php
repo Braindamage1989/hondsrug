@@ -9,12 +9,19 @@
         redirect_to("vs-sw2.php");
     }
     
+    elseif (!isset($_POST["software"])){
+        redirect_to("vs-sw.php?error=noinput");
+    }
+    
     if (isset($_POST["probleem"])) {
         $_SESSION["antwoorden"]["7"]=$_POST["probleem"];
         if ($_POST["probleem"]=='internet') {
             redirect_to("vs-int.php");
         }
         redirect_to("vs-sw3.php");
+    }
+    elseif (!isset($_POST["probleem"])){
+        redirect_to("vs-sw2.php?error=noinput");
     }
     
     if (isset($_POST["ander"])) {
@@ -32,11 +39,8 @@
         }
         redirect_to("vs-sw-server.php");
     }
-    
-    if (isset($_POST["ander"])) {
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre";
+    elseif (!isset($_POST["ander"])){
+        redirect_to("vs-sw3.php?error=noinput");
     }
 ?>
 

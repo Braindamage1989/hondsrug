@@ -1,3 +1,14 @@
+<?php
+    if(isset($_GET["error"])&&$_GET["error"]=="noinput") {
+        $error="U heeft geen optie geselecteerd</br>
+            Selecteer een optie:</br></br>";
+    }
+    elseif (isset($_GET["error"])&&$_GET["error"]=="wronginput") {
+        $error="U heeft een ongeldige optie geselecteerd</br>
+            Selecteer een geldige optie:</br></br>";
+    }
+?>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.

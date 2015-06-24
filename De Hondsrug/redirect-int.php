@@ -1,6 +1,10 @@
 <?php
     session_start();
 	require_once 'includes/functions.php';
+    
+    if (!$_SESSION["bool"]) {
+        redirect_to("vs-int.php?error=noinput");
+    }
 	
     if (isset($_POST["bool"])) {
         $_SESSION["antwoorden"]["5"]=$_POST["bool"];
@@ -10,12 +14,6 @@
         }
         redirect_to("vs-int-false.php");
     }
-    
-    if (isset($_POST["printer"])) {
-        $_SESSION["antwoorden"]["4"]=$_POST["printer"];
-        redirect_to("vs-pr-false.php");
-    }
-    
 ?>
 
 <html>

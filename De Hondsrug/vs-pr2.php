@@ -3,6 +3,16 @@
     require_once 'includes/connectdb.php';
 ?>
 <?php
+    if(isset($_GET["error"])&&$_GET["error"]=="noinput") {
+        $error="U heeft geen optie geselecteerd</br>
+            Selecteer een optie:</br></br>";
+    }
+    elseif (isset($_GET["error"])&&$_GET["error"]=="wronginput") {
+        $error="U heeft een ongeldige optie geselecteerd</br>
+            Selecteer een geldige optie:</br></br>";
+    }
+?>
+<?php
     
     $query="SELECT hw_id "
             . "FROM hardware "
@@ -32,6 +42,14 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+        
+        <?php if(isset($error)) { ?>
+        <div id="error">
+            <?=$error?>
+        </div>
+        <?php } ?>
+        
+        
         <diff id='form'>
             <form action="redirect-pr.php" name="form" method="post">
                 Wat is de ID-code van de printer/plotter?</br>

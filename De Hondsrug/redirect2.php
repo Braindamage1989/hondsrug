@@ -3,7 +3,7 @@
 	require_once 'includes/functions.php';
 	
     if (!isset($_POST["type"])){
-        redirect_to("vs2.php?error=noinput");
+        redirect_to("vs3.php?error=noinput");
     }
     
     $_SESSION["type"]=$_POST["type"];

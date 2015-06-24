@@ -2,6 +2,10 @@
     session_start();
 	require_once 'includes/functions.php';
 	
+    if (!isset($_POST["type"])){
+        redirect_to("vs-hw.php?error=noinput");
+    }
+    
     if (isset($_POST["problem"])) {
         $_SESSION["antwoorden"]["9"]=$_POST["problem"];
         $bool=$_POST["problem"];

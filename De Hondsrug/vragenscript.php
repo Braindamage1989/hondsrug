@@ -3,6 +3,16 @@
     require 'includes/connectdb.php';
 ?>
 <?php
+    if(isset($_GET["error"])&&$_GET["error"]=="noinput") {
+        $error="U heeft geen optie geselecteerd</br>
+            Selecteer een optie:</br></br>";
+    }
+    elseif (isset($_GET["error"])&&$_GET["error"]=="wronginput") {
+        $error="U heeft een ongeldige optie geselecteerd</br>
+            Selecteer een geldige optie:</br></br>";
+    }
+?>
+<?php
     $_SESSION=[];
 
     $query="SELECT hw_id FROM hardware WHERE soort_hw='werkstation'";
@@ -25,6 +35,13 @@ and open the template in the editor.
         <title>Vragenscript</title>
     </head>
     <body>
+        
+        <?php if(isset($error)) { ?>
+        <div id="error">
+            <?=$error?>
+        </div>
+        <?php } ?>
+        
         <div id="form">
             <form action="redirect0.php" name="form" method="post">
                 Op welke locatie bevind u zich?

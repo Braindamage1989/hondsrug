@@ -3,6 +3,10 @@
 	require_once 'includes/functions.php';
     require_once 'includes/connectdb.php';
 	
+    if (!$_SESSION["locatie"]) {
+        redirect_to("vs2.php?error=noinput");
+    }
+    
     $query="SELECT hw_id FROM hardware WHERE soort_hw='werkstation' AND locatie='".$_SESSION["locatie"]."'";
     $result=  mysqli_query($db, $query);
     
@@ -22,7 +26,7 @@
         if ($hw_id==$value["hw_id"]) $legal=true;
     }
     
-    if ($legal==true||$hw_id=="hoi") {
+    if ($legal==true) {
         $_SESSION["antwoorden"]["1"]=$_POST["id"];
         redirect_to("vs3.php");
     }
