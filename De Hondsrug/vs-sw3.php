@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -7,23 +9,16 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Vragenscript - Internet</title>
+        <title></title>
     </head>
     <body>
-        
-        <?php if(isset($error)) { ?>
-        <div id="error">
-            <?=$error?>
-        </div>
-        <?php } ?>
-        
         <div id="form">
-            <form action="redirect-int.php" name="form" method="post">
-                Kunt u op een ander werkstation wel verbinding maken met het internet?
+            <form action="redirect-sw.php" name="form" method="post">
+                Werkt De aplicatie wel op een ander werk station?
                 </br>
-                <input type="radio" name='bool' value="true">Ja, dit lukt.</input>
+                <input type="radio" name='ander' value="true">Ja, dit werkt</input>
                 </br>
-                <input type="radio" name='bool' value="false">Nee, dit lukt niet.</input>
+                <input type="radio" name='ander' value="false">Nee, dit werkt niet</input>
                 </br>
                 <input type="submit" name="submit" value="Return" />
                 <input type="submit" name="submit" value="Submit" />

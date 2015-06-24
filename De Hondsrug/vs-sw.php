@@ -1,4 +1,27 @@
-<?php session_start(); ?>
+<?php 
+    session_start();
+    require_once 'includes/connectdb.php';
+?>
+
+<?php
+    
+    $query="SELECT DISTINCT sw.sw_id, sw.uitgebreidde_naam "
+            . "FROM software sw "
+            . "JOIN geinstalleerde_software gs ON gs.sw_id=sw.sw_id "
+            . "JOIN hardware hw ON hw.hw_id=gs.hw_id "
+            . "WHERE hw.hw_id='".$_SESSION["antwoorden"]["1"]."' "
+            . "OR hw.hw_id IN "
+                . "(SELECT hw.hw_id "
+                . "FROM hardware hw "
+                . "WHERE hw.soort_hw='server' "
+                . "AND hw.locatie='".$_SESSION["locatie"]."')";
+    $result=  mysqli_query($db, $query);
+    if (!$result) {
+        echo $query.'</br>'.$result;
+        die("Database query failed.");
+    }
+?>
+
 <?php
     if(isset($_GET["error"])&&$_GET["error"]=="noinput") {
         $error="U heeft niks ingevoerd.</br>
@@ -30,10 +53,16 @@ and open the template in the editor.
         <?php } ?>
         
         <div id="form">
-            <form action="redirect-sw0.php" name="form" method="post">
+            <form action="redirect-sw.php" name="form" method="post">
                 Wat is de naam van de applicatie?
                 </br>
-                <input type="text" name='id' value="" placeholder="Voer hier het WS-ID in"></input>
+                <select name="software">
+                    <?php
+                        while ($array=  mysqli_fetch_assoc($result)) {
+                            echo "<option value='".$array["sw_id"]."'>".$array["uitgebreidde_naam"]."</option>";
+                        }
+                    ?>
+                </select>
                 </br>
                 <input type="submit" name="submit" value="Return" />
                 <input type="submit" name="submit" value="Submit" />

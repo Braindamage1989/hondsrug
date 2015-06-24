@@ -15,6 +15,3 @@
     }
 	redirect_to("vs2.php");
 ?>
-
-<br><br>
-Hello

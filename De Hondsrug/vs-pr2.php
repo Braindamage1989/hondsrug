@@ -41,6 +41,7 @@ and open the template in the editor.
                             echo "<option value='".$value."'>".$value."</option>";
                         }    
                     ?>
+                    </br>
                     <input type="submit" name="submit" value="Return" />
                     <input type="submit" name="submit" value="Submit" />
                 </select>
