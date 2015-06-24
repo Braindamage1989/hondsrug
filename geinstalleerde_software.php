@@ -4,6 +4,8 @@
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
     
+    $melding = "";
+    
     $query = "SELECT hw_id, sw_id FROM geinstalleerde_software WHERE status != '9'";
     $result = mysqli_query($db, $query);
     
@@ -13,13 +15,17 @@
     endif;
     
     if(isset($_POST['verwijderen'])):
-        $aantal = 0;
-        foreach($_POST['id'] as $k => $v) :
-            $key = explode("_", $_POST['id'][$aantal]);
-            $aantal++;
-            $update = "UPDATE geinstalleerde_software SET status='9' WHERE hw_id='$key[0]' AND sw_id='$key[1]'";
-            mysqli_query($db, $update);
-        endforeach;
+        if(empty($_POST['id'])) :
+            $melding .= "<font color=\"red\"><b>Er is geen record geselecteerd</b></font><br/>";
+        else:
+            $aantal = 0;
+            foreach($_POST['id'] as $k => $v) :
+                $key = explode("_", $_POST['id'][$aantal]);
+                $aantal++;
+                $update = "UPDATE geinstalleerde_software SET status='9' WHERE hw_id='$key[0]' AND sw_id='$key[1]'";
+                mysqli_query($db, $update);
+            endforeach;
+        endif;
     endif;
 ?>
 <div class="titel2">
@@ -30,6 +36,7 @@
 <div class="lijst">
     <div class="container">
         <div class="col-md-11">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table class="table">
                     <tr>

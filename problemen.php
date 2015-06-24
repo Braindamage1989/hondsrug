@@ -4,13 +4,10 @@
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
     
+    $melding ="";
+    
     $query_problemen = "SELECT * FROM problemen WHERE status !=9";
     $result_problemen = mysqli_query($db, $query_problemen);
-    
-    /*
-    $query_incidenten = "SELECT * FROM incidenten_probleem";
-    $result_incidenten = mysqli_query($db, $query_incidenten);
-    */
     
     $query_gebruikers = "SELECT id, voornaam, achternaam FROM gebruikers";
     $result_gebruikers = mysqli_query($db, $query_gebruikers);
@@ -25,10 +22,14 @@
     endif;
     
     if(isset($_POST['verwijderen'])):
-        foreach($_POST['id'] as $k => $v) :
-            $update = "UPDATE problemen SET status='9' WHERE id='$v'";
-            mysqli_query($db, $update);
-        endforeach;
+        if(empty($_POST['id'])) :
+            $melding .= "<font color=\"red\"><b>Er is geen record geselecteerd</b></font><br/>";
+        else:
+            foreach($_POST['id'] as $k => $v) :
+                $update = "UPDATE problemen SET status='9' WHERE id='$v'";
+                mysqli_query($db, $update);
+            endforeach;
+        endif;
     endif;
 ?>
  <div class="titel2">
@@ -39,6 +40,7 @@
 <div class="lijst">
     <div class="container">
         <div class="col-md-11">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table class="table">
                     <tr>

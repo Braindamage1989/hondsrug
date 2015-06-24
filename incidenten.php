@@ -6,6 +6,8 @@
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
     
+    $melding = "";
+    
     $query_all = "SELECT id, omschrijving, datum, starttijd, hw_id, sw_id, toegekend_aan, melder, status FROM incidenten WHERE status != '9'";
     $result_all = mysqli_query($db, $query_all);
     
@@ -38,9 +40,13 @@
     endwhile;
     
     if(isset($_POST['inline'])):
-        $_SESSION['ids'] = $_POST['id'];
-        header('Location: incidenten_inline.php');
-        exit;
+        if(empty($_POST['id'])) :
+            $melding .= "<font color=\"red\"><b>Er is geen record geselecteerd</b></font><br/>";
+        else:
+            $_SESSION['ids'] = $_POST['id'];
+            header('Location: incidenten_inline.php');
+            exit;
+        endif;
     endif;
     
     if(isset($_POST['toevoegen'])):
@@ -49,10 +55,14 @@
     endif;
     
     if(isset($_POST['verwijderen'])):
-        foreach($_POST['id'] as $k => $v) :
-            $update = "UPDATE incidenten SET status='9' WHERE id='$v'";
-            mysqli_query($db, $update);
-        endforeach;
+        if(empty($_POST['id'])) :
+            $melding .= "<font color=\"red\"><b>Er is geen record geselecteerd</b></font><br/>";
+        else:
+            foreach($_POST['id'] as $k => $v) :
+                $update = "UPDATE incidenten SET status='9' WHERE id='$v'";
+                mysqli_query($db, $update);
+            endforeach;
+        endif;
     endif;
 ?>
  <div class="titel2">
@@ -63,6 +73,7 @@
 <div class="lijst">
     <div class="container">
         <div class="col-md-11">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table class="table">
                     <tr>

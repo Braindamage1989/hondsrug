@@ -11,11 +11,17 @@
     $result_one = mysqli_query($db, $query_one);
     $titles = mysqli_fetch_assoc($result_one);
     
+    $melding = "";
+    
     
     if(isset($_POST['inline'])):
-        $_SESSION['ids'] = $_POST['id'];
-        header('Location: hardware_inline.php');
-        exit;
+        if(empty($_POST['id'])) :
+            $melding .= "<font color=\"red\"><b>Er is geen record geselecteerd</b></font><br/>";
+        else:
+            $_SESSION['ids'] = $_POST['id'];
+            header('Location: hardware_inline.php');
+            exit;
+        endif;
     endif;
     
     if(isset($_POST['toevoegen'])):
@@ -24,10 +30,14 @@
     endif;
     
     if(isset($_POST['verwijderen'])):
-        foreach($_POST['id'] as $k => $v) :
-            $update = "UPDATE hardware SET status='9' WHERE hw_id='$v'";
-            mysqli_query($db, $update);
-        endforeach;
+        if(empty($_POST['id'])) :
+            $melding .= "<font color=\"red\"><b>Er is geen record geselecteerd</b></font><br/>";
+        else:
+            foreach($_POST['id'] as $k => $v) :
+                $update = "UPDATE hardware SET status='9' WHERE hw_id='$v'";
+                mysqli_query($db, $update);
+            endforeach;
+        endif;
     endif;
 ?>
 <div class="titel2">
@@ -38,6 +48,7 @@
 <div class="lijst">
     <div class="container">
         <div class="col-md-11">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table class='table'>
                     <tr>

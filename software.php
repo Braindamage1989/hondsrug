@@ -4,6 +4,8 @@
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
     
+    $melding ="";
+    
     $query_all = "SELECT sw_id, uitgebreidde_naam, soort, producent, leverancier, aantal_licenties, serverlicentie, aantal_gebruikers FROM software WHERE status !=9";
     $result_all = mysqli_query($db, $query_all);
     
@@ -12,10 +14,13 @@
     $titles = mysqli_fetch_assoc($result_one);
     
     if(isset($_POST['inline'])):
-        $_SESSION['ids'] = $_POST['id'];
-        print_r($_SESSION['ids']);
-        header('Location: software_inline.php');
-        exit;
+        if(empty($_POST['id'])) :
+            $melding .= "<font color=\"red\"><b>Er is geen record geselecteerd</b></font><br/>";
+        else:
+            $_SESSION['ids'] = $_POST['id'];
+            header('Location: software_inline.php');
+            exit;
+        endif;
     endif;
         
     if(isset($_POST['toevoegen'])):
@@ -24,10 +29,14 @@
     endif;
     
     if(isset($_POST['verwijderen'])):
-        foreach($_POST['id'] as $k => $v) :
-            $update = "UPDATE software SET status='9' WHERE sw_id='$v'";
-            mysqli_query($db, $update);
-        endforeach;
+        if(empty($_POST['id'])) :
+            $melding .= "<font color=\"red\"><b>Er is geen record geselecteerd</b></font><br/>";
+        else:
+            foreach($_POST['id'] as $k => $v) :
+                $update = "UPDATE software SET status='9' WHERE sw_id='$v'";
+                mysqli_query($db, $update);
+            endforeach;
+        endif;
     endif;
 ?>
  <div class="titel2">
@@ -38,37 +47,38 @@
 <div class="lijst">
     <div class="container-fluid">
         <div class="col-md-11">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
-            <table class='table'>
-                <tr>
-                    <td></td>
-                    <td><b>Software ID</b></td>
-                    <td><b>Uitgebreide naam</b></td>
-                    <td><b>Soort</b></td>
-                    <td><b>Producent</b></td>
-                    <td><b>Leverancier</b></td>
-                    <td><b>Aantal Licenties</b></td>
-                    <td><b>Serverlicenties</b></td>
-                    <td><b>Aantal gebruikers</b></td>
-                </tr>
-                <?php
-                    while($row = mysqli_fetch_assoc($result_all)):
-                ?>
+                <table class='table'>
                     <tr>
-                <?php
-                        foreach($row as $k => $v):
-                            if($k == 'sw_id'):
-                                echo "<td><input type=\"checkbox\" name=\"id[]\" value=\"$v\"></td>\n";
-                            endif;
-                            echo "<td>$v</td>\n";
-                        endforeach;
-                ?>
+                        <td></td>
+                        <td><b>Software ID</b></td>
+                        <td><b>Uitgebreide naam</b></td>
+                        <td><b>Soort</b></td>
+                        <td><b>Producent</b></td>
+                        <td><b>Leverancier</b></td>
+                        <td><b>Aantal Licenties</b></td>
+                        <td><b>Serverlicenties</b></td>
+                        <td><b>Aantal gebruikers</b></td>
                     </tr>
-                <?php
-                    endwhile;
-                ?>
+                    <?php
+                        while($row = mysqli_fetch_assoc($result_all)):
+                    ?>
+                        <tr>
+                    <?php
+                            foreach($row as $k => $v):
+                                if($k == 'sw_id'):
+                                    echo "<td><input type=\"checkbox\" name=\"id[]\" value=\"$v\"></td>\n";
+                                endif;
+                                echo "<td>$v</td>\n";
+                            endforeach;
+                    ?>
+                        </tr>
+                    <?php
+                        endwhile;
+                    ?>
 
-            </table>
+                </table>
         </div>
             <div class='col-md-1'>
                 <div class='submenu'>
