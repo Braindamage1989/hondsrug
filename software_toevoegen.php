@@ -3,17 +3,42 @@
     
     require_once 'includes/header.html';
     require_once 'includes/connectdb.php';
+    
+    $melding = "";
+    $teller = 0;
    
     $query = "SELECT sw_id, uitgebreidde_naam, soort, producent, leverancier, aantal_licenties, serverlicentie, aantal_gebruikers FROM software LIMIT 1";
     $result = mysqli_query($db, $query);
     $titles = mysqli_fetch_assoc($result);
     
     if(isset($_POST['opslaan'])):
-        $insert = "INSERT INTO software (sw_id,uitgebreidde_naam,soort,producent,leverancier,aantal_licenties,serverlicentie,aantal_gebruikers,status) "
-            . "VALUES ('".$_POST['sw_id']."','".$_POST['uitgebreidde_naam']."','".$_POST['soort']."','".$_POST['producent']."','".$_POST['leverancier']."','".$_POST['aantal_licenties']."','".$_POST['serverlicentie']."','".$_POST['aantal_gebruikers']."',1)";
-        mysqli_query($db, $insert);
-        header('Location: software.php');
-        exit;
+        if(empty($_POST['sw_id'])) :
+            $melding .= "<font color=\"red\"><b>Software ID mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['uitgebreidde_naam'])) :
+            $melding .= "<font color=\"red\"><b>Uitgebreide naam mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['soort'])) :
+            $melding .= "<font color=\"red\"><b>Soort mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['producent'])) :
+            $melding .= "<font color=\"red\"><b>Producent mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['leverancier'])) :
+            $melding .= "<font color=\"red\"><b>Leverancier mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if($teller == 0) :
+            $insert = "INSERT INTO software (sw_id,uitgebreidde_naam,soort,producent,leverancier,aantal_licenties,serverlicentie,aantal_gebruikers,status) "
+                . "VALUES ('".$_POST['sw_id']."','".$_POST['uitgebreidde_naam']."','".$_POST['soort']."','".$_POST['producent']."','".$_POST['leverancier']."','".$_POST['aantal_licenties']."','".$_POST['serverlicentie']."','".$_POST['aantal_gebruikers']."',1)";
+            mysqli_query($db, $insert);
+            header('Location: software.php');
+            exit;
+        endif;
     endif;
     
     if(isset($_POST['overzicht'])):
@@ -29,6 +54,7 @@
 <div class="lijst">
     <div class="container-fluid">
         <div class="col-md-10">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table>
                     <tr>

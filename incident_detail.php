@@ -1,5 +1,7 @@
 <?php
     session_start();
+    
+    error_reporting(0);
 
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
@@ -74,7 +76,7 @@
                         <td><b>Workaround *</b></td>
                         <td><b>Datum</b></td>
                         <td><b>Starttijd</b></td>
-                        <td><b>Eindtijd</b></td>
+                        <td><b>Eindtijd *</b></td>
                         <td><b>Hardware ID</b></td>
                         <td><b>Software ID *</b></td>
                     </tr>

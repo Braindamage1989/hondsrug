@@ -15,15 +15,14 @@
             . "achternaam='".$_POST[$id][2]."', "
             . "email='".$_POST[$id][3]."', "
             . "wachtwoord='".$_POST[$id][4]."', "
-            . "functie='".$_POST[$id][5]."', "
-            . "status='".$_POST[$id][6]."'"
+            . "functie='".$_POST[$id][5]."'"
             . " WHERE id='".$_POST[$id][0]."'";
             mysqli_query($db, $update);
             echo $update;
             echo "<br/>";
         endforeach;
         empty($SESSION['ids']);
-        //header('Location: gebruikers.php');
+        header('Location: gebruikers.php');
         exit;
     endif;
     
@@ -32,10 +31,9 @@
         exit;
     endif;
 ?>
-?>
 <div class="titel2">
     <div class="container">
-        <h1>Gebruiker toevoegen</h1>
+        <h1>Gebruiker bewerken</h1>
     </div>
 </div>
 <div class="lijst">
@@ -50,7 +48,6 @@
                         <td><b>E-mail</b></td>
                         <td><b>Wachtwoord</b></td>
                         <td><b>Functie</b></td>
-                        <td><b>Status</b></td>
                     </tr>
                     <?php
                         while($row = mysqli_fetch_assoc($result)):
@@ -70,6 +67,8 @@
                                     <?php
                                 elseif ($key == "id") :
                                     echo "<td><input type=\"text\" name=\"".$row["id"]."[]\" value=\"$value\" readonly=\"readonly\"/></td>\n";
+                                elseif ($key == 'status') :
+                                    //doe niks
                                 else:
                                     echo "<td><input type=\"text\" name=\"".$row["id"]."[]\" value=\"$value\"/></td>\n";
                                 endif;

@@ -1,5 +1,7 @@
 <?php
     session_start();
+    
+    error_reporting(0);
 
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
@@ -35,7 +37,7 @@
 ?>
 <div class="titel2">
     <div class="container">
-        <h1>Geïnstalleerde software toevoegen</h1>
+        <h1>Geinstalleerde software toevoegen</h1>
     </div>
 </div>
 <div class="lijst">

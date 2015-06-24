@@ -4,15 +4,36 @@
     require_once 'includes/header.html';
     require_once 'includes/connectdb.php';
     
+    $melding = "";
+    $teller = 0;
+    
     $query = "SELECT voornaam, achternaam, email, wachtwoord, functie FROM gebruikers LIMIT 1";
     $result = mysqli_query($db, $query);
     
     if(isset($_POST['opslaan'])):
-        $insert = "INSERT INTO gebruikers (voornaam,achternaam,email,wachtwoord,functie,status) "
-            . "VALUES ('".$_POST['voornaam']."','".$_POST['achternaam']."','".$_POST['email']."','".$_POST['wachtwoord']."','".$_POST['functie']."','1')";
-        mysqli_query($db, $insert);
-        header('Location: gebruikers.php');
-        exit;
+        if(empty($_POST['voornaam'])) :
+            $melding .= "<font color=\"red\"><b>Voornaam mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['achternaam'])) :
+            $melding .= "<font color=\"red\"><b>Achternaam mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['email'])) :
+            $melding .= "<font color=\"red\"><b>E-mail mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['wachtwoord'])) :
+            $melding .= "<font color=\"red\"><b>Wachtwoord mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if($teller == 0) :
+            $insert = "INSERT INTO gebruikers (voornaam,achternaam,email,wachtwoord,functie,status) "
+                . "VALUES ('".$_POST['voornaam']."','".$_POST['achternaam']."','".$_POST['email']."','".$_POST['wachtwoord']."','".$_POST['functie']."','1')";
+            mysqli_query($db, $insert);
+            header('Location: gebruikers.php');
+            exit;
+        endif;
     endif;
     
     if(isset($_POST['overzicht'])):
@@ -28,6 +49,7 @@
 <div class="lijst">
     <div class="container">
         <div class="col-md-10">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table class="table">
                     <tr>

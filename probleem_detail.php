@@ -50,15 +50,13 @@
             echo $update_inc;
         endforeach;
         header('Location: problemen.php');
-        //exit;
+        exit;
     endif;
     
     if(isset($_POST['overzicht'])):
         header('Location: problemen.php');
         exit;
     endif;
-    
-    print_r($_POST['incidenten']);
 ?>
 <div class="titel2">
     <div class="container">
@@ -82,7 +80,20 @@
                     <tr>
                         <td><input type="text" name="id" readonly="readonly" value="<?php echo $record['id']; ?>"/></td>
                         <td><input type="text" name="omschrijving" value="<?php echo $record['omschrijving']; ?>"/></td>
-                        <td><input type="text" name="known_error" value="<?php echo $record['known_error']; ?>" /></td>
+                        <td><select name="known_error">
+                            <?php
+                                if($record['toegekend_aan'] == 0) :
+                                    echo "<option value=\"0\" selected>Nee</option>\n";
+                                else:
+                                    echo "<option value=\"0\">Nee</option>\n";
+                                endif;
+                                if($record['toegekend_aan'] == 1) :
+                                    echo "<option value=\"1\" selected>Ja</option>\n";
+                                else:
+                                    echo "<option value=\"1\">Ja</option>\n";
+                                endif;
+                            ?>
+                        </select></td>
                         <td><select name="toegekend_aan">
                             <?php
                                 foreach($array_gebruikers as $key => $value) :

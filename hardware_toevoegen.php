@@ -3,6 +3,9 @@
     
     require_once 'includes/header.html';
     require_once 'includes/connectdb.php';
+    
+    $melding = "";
+    $teller = 0;
    
     $query = "SELECT * FROM hardware LIMIT 1";
     $result = mysqli_query($db, $query);
@@ -12,11 +15,33 @@
     $dropdown_connected_hw = mysqli_query($db, $qry_dropdown_connected_hw);
     
     if(isset($_POST['opslaan'])):
-        $insert = "INSERT INTO hardware (hw_id,soort_hw,locatie,OS,merk,leverancier,aanschafjaar,connected_hw,status) "
-            . "VALUES ('".$_POST['hw_id']."','".$_POST['soort_hw']."','".$_POST['locatie']."','".$_POST['OS']."','".$_POST['merk']."','".$_POST['leverancier']."','".$_POST['aanschafjaar']."','".$_POST['connected_hw']."',1)";
-        mysqli_query($db, $insert);
-        header('Location: hardware.php');
-        exit;
+        if(empty($_POST['hw_id'])) :
+            $melding .= "<font color=\"red\"><b>Hardware ID mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['locatie'])) :
+            $melding .= "<font color=\"red\"><b>Locatie mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['merk'])) :
+            $melding .= "<font color=\"red\"><b>Merk mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['leverancier'])) :
+            $melding .= "<font color=\"red\"><b>Leverancier mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['aanschafjaar'])) :
+            $melding .= "<font color=\"red\"><b>Aanschafjaar mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if($teller == 0) :
+            $insert = "INSERT INTO hardware (hw_id,soort_hw,locatie,OS,merk,leverancier,aanschafjaar,connected_hw,status) "
+                . "VALUES ('".$_POST['hw_id']."','".$_POST['soort_hw']."','".$_POST['locatie']."','".$_POST['OS']."','".$_POST['merk']."','".$_POST['leverancier']."','".$_POST['aanschafjaar']."','".$_POST['connected_hw']."',1)";
+            mysqli_query($db, $insert);
+            header('Location: hardware.php');
+            exit;
+        endif;
     endif;
     
     if(isset($_POST['overzicht'])):
@@ -32,6 +57,7 @@
 <div class="lijst">
     <div class="container-fluid">
         <div class="col-md-10">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table>
                     <tr>

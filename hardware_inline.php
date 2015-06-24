@@ -51,7 +51,6 @@
             <form action="" method="POST">
                 <table>
                     <tr>
-                        <td></td>
                         <td><b>Hardware ID</b></td>
                         <td><b>Soort Hardware</b></td>
                         <td><b>Locatie</b></td>

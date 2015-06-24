@@ -1,5 +1,7 @@
 <?php
     session_start();
+    
+    error_reporting(0);
 
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';

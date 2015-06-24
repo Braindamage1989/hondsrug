@@ -30,7 +30,7 @@
 ?>
 <div class="titel2">
     <div class="container">
-        <h1>Geïnstalleerde software</h1>
+        <h1>Geinstalleerde software</h1>
     </div>
 </div>
 <div class="lijst">

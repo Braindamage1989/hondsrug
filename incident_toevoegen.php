@@ -4,6 +4,9 @@
     require_once 'includes/connectdb.php';
     require_once 'includes/header.html';
     
+    $melding = "";
+    $teller = 0;
+    
     $qry_dropdown_toegekend_aan = "SELECT id, voornaam, achternaam FROM gebruikers";
     $dropdown_toegekend_aan = mysqli_query($db, $qry_dropdown_toegekend_aan);
     
@@ -17,12 +20,29 @@
     $dropdown_sw_id = mysqli_query($db, $qry_dropdown_sw_id);
     
     if(isset($_POST['opslaan'])):
-        $insert = "INSERT INTO incidenten (omschrijving,workaround,datum,starttijd,eindtijd,hw_id,sw_id,urgentie,impact,status,soort,toegekend_aan,melder) "
-            . "VALUES ('".$_POST['omschrijving']."','".$_POST['workaround']."','".$_POST['datum']."','".$_POST['starttijd']."','".$_POST['eindtijd']."','".$_POST['hw_id']."','".$_POST['sw_id']."','".$_POST['urgentie']."','".$_POST['impact']."','1','".$_POST['soort']."','".$_POST['toegekend_aan']."','".$_POST['melder']."')";
-        mysqli_query($db, $insert);
-        echo $insert;
-        //header('Location: incidenten.php');
-        exit;
+        if(empty($_POST['omschrijving'])) :
+            $melding .= "<font color=\"red\"><b>Omschrijving mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['datum'])) :
+            $melding .= "<font color=\"red\"><b>Datum mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['starttijd'])) :
+            $melding .= "<font color=\"red\"><b>Starttijd mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['soort'])) :
+            $melding .= "<font color=\"red\"><b>Soort mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if($teller == 0) :
+            $insert = "INSERT INTO incidenten (omschrijving,workaround,datum,starttijd,eindtijd,hw_id,sw_id,urgentie,impact,status,soort,toegekend_aan,melder) "
+                . "VALUES ('".$_POST['omschrijving']."','".$_POST['workaround']."','".$_POST['datum']."','".$_POST['starttijd']."','".$_POST['eindtijd']."','".$_POST['hw_id']."','".$_POST['sw_id']."','".$_POST['urgentie']."','".$_POST['impact']."','1','".$_POST['soort']."','".$_POST['toegekend_aan']."','".$_POST['melder']."')";
+            mysqli_query($db, $insert);
+            header('Location: incidenten.php');
+            exit;
+        endif;
     endif;
     
     if(isset($_POST['overzicht'])):
@@ -38,6 +58,7 @@
 <div class="lijst">
     <div class="container-fluid">
         <div class="col-md-10">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table>
                     <tr>
