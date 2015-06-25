@@ -14,11 +14,17 @@
         <ul class="pull-left">
           <li><a href="index.php">Home</a></li>
           
-          <li><a href="incidenten.php">Vragen</a></li>
-          <li><a href="incidenten.php">F.A.Q.</a></li>
+          <li><a href="vragenscript.php">Vragen</a></li>
+          <li><a href="FAQ.php">F.A.Q.</a></li>
         </ul>
         <ul class="pull-right">
-          <li><a href="#">Log In</a></li>
+            <?php
+                if(isset($_SESSION['ingelogd'])) {
+                    echo "<li><a href=\"logout.php\">Log Out</a></li>";
+                }else {
+                    echo "<li><a href=\"login.php\">Log In</a></li>";
+                }
+            ?>
           <li><a href="#">Contact</a></li>
         </ul>
       </div>

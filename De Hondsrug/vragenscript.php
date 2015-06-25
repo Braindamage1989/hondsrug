@@ -1,5 +1,9 @@
-<?php 
+<?php
     session_start();
+    
+    if(!isset($_SESSION['ingelogd'])) {
+        header("location:login.php");
+    }
     require 'includes/connectdb.php';
     require_once 'includes/header.php';
     
@@ -12,7 +16,7 @@
             Selecteer een geldige optie:</br></br>";
     }
     
-    $_SESSION=[];
+    $_SESSION['antwoorden']=[];
 
     $query="SELECT hw_id FROM hardware WHERE soort_hw='werkstation'";
     $result=  mysqli_query($db, $query);

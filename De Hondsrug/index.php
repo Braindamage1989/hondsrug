@@ -1,12 +1,23 @@
 <?php
+    session_start();
     require_once 'includes/header.php';
 ?>
 
 <div class="titel1">
   <div class="container">
-    <h1>Heeft u een probleem met onze ICT-dienst?</h1>
-    <p>Via deze site kunt u uw probleem bij ons melden</p>
-    <a href="#">Log a.u.b. eerst in</a>
+      <?php
+        if(isset($_SESSION['ingelogd'])) {
+            $voornaam = $_SESSION['voornaam'];
+            echo "<h1>Welkom, $voornaam.</h1>"
+                    . "<p>Via deze site kunt u uw probleem bij ons melden</p>"
+                    . "<a href=\"logout.php\">Of log hier uit</a>";
+        }
+        else {
+            echo "<h1>Heeft u een probleem met onze ICT-dienst?</h1>"
+            . "<p>Via deze site kunt u uw probleem bij ons melden</p>"
+                    . "<a href=\"login.php\">Log a.u.b. eerst in</a>";
+        }
+      ?>
   </div>
 </div> 
 
@@ -21,7 +32,7 @@
               <div class="col-md-6">
                     <h3>F.A.Q.</h3>
                     <p>Bekijk onze F.A.Q. om te kijken of uw vraag hiertussen staat.</p>
-                    <p><a href="problemen.php">Ga naar de F.A.Q.</a></p>
+                    <p><a href="FAQ.php">Ga naar de F.A.Q.</a></p>
               </div>
         </div>
     </div>
