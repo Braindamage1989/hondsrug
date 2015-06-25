@@ -23,23 +23,23 @@
     
     if(isset($_POST['opslaan'])):
             foreach ($_SESSION['ids'] as $id):
-                if(empty($_POST['sw_id'])) :
+                if(empty($_POST[$id][0])) :
                     $melding .= "<font color=\"red\"><b>Software ID mag niet leeg zijn</b></font><br/>";
                     $teller++;
                 endif;
-                if(empty($_POST['uitgebreidde_naam'])) :
+                if(empty($_POST[$id][1])) :
                     $melding .= "<font color=\"red\"><b>Uitgebreide naam mag niet leeg zijn</b></font><br/>";
                     $teller++;
                 endif;
-                if(empty($_POST['soort'])) :
+                if(empty($_POST[$id][2])) :
                     $melding .= "<font color=\"red\"><b>Soort mag niet leeg zijn</b></font><br/>";
                     $teller++;
                 endif;
-                if(empty($_POST['producent'])) :
+                if(empty($_POST[$id][3])) :
                     $melding .= "<font color=\"red\"><b>Producent mag niet leeg zijn</b></font><br/>";
                     $teller++;
                 endif;
-                if(empty($_POST['leverancier'])) :
+                if(empty($_POST[$id][4])) :
                     $melding .= "<font color=\"red\"><b>Leverancier mag niet leeg zijn</b></font><br/>";
                     $teller++;
                 endif;
