@@ -12,7 +12,7 @@
     
     $melding = "";
     
-    $query_all = "SELECT id, omschrijving, datum, starttijd, hw_id, sw_id, toegekend_aan, melder, status FROM incidenten WHERE status != '9'";
+    $query_all = "SELECT id, omschrijving, soort, datum, starttijd, hw_id, sw_id, toegekend_aan, melder, status FROM incidenten WHERE status != '9'";
     $result_all = mysqli_query($db, $query_all);
     
     $query_prioriteit = "SELECT id, urgentie, impact FROM incidenten WHERE status != '9'";
@@ -85,6 +85,7 @@
                     <tr>
                         <td></td>
                         <td><b>Omschrijving</b></td>
+                        <td><b>Soort</b></td>
                         <td><b>Datum</b></td>
                         <td><b>Starttijd</b></td>
                         <td><b>Hardware ID</b></td>

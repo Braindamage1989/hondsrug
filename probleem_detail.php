@@ -23,14 +23,14 @@
     $query_incidenten = "SELECT id, inc_id FROM incidenten_probleem WHERE pro_id=".$_GET['id']."";
     $result_incidenten = mysqli_query($db, $query_incidenten);
     
-    $qry_dropdown_gebruikers = "SELECT id, voornaam, achternaam FROM gebruikers";
-    $dropdown_gebruikers = mysqli_query($db, $qry_dropdown_gebruikers);
+    $qry_dropdown_medewerkers = "SELECT id, voornaam, achternaam FROM gebruikers WHERE functie ='Medewerker IT'";
+    $dropdown_medewerkers = mysqli_query($db, $qry_dropdown_medewerkers);
     
     $qry_dropdown_status = "SELECT status FROM problemen WHERE id=".$_GET['id']."";
     $dropdown_status = mysqli_query($db, $qry_dropdown_status);
     
-    while($gebruikers = mysqli_fetch_assoc($dropdown_gebruikers)):
-        $array_gebruikers[$gebruikers['id']] .= $gebruikers['voornaam']." ".$gebruikers['achternaam'];
+    while($medewerkers = mysqli_fetch_assoc($dropdown_medewerkers)):
+        $array_medewerkers[$medewerkers['id']] .= $medewerkers['voornaam']." ".$medewerkers['achternaam'];
     endwhile;
     
     while($incidenten = mysqli_fetch_assoc($result_incidenten)):
@@ -113,7 +113,7 @@
                         </select></td>
                         <td><select name="toegekend_aan">
                             <?php
-                                foreach($array_gebruikers as $key => $value) :
+                                foreach($array_medewekers as $key => $value) :
                                     if($record['toegekend_aan'] == $key) :
                                         echo "<option value=\"".$key."\" selected>".$value."</option>\n";
                                     else:

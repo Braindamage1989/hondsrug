@@ -128,7 +128,7 @@
                         <td><b>Urgentie</b></td>
                         <td><b>Impact</b></td>
                         <td><b>Hardware ID</b></td>
-                        <td><b>Software ID</b></td>
+                        <td><b>Software ID *</b></td>
                         <td><b>Toegekend aan</b></td>
                         <td><b>Melder</b></td>
                     </tr>
@@ -240,6 +240,7 @@
             <div class='submenu'>
                 <input type="submit" name="opslaan" value="Opslaan" class="btn btn-primary"/>
                 <input type="submit" name="overzicht" value="Terug naar overzicht" class="btn btn-default"/>
+                <br />* = optioneel 
                 </div>
             </form>
         </div>

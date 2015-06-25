@@ -11,10 +11,10 @@
     $melding = "";
     $teller = 0;
     
-    $qry_dropdown_toegekend_aan = "SELECT id, voornaam, achternaam FROM gebruikers";
+    $qry_dropdown_toegekend_aan = "SELECT id, voornaam, achternaam FROM gebruikers WHERE functie ='Medewerker IT'";
     $dropdown_toegekend_aan = mysqli_query($db, $qry_dropdown_toegekend_aan);
     
-    $qry_dropdown_melder = "SELECT id, voornaam, achternaam FROM gebruikers";
+    $qry_dropdown_melder = "SELECT id, voornaam, achternaam FROM gebruikers WHERE functie='Docent' OR functie='Leerling'";
     $dropdown_melder = mysqli_query($db, $qry_dropdown_melder);
     
     $qry_dropdown_hw_id = "SELECT hw_id FROM hardware";
@@ -41,9 +41,8 @@
             $teller++;
         endif;
         if($teller == 0) :
-            $datum = explode("-", $_POST['datum']);
             $insert = "INSERT INTO incidenten (omschrijving,workaround,datum,starttijd,eindtijd,hw_id,sw_id,urgentie,impact,status,soort,toegekend_aan,melder) "
-                . "VALUES ('".$_POST['omschrijving']."','".$_POST['workaround']."','".$datum[2]."-".$datum[1]."-".$datum[0]."','".$_POST['starttijd']."','".$_POST['eindtijd']."','".$_POST['hw_id']."','".$_POST['sw_id']."','".$_POST['urgentie']."','".$_POST['impact']."','1','".$_POST['soort']."','".$_POST['toegekend_aan']."','".$_POST['melder']."')";
+                . "VALUES ('".$_POST['omschrijving']."','".$_POST['workaround']."','".$_POST['datum']."','".$_POST['starttijd']."','".$_POST['eindtijd']."','".$_POST['hw_id']."','".$_POST['sw_id']."','".$_POST['urgentie']."','".$_POST['impact']."','1','".$_POST['soort']."','".$_POST['toegekend_aan']."','".$_POST['melder']."')";
             mysqli_query($db, $insert);
             header('Location: incidenten.php');
             exit;
@@ -68,12 +67,12 @@
                 <table>
                     <tr>
                         <td><b>Omschrijving</b></td>
-                        <td><b>Workaround*</b></td>
+                        <td><b>Workaround *</b></td>
                         <td><b>Datum</b></td>
                         <td><b>Starttijd</b></td>
-                        <td><b>Eindtijd</b></td>
+                        <td><b>Eindtijd *</b></td>
                         <td><b>Hardware ID</b></td>
-                        <td><b>Software ID*</b></td>
+                        <td><b>Software ID *</b></td>
                     </tr>
                     <tr>
                         <td><input type="text" name="omschrijving" /></td>
@@ -119,7 +118,7 @@
                                 <option value="3">Hoog</option>
                             </select>
                         </td>
-                        <td><input type="text" name="soort" /></td>
+                        <td><input type="text" name="soort" readonly="readonly" value="Melding"/></td>
                         <td><select name="toegekend_aan">
                             <?php
                                 while($medewerker = mysqli_fetch_assoc($dropdown_toegekend_aan)):
@@ -142,6 +141,7 @@
             <div class='submenu'>
                 <input type="submit" name="opslaan" value="Opslaan" class="btn btn-primary"/>
                 <input type="submit" name="overzicht" value="Terug naar overzicht" class="btn btn-default"/>
+                <br />* = optioneel 
                 </div>
             </form>
         </div>

@@ -116,9 +116,9 @@
                     <tr>
                         <td><input type="text" name="omschrijving" value="<?php echo $record['omschrijving']; ?>"/></td>
                         <td><input type="text" name="workaround" value="<?php echo $record['workaround']; ?>"/></td>
-                        <td><input type="text" name="datum" readonly="readonly" value="<?php //echo date('d-m-Y') ?>" /></td>
-                        <td><input type="text" name="starttijd" readonly="readonly" value="<?php //echo date('H:i:s') ?>" /></td>
-                        <td><input type="text" name="eindtijd" value="<?php echo $record['eindtijd']; ?>"/></td>
+                        <td><input type="text" name="datum" readonly="readonly" value="<?php echo $record['datum']; ?>" /></td>
+                        <td><input type="text" name="starttijd" readonly="readonly" value="<?php echo $record['starttijd']; ?>" /></td>
+                        <td><input type="text" name="eindtijd" placeholder="invoeren als xx:xx:xx" value="<?php echo $record['eindtijd']; ?>"/></td>
                         <td><select name="hw_id">
                             <?php
                             foreach($array_hw_id as $key => $value) :
