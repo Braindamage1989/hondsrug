@@ -5,29 +5,54 @@
         header("location:login.php");
     }
     
+    $melding = "";
+    $teller = 0;
+    
     require_once 'includes/connectdb.php';
     require_once 'includes/header.php';
+    
+    $melding = "";
+    $teller = 0;
     
     $ids = implode(' OR id = ', $_SESSION['ids']);
     
     $query = "SELECT * FROM gebruikers WHERE id = $ids";
     $result = mysqli_query($db, $query);
     
+    
     if(isset($_POST['opslaan'])):
-        foreach ($_SESSION['ids'] as $id):
-            $update = "UPDATE gebruikers SET voornaam='".$_POST[$id][1]."', "
-            . "achternaam='".$_POST[$id][2]."', "
-            . "email='".$_POST[$id][3]."', "
-            . "wachtwoord='".$_POST[$id][4]."', "
-            . "functie='".$_POST[$id][5]."'"
-            . " WHERE id='".$_POST[$id][0]."'";
-            mysqli_query($db, $update);
-            echo $update;
-            echo "<br/>";
-        endforeach;
-        empty($SESSION['ids']);
-        header('Location: gebruikers.php');
-        exit;
+        if(empty($_POST['voornaam'])) :
+            $melding .= "<font color=\"red\"><b>Voornaam mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['achternaam'])) :
+            $melding .= "<font color=\"red\"><b>Achternaam mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['email'])) :
+            $melding .= "<font color=\"red\"><b>E-mail mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['wachtwoord'])) :
+            $melding .= "<font color=\"red\"><b>Wachtwoord mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if($teller == 0) :
+            foreach ($_SESSION['ids'] as $id):
+                $update = "UPDATE gebruikers SET voornaam='".$_POST[$id][1]."', "
+                . "achternaam='".$_POST[$id][2]."', "
+                . "email='".$_POST[$id][3]."', "
+                . "wachtwoord='".$_POST[$id][4]."', "
+                . "functie='".$_POST[$id][5]."'"
+                . " WHERE id='".$_POST[$id][0]."'";
+                mysqli_query($db, $update);
+                echo $update;
+                echo "<br/>";
+            endforeach;
+            empty($SESSION['ids']);
+            header('Location: gebruikers.php');
+            exit;
+        endif;
     endif;
     
     if(isset($_POST['overzicht'])):
@@ -43,6 +68,7 @@
 <div class="lijst">
     <div class="container-fluid">
         <div class="col-md-8">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table>
                     <tr>

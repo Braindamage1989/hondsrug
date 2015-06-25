@@ -8,6 +8,9 @@
     require_once 'includes/header.php';
     require_once 'includes/connectdb.php';
     
+    $melding = "";
+    $teller = 0;
+    
     $ids = implode('" OR hw_id = "', $_SESSION['ids']);
     
     $query_all = "SELECT * FROM hardware WHERE hw_id = \"$ids\"";
@@ -21,22 +24,42 @@
     endwhile;
     
     if(isset($_POST['opslaan'])):
-        foreach ($_SESSION['ids'] as $id):
-            $update = "UPDATE hardware SET soort_hw='".$_POST[$id][1]."', "
-            . "locatie='".$_POST[$id][2]."', "
-            . "OS='".$_POST[$id][3]."', "
-            . "merk='".$_POST[$id][4]."', "
-            . "leverancier='".$_POST[$id][5]."', "
-            . "aanschafjaar='".$_POST[$id][6]."', "
-            . "connected_hw='".$_POST[$id][7]."' "
-            . "WHERE hw_id='".$id."'";
-            mysqli_query($db, $update);
-            echo $update;
-            echo "<br/>";
-        endforeach;
-        empty($SESSION['ids']);
-        header('Location: hardware.php');
-        exit;
+        if(empty($_POST['hw_id'])) :
+            $melding .= "<font color=\"red\"><b>Hardware ID mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['locatie'])) :
+            $melding .= "<font color=\"red\"><b>Locatie mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['merk'])) :
+            $melding .= "<font color=\"red\"><b>Merk mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['leverancier'])) :
+            $melding .= "<font color=\"red\"><b>Leverancier mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if(empty($_POST['aanschafjaar'])) :
+            $melding .= "<font color=\"red\"><b>Aanschafjaar mag niet leeg zijn</b></font><br/>";
+            $teller++;
+        endif;
+        if($teller == 0) :
+            foreach ($_SESSION['ids'] as $id):
+                $update = "UPDATE hardware SET soort_hw='".$_POST[$id][1]."', "
+                . "locatie='".$_POST[$id][2]."', "
+                . "OS='".$_POST[$id][3]."', "
+                . "merk='".$_POST[$id][4]."', "
+                . "leverancier='".$_POST[$id][5]."', "
+                . "aanschafjaar='".$_POST[$id][6]."', "
+                . "connected_hw='".$_POST[$id][7]."' "
+                . "WHERE hw_id='".$id."'";
+                mysqli_query($db, $update);
+            endforeach;
+            empty($SESSION['ids']);
+            header('Location: hardware.php');
+            exit;
+        endif;
     endif;
     
     if(isset($_POST['overzicht'])):
@@ -52,6 +75,7 @@
 <div class="lijst">
     <div class="container-fluid">
         <div class="col-md-10">
+            <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
                 <table>
                     <tr>

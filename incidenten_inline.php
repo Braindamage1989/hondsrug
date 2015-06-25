@@ -22,7 +22,10 @@
     $result_one = mysqli_query($db, $query_one);
     $titles = mysqli_fetch_assoc($result_one);
     
-    $qry_dropdown_gebruikers = "SELECT id, voornaam, achternaam FROM gebruikers";
+    $qry_dropdown_medewerkers = "SELECT id, voornaam, achternaam FROM gebruikers WHERE functie ='Medewerker IT'";
+    $dropdown_medewerkers = mysqli_query($db, $qry_dropdown_medewerkers);
+    
+    $qry_dropdown_gebruikers = "SELECT id, voornaam, achternaam FROM gebruikers WHERE functie='Docent' OR functie='Leerling'";
     $dropdown_gebruikers = mysqli_query($db, $qry_dropdown_gebruikers);
     
     $qry_dropdown_hw_id = "SELECT hw_id FROM hardware";
@@ -103,6 +106,10 @@
     while($gebruikers = mysqli_fetch_assoc($dropdown_gebruikers)):
         $array_gebruikers[$gebruikers['id']] .= $gebruikers['voornaam']." ".$gebruikers['achternaam'];
     endwhile;
+    
+    while($medewerkers = mysqli_fetch_assoc($dropdown_medewerkers)):
+        $array_medewerkers[$medewerkers['id']] .= $medewerkers['voornaam']." ".$medewerkers['achternaam'];
+    endwhile;
 ?>
 <div class="titel2">
     <div class="container">
@@ -135,7 +142,7 @@
                                 echo "<td><input type=\"text\" readonly=\"readonly\" name=\"".$row["id"]."[]\" value=\"$v\"/></td>\n";
                             elseif($k == 'toegekend_aan') :
                                 echo"<td><select name=\"".$row["id"]."[]\">";
-                                foreach($array_gebruikers as $key => $value) :
+                                foreach($array_medewerkers as $key => $value) :
                                     if($v == $key) :
                                         echo "<option value=\"".$key."\" selected>".$value."</option>\n";
                                     else:
