@@ -8,12 +8,13 @@
     if (isset($_GET["send"])&&$_GET["send"]=="true") {
         
         $to      = 'd.bor@st.hanze.nl';
-        $subject = 'contact Formulier';
+        $subject = $_POST["subject"];
         $message = $_POST["email"]."//".$_POST["name"];
         $headers = 'From: ' . $_POST["mail"] . "\r\n" .
             'Reply-To: ' . $_POST["mail"];
         
-        echo 'U kunt helaas geen mail sturen van af localhost.<br />Dit is wel mogelijk van af een normale server.'; //mail($to, $subject, $message, $headers);
+        echo 'U kunt helaas geen mail sturen van af localhost.<br />Dit is wel mogelijk van af een normale server.<br />'; //mail($to, $subject, $message, $headers);
+        echo $to."<br />".$subject."<br />".$message."<br />".$headers;
     }
     
 ?>
@@ -46,6 +47,8 @@ and open the template in the editor.
                 <input type="text" name="name" value="" placeholder="Uw naam"><br>
                 E-mail:<br>
                 <input type="text" name="mail" value="" placeholder="Uw email"><br>
+                Onderwerp:<br>
+                <input type="text" name="subject" value="" placeholder="Het onderwerp"><br>
                 Bericht:<br>
                 <textarea name="email" value="" placeholder='Uw bericht'></textarea><br><br>
                 <input type="submit" value="Send">
