@@ -41,41 +41,29 @@
     $dropdown_urgentie = mysqli_query($db, $qry_dropdown_urgentie);
     
     if(isset($_POST['opslaan'])):
-        if(empty($_POST['omschrijving'])) :
-            $melding .= "<font color=\"red\"><b>Omschrijving mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['datum'])) :
-            $melding .= "<font color=\"red\"><b>Datum mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['starttijd'])) :
-            $melding .= "<font color=\"red\"><b>Starttijd mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['soort'])) :
-            $melding .= "<font color=\"red\"><b>Soort mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if($teller == 0) :
             foreach ($_SESSION['ids'] as $id):
-                $update = "UPDATE incidenten SET id='".$_POST[$id][0]."',"
-                . "omschrijving='".$_POST[$id][1]."', "
-                . "urgentie='".$_POST[$id][2]."', "
-                . "impact='".$_POST[$id][3]."', "
-                . "hw_id='".$_POST[$id][4]."', "
-                . "sw_id='".$_POST[$id][5]."', "
-                . "toegekend_aan='".$_POST[$id][6]."', "
-                . "melder='".$_POST[$id][7]."' "
-                . "WHERE id='".$id."'";
-                mysqli_query($db, $update);
-                echo $update;
-                echo "<br/>";
+                if(empty($_POST[$id][1])) :
+                    $melding .= "<font color=\"red\"><b>Omschrijving mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if($teller == 0) :
+                    $update = "UPDATE incidenten SET id='".$_POST[$id][0]."',"
+                    . "omschrijving='".$_POST[$id][1]."', "
+                    . "urgentie='".$_POST[$id][2]."', "
+                    . "impact='".$_POST[$id][3]."', "
+                    . "hw_id='".$_POST[$id][4]."', "
+                    . "sw_id='".$_POST[$id][5]."', "
+                    . "toegekend_aan='".$_POST[$id][6]."', "
+                    . "melder='".$_POST[$id][7]."' "
+                    . "WHERE id='".$id."'";
+                    mysqli_query($db, $update);
+                endif;
             endforeach;
-            empty($SESSION['ids']);
-            header('Location: incidenten.php');
-            exit;
-        endif;
+            if($teller == 0):
+                    empty($SESSION['ids']);
+                    header('Location: incidenten.php');
+                    exit;
+            endif;          
     endif;
     
     if(isset($_POST['overzicht'])):

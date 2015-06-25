@@ -113,7 +113,7 @@
                         </select></td>
                         <td><select name="toegekend_aan">
                             <?php
-                                foreach($array_medewekers as $key => $value) :
+                                foreach($array_medewerkers as $key => $value) :
                                     if($record['toegekend_aan'] == $key) :
                                         echo "<option value=\"".$key."\" selected>".$value."</option>\n";
                                     else:

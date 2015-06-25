@@ -34,6 +34,8 @@
             foreach($_POST['id'] as $k => $v) :
                 $update = "UPDATE problemen SET status='9' WHERE id='$v'";
                 mysqli_query($db, $update);
+                header('Location: problemen.php');
+                exit;
             endforeach;
         endif;
     endif;

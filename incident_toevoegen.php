@@ -41,8 +41,8 @@
             $teller++;
         endif;
         if($teller == 0) :
-            $insert = "INSERT INTO incidenten (omschrijving,workaround,datum,starttijd,eindtijd,hw_id,sw_id,urgentie,impact,status,soort,toegekend_aan,melder) "
-                . "VALUES ('".$_POST['omschrijving']."','".$_POST['workaround']."','".$_POST['datum']."','".$_POST['starttijd']."','".$_POST['eindtijd']."','".$_POST['hw_id']."','".$_POST['sw_id']."','".$_POST['urgentie']."','".$_POST['impact']."','1','".$_POST['soort']."','".$_POST['toegekend_aan']."','".$_POST['melder']."')";
+            $insert = "INSERT INTO incidenten (omschrijving,soort,workaround,datum,starttijd,eindtijd,hw_id,sw_id,urgentie,impact,status,soort,toegekend_aan,melder) "
+                . "VALUES ('".$_POST['omschrijving']."','Melding', '".$_POST['workaround']."','".$_POST['datum']."','".$_POST['starttijd']."','".$_POST['eindtijd']."','".$_POST['hw_id']."','".$_POST['sw_id']."','".$_POST['urgentie']."','".$_POST['impact']."','1','".$_POST['soort']."','".$_POST['toegekend_aan']."','".$_POST['melder']."')";
             mysqli_query($db, $insert);
             header('Location: incidenten.php');
             exit;

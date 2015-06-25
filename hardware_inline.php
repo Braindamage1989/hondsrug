@@ -5,6 +5,8 @@
         header("location:login.php");
     }
     
+    error_reporting(0);
+    
     require_once 'includes/header.php';
     require_once 'includes/connectdb.php';
     
@@ -24,42 +26,45 @@
     endwhile;
     
     if(isset($_POST['opslaan'])):
-        if(empty($_POST['hw_id'])) :
-            $melding .= "<font color=\"red\"><b>Hardware ID mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['locatie'])) :
-            $melding .= "<font color=\"red\"><b>Locatie mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['merk'])) :
-            $melding .= "<font color=\"red\"><b>Merk mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['leverancier'])) :
-            $melding .= "<font color=\"red\"><b>Leverancier mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['aanschafjaar'])) :
-            $melding .= "<font color=\"red\"><b>Aanschafjaar mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if($teller == 0) :
             foreach ($_SESSION['ids'] as $id):
-                $update = "UPDATE hardware SET soort_hw='".$_POST[$id][1]."', "
-                . "locatie='".$_POST[$id][2]."', "
-                . "OS='".$_POST[$id][3]."', "
-                . "merk='".$_POST[$id][4]."', "
-                . "leverancier='".$_POST[$id][5]."', "
-                . "aanschafjaar='".$_POST[$id][6]."', "
-                . "connected_hw='".$_POST[$id][7]."' "
-                . "WHERE hw_id='".$id."'";
-                mysqli_query($db, $update);
+                if(empty($_POST[$id][1])) :
+                    $melding .= "<font color=\"red\"><b>Hardware ID mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if(empty($_POST[$id][2])) :
+                    $melding .= "<font color=\"red\"><b>Locatie mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if(empty($_POST[$id][4])) :
+                    $melding .= "<font color=\"red\"><b>Merk mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if(empty($_POST[$id][5])) :
+                    $melding .= "<font color=\"red\"><b>Leverancier mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if(empty($_POST[$id][6])) :
+                    $melding .= "<font color=\"red\"><b>Aanschafjaar mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if($teller == 0) :
+                    $update = "UPDATE hardware SET soort_hw='".$_POST[$id][1]."', "
+                    . "locatie='".$_POST[$id][2]."', "
+                    . "OS='".$_POST[$id][3]."', "
+                    . "merk='".$_POST[$id][4]."', "
+                    . "leverancier='".$_POST[$id][5]."', "
+                    . "aanschafjaar='".$_POST[$id][6]."', "
+                    . "connected_hw='".$_POST[$id][7]."' "
+                    . "WHERE hw_id='".$id."'";
+                    mysqli_query($db, $update);
+                    echo $update;
+                endif;
             endforeach;
-            empty($SESSION['ids']);
-            header('Location: hardware.php');
-            exit;
-        endif;
+            if($teller == 0) :
+                empty($SESSION['ids']);
+                header('Location: hardware.php');
+                exit;
+            endif;
     endif;
     
     if(isset($_POST['overzicht'])):
@@ -97,7 +102,7 @@
                                 if($k == 'hw_id') :
                                     echo "<td><input type=\"text\" readonly=\"readonly\" name=\"".$row["hw_id"]."[]\" value=\"$v\"/></td>\n";
                                 elseif ($k == 'aanschafjaar'):
-                                    echo "<td><input type=\"number\" name=\"aanschafjaar\" value=\"$v\"/></td>";
+                                    echo "<td><input type=\"number\" name=\"".$row["hw_id"]."[]\"\" value=\"$v\"/></td>";
                                 elseif($k == 'connected_hw') :
                                     echo"<td><select name=\"".$row["hw_id"]."[]\">";
                                     foreach($array_connected as $key => $value) :

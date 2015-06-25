@@ -40,6 +40,8 @@
             foreach($_POST['id'] as $k => $v) :
                 $update = "UPDATE hardware SET status='9' WHERE hw_id='$v'";
                 mysqli_query($db, $update);
+                header('Location: hardware.php');
+                exit;
             endforeach;
         endif;
     endif;

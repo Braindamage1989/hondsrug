@@ -82,10 +82,11 @@
                 . "datum='".$_POST['datum']."',starttijd='".$_POST['starttijd']."',eindtijd='".$_POST['eindtijd']."',hw_id='".$_POST['hw_id']."',"
                 . "sw_id='".$_POST['sw_id']."',urgentie='".$_POST['urgentie']."',impact='".$_POST['impact']."',status='".$_POST['status']."',"
                 . "soort='".$_POST['soort']."',toegekend_aan='".$_POST['toegekend_aan']."',melder='".$_POST['melder']."' WHERE id=".$_GET['id']."";
-            mysqli_query($db, $update);
+            $update = mysqli_query($db, $update);
+            echo $update;
             header('Location: incidenten.php');
+            exit;
         endif;
-        exit;
     endif;
     
     if(isset($_POST['overzicht'])):
@@ -232,7 +233,7 @@
                                 ?>
                             </select>
                         </td>
-                        <td><input type="text" name="soort" /></td>
+                        <td><input type="text" name="soort" readonly="readonly" value="<?php echo $record['soort']; ?>"/></td>
                         <td><select name="toegekend_aan">
                             <?php
                                 foreach($array_medewerkers as $key => $value) :

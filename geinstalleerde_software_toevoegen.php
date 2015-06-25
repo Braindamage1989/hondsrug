@@ -10,10 +10,10 @@
     require_once 'includes/connectdb.php';
     require_once 'includes/header.php';
     
-    $query_hardware = "SELECT hw_id FROM hardware";
+    $query_hardware = "SELECT hw_id FROM hardware WHERE status != 9";
     $result_hardware = mysqli_query($db, $query_hardware);
     
-    $query_software = "SELECT sw_id FROM software";
+    $query_software = "SELECT sw_id FROM software WHERE status != 9";
     $result_software = mysqli_query($db, $query_software);
     
     while($ids = mysqli_fetch_assoc($result_hardware)):
@@ -24,9 +24,7 @@
         $array_sw_id[] .= $ids['sw_id'];
     endwhile;
     
-    if(isset($_POST['opslaan'])):
-        
-        print_r($_POST);
+    if(isset($_POST['opslaan'])): 
         $insert = "INSERT INTO geinstalleerde_software (hw_id, sw_id, status) "
             . "VALUES ('".$_POST['hw_id']."','".$_POST['sw_id']."','1')";
         mysqli_query($db, $insert);

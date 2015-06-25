@@ -65,7 +65,7 @@
             foreach($_POST['id'] as $k => $v) :
                 $update = "UPDATE incidenten SET status='9' WHERE id='$v'";
                 mysqli_query($db, $update);
-                header('Location: incidenten_inline.php');
+                header('Location: incidenten.php');
                 exit;
             endforeach;
         endif;

@@ -21,38 +21,38 @@
     
     
     if(isset($_POST['opslaan'])):
-        if(empty($_POST['voornaam'])) :
-            $melding .= "<font color=\"red\"><b>Voornaam mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['achternaam'])) :
-            $melding .= "<font color=\"red\"><b>Achternaam mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['email'])) :
-            $melding .= "<font color=\"red\"><b>E-mail mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['wachtwoord'])) :
-            $melding .= "<font color=\"red\"><b>Wachtwoord mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if($teller == 0) :
             foreach ($_SESSION['ids'] as $id):
-                $update = "UPDATE gebruikers SET voornaam='".$_POST[$id][1]."', "
-                . "achternaam='".$_POST[$id][2]."', "
-                . "email='".$_POST[$id][3]."', "
-                . "wachtwoord='".$_POST[$id][4]."', "
-                . "functie='".$_POST[$id][5]."'"
-                . " WHERE id='".$_POST[$id][0]."'";
-                mysqli_query($db, $update);
-                echo $update;
-                echo "<br/>";
+                if(empty($_POST[$id][1])) :
+                    $melding .= "<font color=\"red\"><b>Voornaam mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if(empty($_POST[$id][2])) :
+                    $melding .= "<font color=\"red\"><b>Achternaam mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if(empty($_POST[$id][3])) :
+                    $melding .= "<font color=\"red\"><b>E-mail mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if(empty($_POST[$id][4])) :
+                    $melding .= "<font color=\"red\"><b>Wachtwoord mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if($teller == 0) :
+                    $update = "UPDATE gebruikers SET voornaam='".$_POST[$id][1]."', "
+                    . "achternaam='".$_POST[$id][2]."', "
+                    . "email='".$_POST[$id][3]."', "
+                    . "wachtwoord='".$_POST[$id][4]."', "
+                    . "functie='".$_POST[$id][5]."'"
+                    . " WHERE id='".$_POST[$id][0]."'";
+                    mysqli_query($db, $update);
+                endif;
             endforeach;
-            empty($SESSION['ids']);
-            header('Location: gebruikers.php');
-            exit;
-        endif;
+            if($teller == 0) :
+                empty($SESSION['ids']);
+                header('Location: gebruikers.php');
+                exit;
+            endif;
     endif;
     
     if(isset($_POST['overzicht'])):

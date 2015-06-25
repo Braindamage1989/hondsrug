@@ -39,6 +39,8 @@
             foreach($_POST['id'] as $k => $v) :
                 $update = "UPDATE software SET status='9' WHERE sw_id='$v'";
                 mysqli_query($db, $update);
+                header('Location: software.php');
+                exit;
             endforeach;
         endif;
     endif;

@@ -35,6 +35,8 @@
             foreach($_POST['id'] as $k => $v) :
                 $update = "UPDATE gebruikers SET status='9' WHERE id='$v'";
                 mysqli_query($db, $update);
+                header('Location: gebruikers.php');
+                exit;
             endforeach;
         endif;
     endif;
