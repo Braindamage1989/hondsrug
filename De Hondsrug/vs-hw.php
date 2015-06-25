@@ -1,4 +1,8 @@
-<?php
+<?php 
+    session_start();
+    require 'includes/connectdb.php';
+    require_once 'includes/header.php';
+    
     if(isset($_GET["error"])&&$_GET["error"]=="noinput") {
         $error="U heeft geen optie geselecteerd</br>
             Selecteer een optie:</br></br>";
@@ -9,18 +13,13 @@
     }
 ?>
 
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Vragenscript - Hardware</title>
-    </head>
-    <body>
+<div class="titel2">
+    <div class="container">
+        <h1>Vragenscript</h1>
+    </div>
+</div>
+<div class="lijst">
+    <div class="container">
         
         <?php if(isset($error)) { ?>
         <div id="error">
@@ -42,10 +41,13 @@ and open the template in the editor.
                 </br>
                 <input type="radio" name='problem' value="anders">Anders</input>
                 </br>
-                <INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">
-                <input type="submit" name="submit" value="Submit" />
-            </form>
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
+                <INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;" class="btn btn-default"/>
+                    </div>
+                         </form>
+                </div>
         </div>
-    </body>
-</html>
+<?php 
+    require_once 'includes/footer.html'; 
+?>
 

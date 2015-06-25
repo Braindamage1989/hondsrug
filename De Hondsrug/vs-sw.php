@@ -1,6 +1,7 @@
 <?php 
     session_start();
-    require_once 'includes/connectdb.php';
+    require 'includes/connectdb.php';
+    require_once 'includes/header.php';
 ?>
 
 <?php
@@ -33,25 +34,20 @@
     }
 ?>
 
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Vragenscript - Software</title>
-    </head>
-    <body>
+<div class="titel2">
+    <div class="container">
+        <h1>Vragenscript</h1>
+    </div>
+</div>
+<div class="lijst">
+    <div class="container">
         
         <?php if(isset($error)) { ?>
         <div id="error">
             <?=$error?>
         </div>
         <?php } ?>
-        
+        <div class='vragenscript'>
         <div id="form">
             <form action="redirect-sw.php" name="form" method="post">
                 Wat is de naam van de applicatie?
@@ -64,9 +60,13 @@ and open the template in the editor.
                     ?>
                 </select>
                 </br>
-                <INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">
-                <input type="submit" name="submit" value="Submit" />
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
+                <INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;" class="btn btn-default"/>
             </form>
         </div>
-    </body>
-</html>
+                    </div>
+                </div>
+        </div>
+<?php 
+    require_once 'includes/footer.html'; 
+?>

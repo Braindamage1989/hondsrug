@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
+<?php 
+    session_start();
+    require 'includes/connectdb.php';
+    require_once 'includes/header.php';
+?>
+
+<div class="titel2">
+    <div class="container">
+        <h1>Vragenscript</h1>
+    </div>
+</div>
+<div class="lijst">
+    <div class="container">
         Bedankt voor het melden van uw incident. Deze is door gegeven en zal snel weer vergeten worden. Tot ziens...
         </br>
         Incident server, switch of router
-    </body>
-</html>
+        </div>
+    </div>
+<?php 
+    require_once 'includes/footer.html'; 
+?>

@@ -1,0 +1,102 @@
+h2 {
+    font-size: 38px;  
+    font-family: 'Shift', sans-serif;
+    font-weight: bold;
+}
+
+.nav {
+    background-color:#98BDD7;
+}
+
+.nav a {
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 14px 10px;
+  text-transform: uppercase;
+}
+
+.nav li {
+  display: inline;
+}
+
+.titel1 {
+  background-image:url("images/computer.jpg");
+  height: 700px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.titel1 .container {
+  position: relative;
+  top:100px;
+}
+
+.titel1 h1 {
+  color: #9AB650;
+  font-size: 53px;  
+  font-family: 'Shift', sans-serif;
+  font-weight: bold;
+}
+
+.titel1 p {
+  font-size: 20px;
+  color: #fff;
+}
+
+.titel1 a {
+    font-size: 20px;
+    color: #fff;
+}
+
+.titel2 {
+    background-image:url("images/computer.jpg");
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.titel2 .container {
+    position: relative;
+    top:100px;
+}
+
+.titel2 h1 {
+  color: #fff;
+  font-size: 48px;  
+  font-family: 'Shift', sans-serif;
+  font-weight: bold;
+}
+
+.lijst {
+    //background-color: #f7f7f7;
+    font-size: 15px;
+}
+
+.lijst .container, .container-fluid{
+    top:20px;
+    left:20px;
+    position: relative;
+}
+
+.submenu {
+    display: block;
+    width: 150px;
+    margin: 2px 4px 6px 4px;
+    position: fixed;
+}
+
+.learn-more {
+  background-color: #f7f7f7;
+}
+
+.learn-more h3 {
+  font-family: 'Shift', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color:#9AB650;
+}
+
+.learn-more a {
+  color: #CB6B2F;
+}
