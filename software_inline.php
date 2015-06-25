@@ -22,43 +22,45 @@
     $titles = mysqli_fetch_assoc($result_one);
     
     if(isset($_POST['opslaan'])):
-        if(empty($_POST['sw_id'])) :
-            $melding .= "<font color=\"red\"><b>Software ID mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['uitgebreidde_naam'])) :
-            $melding .= "<font color=\"red\"><b>Uitgebreide naam mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['soort'])) :
-            $melding .= "<font color=\"red\"><b>Soort mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['producent'])) :
-            $melding .= "<font color=\"red\"><b>Producent mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if(empty($_POST['leverancier'])) :
-            $melding .= "<font color=\"red\"><b>Leverancier mag niet leeg zijn</b></font><br/>";
-            $teller++;
-        endif;
-        if($teller == 0) :
             foreach ($_SESSION['ids'] as $id):
-                $update = "UPDATE software SET sw_id='".$_POST[$id][0]."',"
-                . "uitgebreidde_naam='".$_POST[$id][1]."', "
-                . "soort='".$_POST[$id][2]."', "
-                . "producent='".$_POST[$id][3]."', "
-                . "leverancier='".$_POST[$id][4]."', "
-                . "aantal_licenties='".$_POST[$id][5]."', "
-                . "serverlicentie='".$_POST[$id][6]."', "
-                . "aantal_gebruikers='".$_POST[$id][7]."' "
-                . "WHERE sw_id='".$id."'";
-                mysqli_query($db, $update);
+                if(empty($_POST['sw_id'])) :
+                    $melding .= "<font color=\"red\"><b>Software ID mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if(empty($_POST['uitgebreidde_naam'])) :
+                    $melding .= "<font color=\"red\"><b>Uitgebreide naam mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if(empty($_POST['soort'])) :
+                    $melding .= "<font color=\"red\"><b>Soort mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if(empty($_POST['producent'])) :
+                    $melding .= "<font color=\"red\"><b>Producent mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if(empty($_POST['leverancier'])) :
+                    $melding .= "<font color=\"red\"><b>Leverancier mag niet leeg zijn</b></font><br/>";
+                    $teller++;
+                endif;
+                if($teller == 0) :
+                    $update = "UPDATE software SET sw_id='".$_POST[$id][0]."',"
+                    . "uitgebreidde_naam='".$_POST[$id][1]."', "
+                    . "soort='".$_POST[$id][2]."', "
+                    . "producent='".$_POST[$id][3]."', "
+                    . "leverancier='".$_POST[$id][4]."', "
+                    . "aantal_licenties='".$_POST[$id][5]."', "
+                    . "serverlicentie='".$_POST[$id][6]."', "
+                    . "aantal_gebruikers='".$_POST[$id][7]."' "
+                    . "WHERE sw_id='".$id."'";
+                    mysqli_query($db, $update);
+                endif;
             endforeach;
-            empty($SESSION['ids']);
-            header('Location: software.php');
-            exit;
-        endif;
+            if($teller == 0) :
+                empty($SESSION['ids']);
+                header('Location: software.php');
+                exit;
+            endif;
     endif;
     
     if(isset($_POST['overzicht'])):
