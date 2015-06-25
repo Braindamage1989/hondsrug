@@ -41,6 +41,7 @@
                 </br>
                 <input type="radio" name='ander' value="false">Nee, dit werkt niet</input>
                 </br>
+                <input type="radio" name='ander' value="" hidden="" checked=""></input>
                 <input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
                 <INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;" class="btn btn-default"/>
             </form>

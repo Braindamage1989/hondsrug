@@ -2,7 +2,7 @@
     session_start();
 	require_once 'includes/functions.php';
 	
-    if (!isset($_POST["type"])){
+    if (!isset($_POST["problem"])){
         redirect_to("vs-hw.php?error=noinput");
     }
     

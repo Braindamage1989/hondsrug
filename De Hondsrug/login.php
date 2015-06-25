@@ -10,7 +10,7 @@
         $email=$_POST['email'];
         $wachtwoord=$_POST['wachtwoord'];
 
-        $sql="SELECT voornaam, email, wachtwoord FROM gebruikers WHERE email='$email' AND wachtwoord='$wachtwoord'";
+        $sql="SELECT id, voornaam, email, wachtwoord FROM gebruikers WHERE email='$email' AND wachtwoord='$wachtwoord'";
         $result= mysqli_query($db, $sql);
         
         $count=mysqli_num_rows($result);
@@ -18,6 +18,7 @@
         if($count==1){
             while ($rij = mysqli_fetch_assoc($result)) :
                 $_SESSION['voornaam'] = $rij['voornaam'];
+                $_SESSION['id'] = $rij['id'];
             endwhile;
             $_SESSION['ingelogd'] = true;
             header("location:index.php");

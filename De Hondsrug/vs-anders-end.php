@@ -21,7 +21,7 @@
    $query="INSERT INTO `hondsrug`.`incidenten` "
                . "(`id`, `omschrijving`, `workaround`, `datum`, `starttijd`, `eindtijd`, `hw_id`, `sw_id`, `urgentie`, `impact`, `status`, `soort`, `toegekend_aan`, `melder`) "
            . "VALUES "
-               . "(NULL, 'fjsdfdsa', 'gfs', '00-00-000', '00:00:00', NULL, 'HFK003', NULL, '1', '1', '1', 'asdfh', '1', '2');";
+               . "(NULL, 'fjsdfdsa', 'gfs', '".date("d-m-Y")."', '".date("H:i:s")."', NULL, 'HFK003', NULL, '1', '1', '1', 'vragenscript', '1', '2');";
     $result=  mysqli_query($db, $query);
     if (!$result) {
         echo $query.'<br />'.$result;
