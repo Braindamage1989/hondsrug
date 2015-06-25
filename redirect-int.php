@@ -2,7 +2,7 @@
     session_start();
 	require_once 'includes/functions.php';
     
-    if (!$_SESSION["bool"]) {
+    if (!$_POST["bool"]) {
         redirect_to("vs-int.php?error=noinput");
     }
 	

@@ -11,10 +11,10 @@
     $needed_answers=[0,1,2,6,7,8];
     $locatie=$_SESSION["antwoorden"]["0"];
     $hw_id=$_SESSION["antwoorden"]["1"];
-    $beschrijving=$_SESSION["antwoorden"]["2"]." ".$_SESSION["antwoorden"]["7"];
+    $beschrijving=$_SESSION["antwoorden"]["2"]." ".$_SESSION["antwoorden"]["7"]." local";
     $sw_id=$_SESSION["antwoorden"]["6"];
     $user_id=$_SESSION["id"];
-    if ($_SESSION["antwoorden"]["0"]==true) $impact=1; else $impact=2;
+    if ($_SESSION["antwoorden"]["8"]==true) $impact=1; else $impact=2;
     
    $query="INSERT INTO `de hondsrug`.`incidenten` "
                . "(`id`, `omschrijving`, `workaround`, `datum`, `starttijd`, `eindtijd`, `hw_id`, `sw_id`, `urgentie`, `impact`, `status`, `soort`, `toegekend_aan`, `melder`) "
@@ -55,11 +55,18 @@
 </div>
 <div class="lijst">
     <div class="container">
-        <div id="end">
-            Bedankt voor het melden. Als u niet voldoende bent geinformeerd kunt u de servicedesk bellen.
-            </br>
-            Incident = werkt niet op werk station
-        </div>
+        <?php if ($_SESSION["antwoorden"]["8"]=="true") { ?>
+            Uw incident is doorgegeven.<br />
+            U kunt gebruik maken van het andere werkstation.<br />
+            <br />
+            Mocht dit toch een probleem zijn, neem dan contact op met de helpdesk.<br />
+            U vind de contact gegevens op de <a href="contact.php">contact pagina</a>.
+        <?php } else { ?>
+            Uw incident is doorgegeven.<br />
+            Wij kunnen u helaas niet verder helpen op deze manier.<br />
+            Als uw incident direct een probleem is, neem dan contact op met de helpdesk.<br />
+            U vind de contact gegevens op de <a href="contact.php">contact pagina</a>.
+        <?php } ?>
     </div>
 </div>
 <?php 

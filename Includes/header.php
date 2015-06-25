@@ -15,6 +15,7 @@
           <li><a href="index.php">Home</a></li>
           
           <li><a href="vragenscript.php">Vragen</a></li>
+          <li><a href="tool.php">Beheertool</a></li>
           <li><a href="FAQ.php">F.A.Q.</a></li>
         </ul>
         <ul class="pull-right">
@@ -25,7 +26,7 @@
                     echo "<li><a href=\"login.php\">Log In</a></li>";
                 }
             ?>
-          <li><a href="#">Contact</a></li>
+          <li><a href="contact.php">Contact</a></li>
         </ul>
       </div>
     </div>

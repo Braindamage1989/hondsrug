@@ -39,6 +39,7 @@
                 </br>
                 <input type="radio" name='bool' value="false">Nee, dit lukt niet.</input>
                 </br>
+                <input type="radio" name='bool' value="" hidden="" checked=""></input>
                 <input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
                 <INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;" class="btn btn-default"/>
             </form>

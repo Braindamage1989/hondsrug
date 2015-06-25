@@ -8,13 +8,13 @@
     require_once 'includes/header.php';
 ?>
 <?php  
-    $needed_answers=[0,1,2,6,7,8];
+    $needed_answers=[0,1,2,3,4];
     $locatie=$_SESSION["antwoorden"]["0"];
-    $hw_id=$_SESSION["antwoorden"]["1"];
-    $beschrijving=$_SESSION["antwoorden"]["2"]." ".$_SESSION["antwoorden"]["7"];
-    $sw_id=$_SESSION["antwoorden"]["6"];
+    if ($_SESSION["antwoorden"]["3"]=="true") $hw_id=$_SESSION["antwoorden"]["1"]; else $hw_id=$_SESSION["antwoorden"]["4"];
+    $beschrijving=$_SESSION["antwoorden"]["2"];
+    $sw_id="";
     $user_id=$_SESSION["id"];
-    if ($_SESSION["antwoorden"]["0"]==true) $impact=1; else $impact=2;
+    if ($_SESSION["antwoorden"]["3"]==true) $impact=1; else $impact=2;
     
    $query="INSERT INTO `de hondsrug`.`incidenten` "
                . "(`id`, `omschrijving`, `workaround`, `datum`, `starttijd`, `eindtijd`, `hw_id`, `sw_id`, `urgentie`, `impact`, `status`, `soort`, `toegekend_aan`, `melder`) "
@@ -55,12 +55,12 @@
 </div>
 <div class="lijst">
     <div class="container">
-        Incident = printer is kapot of printerserver probleem...</br></br>
-        <pre>
-        <?php print_r($_SESSION); ?>
-        </pre>
-        </div>
+        Uw incident is doorgegeven.<br />
+        Wij kunnen u helaas op deze wijze niet verder helpen.<br />
+        Als uw incident direct een probleem is, neem dan contact op met de helpdesk.<br />
+        U vind de contact gegevens op de <a href="contact.php">contact pagina</a>.
     </div>
+</div>
 <?php 
     require_once 'includes/footer.html'; 
 ?>

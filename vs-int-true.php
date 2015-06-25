@@ -7,8 +7,13 @@
     require 'includes/connectdb.php';
     require_once 'includes/header.php';
 ?>
-<?php  
-    $needed_answers=[0,1,2,5];
+<?php   
+    if (isset($_SESSION["redirect"])&&$_SESSION["redirect"]==true) {
+        $needed_answers=[0,1,2,5,6,7,8];
+    }
+    else {
+        $needed_answers=[0,1,2,5];
+    }
     $locatie=$_SESSION["antwoorden"]["0"];
     $hw_id=$_SESSION["antwoorden"]["1"];
     $beschrijving=$_SESSION["antwoorden"]["2"];
@@ -55,11 +60,13 @@
 </div>
 <div class="lijst">
     <div class="container">
-        Bedankt voor het melden van uw incident. Deze is door gegeven en zal snel weer vergeten worden. Tot ziens...
-        </br>
-        Incident netwerkkaart kapot
-        </div>
+        Uw incident is doorgegeven.<br />
+        U kunt gebruik maken van het andere werkstation.<br />
+        <br />
+        Mocht dit toch een probleem zijn, neem dan contact op met de helpdesk.<br />
+        U vind de contact gegevens op de <a href="contact.php">contact pagina</a>.
     </div>
+</div>
 <?php 
     require_once 'includes/footer.html'; 
 ?>

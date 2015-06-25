@@ -8,7 +8,7 @@
     require_once 'includes/header.php';
 ?>
 <?php  
-    $needed_answers=[0,1,2,3,4];
+    $needed_answers=[0,1,2,3];
     $locatie=$_SESSION["antwoorden"]["0"];
     if ($_SESSION["antwoorden"]["3"]=="true") $hw_id=$_SESSION["antwoorden"]["1"]; else $hw_id=$_SESSION["antwoorden"]["4"];
     $beschrijving=$_SESSION["antwoorden"]["2"];
@@ -55,10 +55,11 @@
 </div>
 <div class="lijst">
     <div class="container">
-        Incident = netwerkkaart is kapot</br></br>
-        <pre>
-        <?php print_r($_SESSION); ?>
-        </pre>
+        Uw incident is doorgegeven.<br />
+        U kunt gebruik maken van het andere werkstation.<br />
+        <br />
+        Mocht dit toch een probleem zijn, neem dan contact op met de helpdesk.<br />
+        U vind de contact gegevens op de <a href="contact.php">contact pagina</a>.
         </div>
     </div>
 <?php 

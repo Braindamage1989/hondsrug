@@ -18,6 +18,7 @@
         }
         $_SESSION["antwoorden"]["7"]=$_POST["probleem"];
         if ($_POST["probleem"]=='internet') {
+            $_SESSION["redirect"]=true;
             redirect_to("vs-int.php");
         }
         redirect_to("vs-sw3.php");
