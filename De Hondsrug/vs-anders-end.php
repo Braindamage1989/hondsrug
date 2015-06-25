@@ -49,7 +49,7 @@
         // put your code here
         ?>
         Bedankt voor het doorgeven van dit probleem.</br>
-        Uw probleem is doorgegeven en zal zo snel mogelijk behandelt worden.</br>
+        Uw probleem is doorgegeven en zal zo snel mogelijk behandeld worden.</br>
 </div>
 </div>
 <?php 

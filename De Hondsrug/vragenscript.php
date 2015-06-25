@@ -36,7 +36,7 @@
     <div class="container">
         <div>
             <form action="redirect0.php" name="form" method="post">
-                Op welke locatie bevind u zich?
+                Op welke locatie bevindt u zich?
                 </br>
                 <select name="locatie">
                     <option value="Anloo">Anloo</option>

@@ -15,8 +15,8 @@
 </div>
 <div class="lijst">
     <div class="container">
-        We kunnen uw probleem helaas niet vast stellen.<br />
-        Zou u a.u.b. contact op willen nemen met de helpdesk voor verdere afhandeling.<br /> 
+        We kunnen uw probleem helaas niet vaststellen.<br />
+        Neem a.u.b. contact op met de helpdesk voor verdere afhandeling.<br /> 
         Alvast zeer bedankt voor het melden.<br />
         </div>
     </div>

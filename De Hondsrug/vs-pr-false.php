@@ -15,7 +15,7 @@
 </div>
 <div class="lijst">
     <div class="container">
-        Incident = printer is kapo of printerserver probleem...</br></br>
+        Incident = printer is kapot of printerserver probleem...</br></br>
         <pre>
         <?php print_r($_SESSION); ?>
         </pre>
