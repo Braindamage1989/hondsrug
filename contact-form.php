@@ -20,12 +20,6 @@
 ?>
 
 
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <div class="titel2">
     <div class="container">
         <h1>Contact</h1>
@@ -37,7 +31,8 @@ and open the template in the editor.
             if (isset($_GET["send"])&&$_GET["send"]=="true") {
         ?>
         Uw bericht is verzonden.<br />
-        Als u een reactie verwacht aan de hand van deze mail, kunt u deze spoedig verwachten.
+        Als u een reactie verwacht aan de hand van deze mail, kunt u deze spoedig verwachten.<br />
+        <br />
         <?php
             }
         ?>
