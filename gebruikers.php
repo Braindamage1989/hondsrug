@@ -51,7 +51,7 @@
         <div class="col-md-11">
             <?php if(isset($melding)) : echo $melding; endif; ?>
             <form action="" method="POST">
-                <table class="table">
+                <table class="table table-striped table-bordered table-hover table-condensed">
                     <tr>
                         <td></td>
                         <td><b>Voornaam</b></td>

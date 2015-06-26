@@ -4,13 +4,13 @@
     //error_reporting(0);
 
     require_once 'includes/connectdb.php';
-    require_once 'includes/header.php';
+    require_once 'includes/header-tool.php';
     
     if(isset($_POST['login'])):
         $email=$_POST['email'];
         $wachtwoord=$_POST['wachtwoord'];
 
-        $sql="SELECT id, voornaam, email, wachtwoord FROM gebruikers WHERE email='$email' AND wachtwoord='$wachtwoord'";
+        $sql="SELECT voornaam, email, wachtwoord, functie FROM gebruikers WHERE email='$email' AND wachtwoord='$wachtwoord' AND functie='Medewerker IT'";
         $result= mysqli_query($db, $sql);
         
         $count=mysqli_num_rows($result);
@@ -21,7 +21,7 @@
                 $_SESSION['id'] = $rij['id'];
             endwhile;
             $_SESSION['ingelogd'] = true;
-            header("location:index.php");
+            header("location:index-tool.php");
         }
         else {
             $melding = "Email en wachtwoord komen niet overeen.";
